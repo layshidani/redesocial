@@ -15,7 +15,7 @@ Projeto rede social <Laboratoria>
 [Link da aplicação](https://hlays.github.io/redesocial/)
 
 ## Definição do produto
-A SerView é uma rede social para avaliar e consultar outras avaliações sobre serviços prestados nos mais diversos estabelecimentos. 
+A SerView é uma rede social para avaliar e consultar outras avaliações sobre serviços e estabelecimentos.
 
 Os usuários podem interagir curtindo as publicações e assim estimular a credibilidade das avaliações e melhoria dos serviços prestados pelas empresas.
 
@@ -36,15 +36,24 @@ Os usuários podem interagir curtindo as publicações e assim estimular a credi
 ## Histórias de usuário
 
 1. Eu como usuário gostaria de ter opções de validações diversas ao fazer login.
+
 2. Eu como usuária gostaria de saber quando esqueci de preencher campos de login.
-3. Eu como usuário gostaria de postar um texto sem limites de caracteres.
-4. Eu como usuária gostaria de sugestão do que postar na rede social.
+3. Eu como usuária gostaria de fazer o meu cadastro em uma nova rede social de forma rápida, simples e fácil.
+4. Eu como usuário gostaria de postar um texto sem limites de caracteres.
 5. Eu como usuário quero que meus posts possam ser públicos ou privados.
-6. Eu como usuária gostaria de fazer o meu cadastro em uma nova rede social de forma rápida, simples e fácil.
+6. Eu como usuária gostaria de visualizar as avaliações em um feed.
 7. Eu como usuária gostaria de visualizar quantas pessoas concordam com determinada avaliação (além de gostei, curtir, ter a opção "concordo" com essa avaliação, para forma de dar credibilidade para aquela avaliação também).
 8. Eu como usuária gostaria de avaliar de forma rápida, simples e fácil (por exemplo por estrelas,mas também com opção de relato textual da experiência).
-9. Eu como usuária gostaria de ter acesso, no primeiro momento, somente das avaliações que mais têm "concordo".
-10. Eu como usuária, gostaria de seguir alguns usuários e visualizar suas publicações (amigos), vice versa.
+9. Eu como usuária gostaria de poder editar, eliminar minhas publicações.
+
+-- **Hacker Edition** -- 
+
+10. Eu como usuária gostaria de sugestão do que postar na rede social.
+
+11. Eu como usuária gostaria de ter acesso, no primeiro momento, somente das avaliações que mais têm "concordo".
+
+12. Eu como usuária, gostaria de seguir alguns usuários e visualizar suas publicações (amigos), vice versa.
+
 
 ### Definição de pronto
 
