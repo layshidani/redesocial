@@ -4,14 +4,37 @@
 }
 
 body {
-  background: #007bff;
-  background: linear-gradient(to right, #0062E6, #33AEFF);
+  background: linear-gradient(to right, #295f2d, #409946);
+}
+
+.header-login {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.logo {
+  width: 11vw;
+  height: 8vh;
+  display: inline-block;
+  margin: 10px;
+  
+}
+
+.logo-name {
+  width: 30vw;
+  height: 8vh;
+  display: inline-block;
+  margin: 10px;
 }
 
 .card-signin {
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  background-color: #eff1ed;
+  
 }
 
 .card-signin .card-title {
@@ -22,6 +45,7 @@ body {
 
 .card-signin .card-body {
   padding: 2rem;
+  padding-top: 0;
 }
 
 .form-signin {
@@ -35,6 +59,16 @@ body {
   font-weight: bold;
   padding: 1rem;
   transition: all 0.2s;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.icon-btn {
+  width: 3rem;
+  height: 3rem;
 }
 
 .form-label-group {
@@ -99,6 +133,11 @@ body {
   color: #777;
 }
 
+.btn-primary {
+  background-color: #295f2d;
+  border: none;
+}
+
 .btn-google {
   color: white;
   background-color: #ea4335;
@@ -108,3 +147,4 @@ body {
   color: white;
   background-color: #3b5998;
 }
+
