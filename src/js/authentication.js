@@ -66,30 +66,3 @@ btnFacebook.addEventListener('click', function () {
   var provider = new firebase.auth.FacebookAuthProvider();
   signIn(provider);
 });
-<<<<<<< HEAD
-=======
-
-// Autenticação via google
-btnGoogle.addEventListener('click', function() {
-  var provider = new firebase.auth.GoogleAuthProvider();
-  signIn(provider);
-});
-
-// // Autenticação via email
-// btnCreateUser.addEventListener('click', function () {
-//   firebase
-//     .auth()
-//     .createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
-//     .then(function (result) {
-//       console.log(result);
-//       // var token = result.credential.accessToken;
-//       let user = result.user;
-//       let name = result.user.displayName;
-//       window.location.href = "feed.html";
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//       alert('Falha na autenticação');
-//     });
-// });
->>>>>>> 133c2d715c59891cfc9801ad5d1b074b5c57368a
