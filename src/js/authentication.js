@@ -1,10 +1,49 @@
+// $(document).ready(function () {
+
+//   $('#btn-create-user').click(function () {
+//     let email = $('#input-email').val();
+//     console.log(email)
+//     let password = $('#input-password').val();
+
+//     firebase
+//       .auth()
+//       .createUserWithEmailAndPassword(email, password)
+//       .then(function (result) {
+//         console.log(result);
+//         var token = result.credential.accessToken;
+//         let user = result.user;
+//         let name = result.user.displayName;
+//         window.location.href = "feed.html";
+//       })
+//       .catch(function (error) {
+//         let errorCode = error.code;
+//         let errorMessage = error.message;
+//       });
+//   })
+// });
+
 // Butões
 let btnFacebook = document.querySelector('#btn-facebook');
 let btnLogin = document.querySelector('#btn-login');
 let btnCreateUser = document.querySelector('#btn-create-user');
 // Inputs
-let inputEmail = document.querySelector('#input-email');
-let inputPassword = document.querySelector('#input-password');
+
+btnCreateUser.addEventListener('click', function (e) {
+  event.preventDefault();
+  console.log('cliquei')
+  let email = document.querySelector('#input-email').value;
+  let password = document.querySelector('#input-password').value;
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(function (result) {
+      window.location.href = "feed.html";
+    })
+    .catch(function (error) {
+      console.error(error);
+      alert('Falha na autenticação');
+    });
+});
 
 function signIn(provider) {
   firebase.auth()
@@ -26,22 +65,3 @@ btnFacebook.addEventListener('click', function () {
   var provider = new firebase.auth.FacebookAuthProvider();
   signIn(provider);
 });
-
-
-// // Autenticação via email
-// btnCreateUser.addEventListener('click', function () {
-//   firebase
-//     .auth()
-//     .createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
-//     .then(function (result) {
-//       console.log(result);
-//       // var token = result.credential.accessToken;
-//       let user = result.user;
-//       let name = result.user.displayName;
-//       window.location.href = "feed.html";
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//       alert('Falha na autenticação');
-//     });
-// });
