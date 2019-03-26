@@ -28,20 +28,20 @@ btnFacebook.addEventListener('click', function () {
 });
 
 
-// Autenticação via email
-btnCreateUser.addEventListener('click', function () {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
-    .then(function (result) {
-      console.log(result);
-      // var token = result.credential.accessToken;
-      let user = result.user;
-      let name = result.user.displayName;
-      window.location.href = "feed.html";
-    })
-    .catch(function (error) {
-      console.error(error);
-      alert('Falha na autenticação');
-    });
-});
+// // Autenticação via email
+// btnCreateUser.addEventListener('click', function () {
+//   firebase
+//     .auth()
+//     .createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
+//     .then(function (result) {
+//       console.log(result);
+//       // var token = result.credential.accessToken;
+//       let user = result.user;
+//       let name = result.user.displayName;
+//       window.location.href = "feed.html";
+//     })
+//     .catch(function (error) {
+//       console.error(error);
+//       alert('Falha na autenticação');
+//     });
+// });
