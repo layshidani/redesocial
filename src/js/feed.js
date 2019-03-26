@@ -3,7 +3,7 @@ const displayName = document.querySelector('#display-name');
 
 
 // log out
-logoutBtn.addEventListener('click', function() {
+logoutBtn.addEventListener('click', function () {
   firebase
   .auth()
   .signOut()
@@ -14,3 +14,4 @@ logoutBtn.addEventListener('click', function() {
   LoginManager.getInstance().logOut();
   FirebaseAuth.getInstance().signOut();
 })
+

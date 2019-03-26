@@ -15,17 +15,21 @@ body {
 }
 
 .logo {
-  width: 11vw;
-  height: 8vh;
-  display: inline-block;
+  width: 15%;
+  height: 10%;
+  /* width: 11vw;
+  height: 8vh; */
+  /* display: inline-block; */
   margin: 10px;
   
 }
 
 .logo-name {
-  width: 30vw;
-  height: 8vh;
-  display: inline-block;
+  width: 50%;
+  height: 20%;
+  /* width: 30vw;
+  height: 8vh; */
+  /* display: inline-block; */
   margin: 10px;
 }
 
@@ -67,8 +71,12 @@ body {
 }
 
 .icon-btn {
-  width: 3rem;
-  height: 3rem;
+  /* width: 3rem;
+  height: 3rem; */
+  width: 16%;
+  height: auto;
+  margin: auto;
+  text-align: center;
 }
 
 .form-label-group {
@@ -141,10 +149,12 @@ body {
 .btn-google {
   color: white;
   background-color: #ea4335;
+  max-width: 14%;
 }
 
 .btn-facebook {
   color: white;
   background-color: #3b5998;
+  max-width: 14%;
 }
 
