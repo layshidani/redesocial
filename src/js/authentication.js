@@ -1,6 +1,6 @@
 // Butões
-let btnFacebook = document.querySelector('#btn-facebook');
-let btnLogin = document.querySelector('#btn-login');
+let btnFacebook = document.querySelector('#facebook-btn');
+let btnLogin = document.querySelector('#login');
 let btnCreateUser = document.querySelector('#btn-create-user');
 // Inputs
 let inputEmail = document.querySelector('#input-email');
