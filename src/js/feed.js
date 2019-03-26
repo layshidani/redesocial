@@ -11,7 +11,5 @@ logoutBtn.addEventListener('click', function () {
       displayName.innerText = 'logout realizado'
       window.location.href = "index.html";
     })
-});
+})
 
-// FirebaseAuth.getInstance().signOut();
-// LoginManager.getInstance().logOut();
