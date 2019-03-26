@@ -21,34 +21,45 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                
+
             <div class="card card-signin my-5">
-                <div class="header-login">
-                    <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
-                    <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="">
-                  </div>
+              <div class="header-login">
+                <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
+                <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
+              </div>
               <div class="card-body">
                 <h5 class="card-title text-center">Sign In</h5>
                 <form class="form-signin">
                   <div class="form-label-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <input type="email" id="input-email" class="form-control" placeholder="Email address" required
+                      autofocus>
                     <label for="inputEmail">Email</label>
                   </div>
-    
+
                   <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <input type="password" id="input-password" class="form-control" placeholder="Password" required>
                     <label for="inputPassword">Senha</label>
                   </div>
-    
+
                   <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                     <label class="custom-control-label" for="customCheck1">Lembrar senha</label>
                   </div>
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                  <button id="btn-create-user" class="btn btn-lg btn-primary btn-block text-uppercase"
+                    type="submit">Criar
+                    Conta
+                  </button>
+                  <button id="btnLogin" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                    in</button>
                   <hr class="my-4">
-                  <div class="icons">
-                    <button id="google-btn" class="btn btn-lg btn-google btn-block text-uppercase icon-btn" type="submit"><i class="fab fa-google mr-2"></i></button>
-                    <button id="facebook-btn" class="btn btn-lg btn-facebook  text-uppercase icon-btn" type="submit"><i class="fab fa-facebook-f mr-2"></i></button>
+                  <div class="col-md-12">
+                    <p>
+                      ou
+                    </p>
+                    <ul class="social-network social-circle">
+                      <li><a id="facebook-btn" class="icoFacebook"><i class="fab fa-facebook-f"></i></a></li>
+                      <li><a id="google-btn" class="icoGoogle"><i class="fab fa-google"></i></a></li>
+                    </ul>				
                   </div>
                 </form>
               </div>
@@ -59,18 +70,18 @@
     </section>
 
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-  <script src="src/js/script.js"></script>
-  <script src="src/js/authentication.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script src="src/js/script.js"></script>
+    <script src="src/js/authentication.js"></script>
 </body>
 
 </html>
