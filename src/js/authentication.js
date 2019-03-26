@@ -1,4 +1,5 @@
 let facebookBtn = document.querySelector('#facebook-btn');
+let googleBtn = document.querySelector('#google-btn');
 
 function signIn(provider) {
   firebase.auth()
@@ -18,5 +19,11 @@ function signIn(provider) {
 // Autenticação via facebook
 facebookBtn.addEventListener('click', function () {
   var provider = new firebase.auth.FacebookAuthProvider();
+  signIn(provider);
+});
+
+// Autenticação via google
+googleBtn.addEventListener('click', function() {
+  var provider = new firebase.auth.GoogleAuthProvider();
   signIn(provider);
 });
