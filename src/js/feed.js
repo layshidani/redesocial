@@ -13,3 +13,4 @@ logoutBtn.addEventListener('click', function () {
     })
 })
 
+$('.dropdown-toggle').dropdown();
