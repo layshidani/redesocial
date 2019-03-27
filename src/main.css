@@ -32,7 +32,6 @@ body {
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   background-color: #eff1ed;
-  
 }
 
 .card-signin .card-title {
@@ -44,6 +43,20 @@ body {
 .card-signin .card-body {
   padding: 2rem;
   padding-top: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.fas {
+  font-size: 28px;
+  color: #bfbfbf;
+}
+
+.fas:hover {
+  color: #409946;
 }
 
 .form-signin {
