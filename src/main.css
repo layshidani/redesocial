@@ -146,6 +146,17 @@ padding: 10px;
   text-align: center;
 }
 
+.next {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.btn-next:hover {
+ background-color: #295f2d;
+ color: #eff1ed;
+}
+
 .or {
   text-align: center;
 }
