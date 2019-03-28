@@ -59,28 +59,28 @@
                       <form>
                         <div class="form-group">
                           <label for="message-text" class="col-form-label">Local (Nome):</label>
-                          <input class="form-control" id="message-text"></input>
+                          <input class="form-control" id="local-name"></input>
                           <label for="message-text" class="col-form-label">Endereço:</label>
-                          <input class="form-control" id="message-text"></input>
+                          <input class="form-control" id="adress"></input>
                           <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
                           <input class="form-control" id="message-text"></input>
                           <label for="message-text" class="col-form-label">Média de Preço:</label>
-                          <textarea class="form-control" id="message-text"></textarea>
+                          <textarea class="form-control" id="price-average"></textarea>
                           <label for="message-text" class="col-form-label">Comentário:</label>
-                          <textarea class="form-control" id="message-text"></textarea>
+                          <textarea class="form-control" id="comment-text"></textarea>
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                      <button type="button" class="btn btn-primary">Enviar Avaliação</button>
+                      <button id="post-btn" type="button" class="btn btn-primary" data-dismiss="modal">Enviar Avaliação</button>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- Postagens no feed -->
               <div class="posts-feed">
-
+                <ul id="posts"></ul>
               </div>
 
             </div>
@@ -98,7 +98,7 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="src/js/authentication.js"></script>
-  <!-- <script src="src/js/feed.js"></script> -->
+  <script src="src/js/feed.js"></script>
   <script src="src/js/dom_events.js"></script>
 </body>
 
