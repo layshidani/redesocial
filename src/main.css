@@ -271,5 +271,18 @@ a.socialIcon:hover, .socialHoverClass {
 
 .posts-feed {
   height: 300px;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+
 }
+
+.post-card {
+  width: 300px;
+  list-style: none;
+  border: 3px solid #409946;
+  border-radius: 5px;
+  background-color: #eff1ed;
+  padding: 10px;
+  margin: 10px;
+}
+

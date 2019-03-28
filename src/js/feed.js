@@ -1,4 +1,5 @@
-$('.dropdown-toggle').dropdown();
+// Get a reference to the database service
+var database = firebase.database();
 
 $(document).ready(function () {
 
@@ -12,4 +13,15 @@ $(document).ready(function () {
         window.location.href = "index.html";
       })
   })
+  
+  $('#post-btn').click(function() {
+    const textInput = $('#post-input').val();
+    if (textInput !== '') {
+      $('#posts').append(`<li class='post-card'>${textInput}</li>`);
+      $('#post-input').val('');
+    } else {
+      alert('O campo de texto não pode estar vazio :/');
+    }
+  })
 });
+
