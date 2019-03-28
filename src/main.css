@@ -53,6 +53,7 @@ body {
 .fas {
   font-size: 28px;
   color: #bfbfbf;
+  cursor: pointer;
 }
 
 .fas:hover {

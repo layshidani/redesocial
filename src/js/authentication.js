@@ -1,10 +1,5 @@
 $(document).ready(function () {
 
-  // let email = $('#input-email').val();
-  // console.log('email')
-  // let password = $('#input-password').val();
-  // console.log('password')
-
   $('#btn-create-user').click(function () {
     event.preventDefault();
     let email = $('#input-email').val();
@@ -71,6 +66,17 @@ $(document).ready(function () {
       }).catch(function (error) {
         console.error(error);
         alert('Falha na autenticação');
+      });
+  });
+
+  $('#logout-btn').click(function () {
+
+    firebase
+      .auth()
+      .signOut()
+      .then(function (result) {
+        console.log(result);
+        window.location.href = "index.html";
       });
   });
 
