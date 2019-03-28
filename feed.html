@@ -44,48 +44,51 @@
                 </div>
               </div>
             </div>
-            <!-- Postar avaliação -->
+            <!-- Postar avaliação Modal -->
             <div class="container row">
-              <Textarea id="post-input" class="post" placeholder="Avalie aqui"></Textarea>
-              <button id="post-btn" class="btn btn-primary" type="submit">Avaliar</button>
+              <textarea id="post-feed" class="post" data-toggle="modal" placeholder="Avalie aqui"
+                data-target="#exampleModal"></textarea>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Avaliação</h5>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Local (Nome):</label>
+                          <input class="form-control" id="message-text"></input>
+                          <label for="message-text" class="col-form-label">Endereço:</label>
+                          <input class="form-control" id="message-text"></input>
+                          <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
+                          <input class="form-control" id="message-text"></input>
+                          <label for="message-text" class="col-form-label">Média de Preço:</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                          <label for="message-text" class="col-form-label">Comentário:</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-primary">Enviar Avaliação</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Postagens no feed -->
+              <div class="posts-feed">
+
+              </div>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
 
-  <!-- Posts Feed -->
-  <section>
-    <div class="posts-feed">
-      <ul id="posts"></ul>
-    </div>
-  </section>
-
-  <!-- <h1>SerView</h1>
-  <hr>
-  <img id="display-photo" src="#" alt="">
-  <p id="display-name"></p>
-  <button id="logout-btn">Logout</button>
-  <hr>
-
-  <h1 id="display-name"></h1>
-
-  <hr>
-  <section>
-    <p>
-      feed
-    </p>
-    <p>
-      feed
-    </p>
-    <p>
-      feed
-    </p>
-    <p>
-      feed
-    </p>
-  </section> -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -94,8 +97,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <!-- <script src="src/js/authentication.js"></script> -->
-  <script src="src/js/feed.js"></script>
+  <script src="src/js/authentication.js"></script>
+  <!-- <script src="src/js/feed.js"></script> -->
   <script src="src/js/dom_events.js"></script>
 </body>
 

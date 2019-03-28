@@ -1,8 +1,6 @@
 // Get a reference to the database service
 var database = firebase.database();
 
-$(document).ready(function () {
-
   $('#logout-btn').click(function () {
 
     firebase
@@ -12,7 +10,6 @@ $(document).ready(function () {
         console.log(result);
         window.location.href = "index.html";
       })
-  })
   
   $('#post-btn').click(function() {
     const textInput = $('#post-input').val();

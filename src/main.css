@@ -53,6 +53,7 @@ body {
 .fas {
   font-size: 28px;
   color: #bfbfbf;
+  cursor: pointer;
 }
 
 .fas:hover {
@@ -286,3 +287,18 @@ a.socialIcon:hover, .socialHoverClass {
   margin: 10px;
 }
 
+.cashback {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+  font-size: 25px;
+}
+
+.cashback i {
+  font-size: 60px;
+}
+
+/* .square {
+  
+}
+@media ? */
