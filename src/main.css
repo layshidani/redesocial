@@ -273,3 +273,19 @@ a.socialIcon:hover, .socialHoverClass {
   height: 300px;
   margin: auto;
 }
+
+.cashback {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+  font-size: 25px;
+}
+
+.cashback i{
+  font-size: 60px;
+}
+
+/* .square {
+  
+}
+@media ? */
