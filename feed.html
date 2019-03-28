@@ -21,40 +21,43 @@
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
           <div class="card card-signin my-5">
-            <div class="header-login">
+            <div class="header-serview">
               <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
               <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
             </div>
 
             <!-- navbar -->
             <div class="navbar">
-              <button class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
-              <button class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></button>
-              <button class="btn btn-default navbar-btn"><i class="fas fa-search"></i></button>
-              <button class="btn btn-default navbar-btn"><i class="fas fa-users"></i></button>
-              <div class="dropdown mr-1">
-                <button class="dropdown-toggle"><i class="fas fa-cog nav-link"></i></button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">              
-                    <a class="dropdown-item" href="#">Configurações</a>
-                    <a class="dropdown-item" href="#">Log out</a>
+              <button id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
+              <button id="icon-cashback" class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></button>
+              <button id="icon-search" class="btn btn-default navbar-btn"><i class="fas fa-search"></i></button>
+              <button id="icon-friends" class="btn btn-default navbar-btn"><i class="fas fa-users"></i></button>
+              <div class="dropdown">
+                <button id="icon-config" class="dropdown" data-toggle="dropdown"><i
+                    class="fas fa-cog nav-link"></i></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                  <a id="config-dropdown" class="dropdown-item" href="#">Configurações</a>
+                  <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
                 </div>
               </div>
             </div>
-            <!-- logout -->
-            <div>
-              <img id="display-photo" src="#" alt="">
-              <p id="display-name"></p>
-              <button id="logout-btn">Logout</button>
+            <!-- Postar avaliação -->
+            <div class="container row">
+              <Textarea id="post-feed" class="post" placeholder="Avalie aqui"></Textarea>
+              <button id="post-btn" class="btn btn-primary" type="submit">Avaliar</button>
+            </div>
+            <!-- Posts Feed -->
+            <div class="posts-feed">
+
             </div>
 
-            <div class="card-body">
-              <h5 class="card-title text-center"></h5>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <!-- <h1>SerView</h1>
   <hr>
@@ -80,6 +83,7 @@
       feed
     </p>
   </section> -->
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -93,6 +97,7 @@
   <script src="src/js/script.js"></script>
   <!-- <script src="src/js/authentication.js"></script> -->
   <script src="src/js/feed.js"></script>
+  <script src="src/js/dom_events.js"></script>
 </body>
 
 </html>

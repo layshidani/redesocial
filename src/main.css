@@ -1,13 +1,13 @@
 :root {
   --input-padding-x: 1.5rem;
-  --input-padding-y: .75rem;
+  --input-padding-y: 0.75rem;
 }
 
 body {
   background: linear-gradient(to right, #295f2d, #409946);
 }
 
-.header-login {
+.header-serview {
   display: flex;
   align-content: center;
   justify-content: center;
@@ -110,8 +110,8 @@ body {
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
-  border-radius: .25rem;
-  transition: all .1s ease-in-out;
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in-out;
 }
 
 .form-label-group input::-webkit-input-placeholder {
@@ -186,7 +186,7 @@ padding: 10px;
 ul.social-network {
 	list-style: none;
 	display: inline;
-	margin-left:0 !important;
+	margin-left: 0 !important;
   padding: 0;
   cursor: pointer;
 }
@@ -197,36 +197,38 @@ ul.social-network li {
 }
 
 .social-network a.icoFacebook {
-	background-color:#3B5998;
+	background-color: #3B5998;
 }
 
 .social-network a.icoGoogle{
-	background-color:#BD3518;
+	background-color: #BD3518;
 }
 
 .social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
 .social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
-	color:#fff;
+	color: #fff;
 }
+
 a.socialIcon:hover, .socialHoverClass {
-	color:#44BCDD;
+	color: #44BCDD;
 }
 
 .social-circle li a {
-	display:inline-block;
-	position:relative;
-	margin:0 auto 0 auto;
-	-moz-border-radius:50%;
-	-webkit-border-radius:50%;
-	border-radius:50%;
+	display: inline-block;
+	position: relative;
+	margin: 0 auto 0 auto;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
 	text-align:center;
 	width: 50px;
 	height: 50px;
-	font-size:20px;
+	font-size: 20px;
 }
+
 .social-circle li i {
-	margin:0;
-	line-height:50px;
+	margin: 0;
+	line-height: 50px;
 	text-align: center;
 }
 
@@ -250,3 +252,24 @@ a.socialIcon:hover, .socialHoverClass {
 	transition: all 0.8s;
 }
 
+.post {
+  border: none;
+  border-radius: 5px;
+  width: 70%;
+  height: auto;
+  margin: auto;
+  overflow: auto;
+  outline: none;
+  resize: none;
+}
+
+.dropdown {
+  border: none;
+  color: #bfbfbf;
+  background-color: #eff1ed;
+}
+
+.posts-feed {
+  height: 300px;
+  margin: auto;
+}
