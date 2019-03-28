@@ -1,16 +1,15 @@
-const logoutBtn = document.querySelector('#logout-btn');
-const displayName = document.querySelector('#display-name');
-
-
-// log out
-logoutBtn.addEventListener('click', function () {
-  firebase
-    .auth()
-    .signOut()
-    .then(function () {
-      displayName.innerText = 'logout realizado'
-      window.location.href = "index.html";
-    })
-});
-
 $('.dropdown-toggle').dropdown();
+
+$(document).ready(function () {
+
+  $('#logout-btn').click(function () {
+
+    firebase
+      .auth()
+      .signOut()
+      .then(function (result) {
+        console.log(result);
+        window.location.href = "index.html";
+      })
+  })
+});

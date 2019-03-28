@@ -1,68 +1,79 @@
-// $(document).ready(function () {
+$(document).ready(function () {
 
-//   $('#btn-create-user').click(function () {
-//     let email = $('#input-email').val();
-//     console.log(email)
-//     let password = $('#input-password').val();
+  // let email = $('#input-email').val();
+  // console.log('email')
+  // let password = $('#input-password').val();
+  // console.log('password')
 
-//     firebase
-//       .auth()
-//       .createUserWithEmailAndPassword(email, password)
-//       .then(function (result) {
-//         console.log(result);
-//         var token = result.credential.accessToken;
-//         let user = result.user;
-//         let name = result.user.displayName;
-//         window.location.href = "feed.html";
-//       })
-//       .catch(function (error) {
-//         let errorCode = error.code;
-//         let errorMessage = error.message;
-//       });
-//   })
-// });
+  $('#btn-create-user').click(function () {
+    event.preventDefault();
+    let email = $('#input-email').val();
+    let password = $('#input-password').val();
 
-// Butões
-let btnFacebook = document.querySelector('#facebook-btn');
-let btnGoogle = document.querySelector('#google-btn');
-let btnLogin = document.querySelector('#login');
-let btnCreateUser = document.querySelector('#btn-create-user');
-// Inputs
+    console.log('cliquei')
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(function () {
+        window.location.href = "categories_create_user.html";
+      })
+      .catch(function (error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+      });
+  });
 
-btnCreateUser.addEventListener('click', function (e) {
-  event.preventDefault();
-  console.log('cliquei')
-  let email = document.querySelector('#input-email').value;
-  let password = document.querySelector('#input-password').value;
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(function (result) {
-      window.location.href = "feed.html";
-    })
-    .catch(function (error) {
-      console.error(error);
-      alert('Falha na autenticação');
-    });
+  $('#btnLogin').click(function () {
+    event.preventDefault();
+    let email = $('#input-email').val();
+    let password = $('#input-password').val();
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(function () {
+        window.location.href = "feed.html";
+      })
+      .catch(function (error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+      });
+  });
+
+  $('#facebook-btn').click(function () {
+    let provider = new firebase.auth.FacebookAuthProvider();
+    // signIn(provider);
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function (result) {
+        console.log(result);
+        let token = result.credential.accessToken;
+        let user = result.user;
+        let name = result.user.displayName;
+        window.location.href = "feed.html";
+      }).catch(function (error) {
+        console.error(error);
+        alert('Falha na autenticação');
+      });
+  });
+
+  $('#google-btn').click(function () {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function (result) {
+        console.log(result);
+        let token = result.credential.accessToken;
+        let user = result.user;
+        let name = result.user.displayName;
+        window.location.href = "feed.html";
+      }).catch(function (error) {
+        console.error(error);
+        alert('Falha na autenticação');
+      });
+  });
+
 });
 
-function signIn(provider) {
-  firebase.auth()
-    .signInWithPopup(provider)
-    .then(function (result) {
-      console.log(result);
-      var token = result.credential.accessToken;
-      var user = result.user;
-      var name = result.user.displayName;
-      window.location.href = "feed.html";
-    }).catch(function (error) {
-      console.error(error);
-      alert('Falha na autenticação');
-    });
-}
 
-// Autenticação via facebook
-btnFacebook.addEventListener('click', function () {
-  var provider = new firebase.auth.FacebookAuthProvider();
-  signIn(provider);
-});
