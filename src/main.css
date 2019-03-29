@@ -298,7 +298,26 @@ a.socialIcon:hover, .socialHoverClass {
   font-size: 60px;
 }
 
-/* .square {
-  
+.title {
+  color: #409946;
+  font-size: 35px;
+  margin-left: 40px;
 }
-@media ? */
+
+.square {
+  width: auto;
+  height: 240px;
+}
+
+.cont-list {
+  margin: 20px;
+}
+
+.list {
+  color: #777;
+  margin: 5px;
+}
+
+.list:hover {
+  cursor: pointer;
+}
