@@ -24,8 +24,7 @@ $(document).ready(function () {
     })
 
     if (newPost !== '') {
-      $('#posts').append(`<li class='post-card'>${newPost}</li>`);
-      console.log('funciona')
+      $('#posts').append(`<li class='post-card'>${newPost} ${hourPost}</li>`);
       $('#comment-text').val('');
       $(this).dialog('close');
     } else {
@@ -34,6 +33,28 @@ $(document).ready(function () {
   });
 
 });
+
+// const timePost = (x) => {
+//   let date = new Date();
+//   let hour = date.getHours();
+//   let min = date.getMinutes();
+//   let hourPost = hour + ":" + min;
+//   return hourPost;
+// };
+
+// console.log(timePost)
+
+function e() {
+  let date = new Date();
+  let hour = date.getHours();
+  let min = date.getMinutes();
+  let hourPost = hour + ":" + min;
+  return hourPost;
+}
+const hourPost = e();
+console.log(e())
+
+
 
 
 // $('#post-btn').click(function () {

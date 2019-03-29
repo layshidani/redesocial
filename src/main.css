@@ -320,4 +320,5 @@ a.socialIcon:hover, .socialHoverClass {
 
 .list:hover {
   cursor: pointer;
+  color: #295f2d;
 }
