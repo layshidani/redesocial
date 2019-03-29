@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     // Ícone nav-bar menu fixo
     $('#icon-home').click(function () {
-        window.location.href = "home.html"
+        window.location.href = "feed.html"
     })
     $('#icon-cashback').click(function () {
         window.location.href = "cashback.html"
