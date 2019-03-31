@@ -7,10 +7,10 @@
     <title>SerView - Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="src/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
@@ -20,72 +20,76 @@
 <body>
 
     <section>
-    <div class="container">
-        <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-            <div class="header-serview">
-                <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
-                <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
-            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="header-serview">
+                            <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
+                            <img class="logo-name" src="src/img/logo/logo_final_nome.png"
+                                alt="logotipo imagem com texto SerView">
+                        </div>
 
-            <!-- nav bar -->
-            <div class="navbar">
-                <button id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
-                <button id="icon-cashback" class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></button>
-                <button id="icon-search" class="btn btn-default navbar-btn"><i class="fas fa-search"></i></button>
-                <button id="icon-friends" class="btn btn-default navbar-btn"><i class="fas fa-users"></i></button>
-                <div class="dropdown">
-                  <button id="icon-config" class="dropdown" data-toggle="dropdown"><i
-                      class="fas fa-cog nav-link"></i></button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                    <a id="config-dropdown" class="dropdown-item" href="#">Configurações</a>
-                    <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
-                  </div>
+                        <!-- nav bar -->
+                        <div class="navbar">
+                            <button id="icon-home" class="btn btn-default navbar-btn"><i
+                                    class="fas fa-home"></i></button>
+                            <button id="icon-cashback" class="btn btn-default navbar-btn"><i
+                                    class="fas fa-dollar-sign"></i></button>
+                            <button id="icon-search" class="btn btn-default navbar-btn"><i
+                                    class="fas fa-search"></i></button>
+                            <button id="icon-friends" class="btn btn-default navbar-btn"><i
+                                    class="fas fa-users"></i></button>
+                            <div class="dropdown">
+                                <button id="icon-config" class="dropdown" data-toggle="dropdown"><i
+                                        class="fas fa-cog nav-link"></i></button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                    <a id="config-dropdown" class="dropdown-item" href="#">Configurações</a>
+                                    <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEARCH -->
+                        <nav class="navbar navbar-light bg-light">
+                            <form class="form-inline">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar"
+                                    aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                            </form>
+                            <ul class="cont-list">
+                                <li class="list">Bares, Cafés e Restaurantes</li>
+                                <li class="list">Alimentos e Bebidas</li>
+                                <li class="list">Tecnologia</li>
+                                <li class="list">Esporte e Lazer</li>
+                                <li class="list">Automotivo</li>
+                                <li class="list">Moda</li>
+                                <li class="list">Beleza</li>
+                                <li class="list">Viagem e Turismo</li>
+                                <li class="list">Saúde</li>
+                                <li class="list">Saúde Animal</li>
+                            </ul>
+                        </nav>
+
+                        <div class="card-body">
+                            <h5 class="card-title text-center"></h5>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-            <!-- SEARCH -->
-            <nav class="navbar navbar-light bg-light">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="cont-list">
-                    <li class="list">Bares, Cafés e Restaurantes</li>
-                    <li class="list">Alimentos e Bebidas</li>
-                    <li class="list">Tecnologia</li>
-                    <li class="list">Esporte e Lazer</li>
-                    <li class="list">Automotivo</li>
-                    <li class="list">Moda</li>
-                    <li class="list">Beleza</li>
-                    <li class="list">Viagem e Turismo</li>
-                    <li class="list">Saúde</li>
-                    <li class="list">Saúde Animal</li>
-                </ul>
-            </nav>
-
-            <div class="card-body">
-                <h5 class="card-title text-center"></h5>
-            </div>
             </div>
         </div>
-        </div>
-    </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-    <script src="src/js/script.js"></script>
-    <!-- <script src="src/js/authentication.js"></script> -->
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="src/js/authentication.js"></script>
     <script src="src/js/feed.js"></script>
     <script src="src/js/dom_events.js"></script>
 </body>

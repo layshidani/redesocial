@@ -315,9 +315,10 @@ a.socialIcon:hover, .socialHoverClass {
 
 .list {
   color: #777;
-  margin: 5px;
+  margin: 7px;
 }
 
 .list:hover {
   cursor: pointer;
+  color: #295f2d;
 }

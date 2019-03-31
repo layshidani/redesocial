@@ -5,16 +5,14 @@ $(document).ready(function () {
     let email = $('#input-email').val();
     let password = $('#input-password').val();
 
-    console.log('cliquei')
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(function () {
+      .then(function (users) {
         window.location.href = "categories_create_user.html";
       })
       .catch(function (error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
+        alert('Falha na autenticação');
       });
   });
 
@@ -25,12 +23,11 @@ $(document).ready(function () {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function () {
+      .then(function (users) {
         window.location.href = "feed.html";
       })
       .catch(function (error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
+        alert('Falha no Login');
       });
   });
 
@@ -41,13 +38,11 @@ $(document).ready(function () {
       .auth()
       .signInWithPopup(provider)
       .then(function (result) {
-        console.log(result);
         let token = result.credential.accessToken;
         let user = result.user;
         let name = result.user.displayName;
         window.location.href = "feed.html";
       }).catch(function (error) {
-        console.error(error);
         alert('Falha na autenticação');
       });
   });
@@ -64,18 +59,15 @@ $(document).ready(function () {
         let name = result.user.displayName;
         window.location.href = "feed.html";
       }).catch(function (error) {
-        console.error(error);
         alert('Falha na autenticação');
       });
   });
 
   $('#logout-btn').click(function () {
-
     firebase
       .auth()
       .signOut()
       .then(function (result) {
-        console.log(result);
         window.location.href = "index.html";
       });
   });
