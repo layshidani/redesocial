@@ -39,7 +39,11 @@ window.onload = () => {
       let date = new Date();
       let hour = date.getHours();
       let min = date.getMinutes();
-      let hourPost = hour + ":" + min;
+      let year = date.getFullYear();
+      let month = date.getMonth();
+      let day = date.getDate();
+    
+      let hourPost = `${day}/${month}/${year} - ${hour}:${min}`
       return hourPost;
     }
     const hourPost = e();
