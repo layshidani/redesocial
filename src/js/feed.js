@@ -1,15 +1,18 @@
 window.onload = () => {
   // Get a reference to the database service
   const database = firebase.database();
-  const posts = firebase.database().ref('posts');
+  const postsRef = firebase.database().ref('feed');
+  const postsContainer = $('#posts-container')[0];
+  let likes = 0;
 
-  (function () {
-    posts.once('value').then(snapshot => {
-      console.log(snapshot.val());
-    });
-
-
-  })();
+  // firebase.database().ref('feed/posts').once('value').then(snapshot => {
+  //   console.log(snapshot.val());
+  //   snapshot.forEach(value => {
+  //     postTemplate(value.val());
+  //   })
+    
+  // })
+  
 
   // data e hora do post
   function getDate() {
@@ -24,36 +27,40 @@ window.onload = () => {
     return postDate;
   };
 
-  let likes = 0;
+  
+
+  function getText() {
+    return $('#comment-text').val();
+  }
 
   const postTemplate = function() {
     // cabeçaho do post
-    let name = document.createElement('h1');
+    let name = document.createElement('h2');
     name.innerText = '@user';
 
-    let header = document.createElement('h2');
+    let header = document.createElement('h5');
     header.innerText = getDate();
     header.classList.add('post-title');
 
     // mensagem
     let text = document.createElement('p');
-    text.innerText = newPost;
+    text.innerText = getText();
     
     // editar postagem
-    let editPost = document.createElement('a');
-    editPost.innerText = editar;
+    let editPost = document.createElement('button');
+    editPost.innerText = 'editar';
 
     // excluir postagem
-    let deletePost = document.createElement('a');
-    deletePost.innerText = excluir;
+    let deletePost = document.createElement('button');
+    deletePost.innerText = 'excluir';
 
     // botão curtir
-    let likeBtn = document.createElement('p');
-    likeBtn.textContent = `<a>curtir</a>`
+    let likeBtn = document.createElement('button');
+    likeBtn.innerText = 'curtir';
 
     // contador de curtidas
     let counter = document.createElement('span');
-    counter.innerHTML = likes;
+    counter.innerHTML = likes + ' curtidas';
 
     // card de postagem
     let card = document.createElement('div');
@@ -66,24 +73,26 @@ window.onload = () => {
     card.appendChild(deletePost);
     card.appendChild(likeBtn);
     card.appendChild(counter);
+
+    // adiciona nos posts
+    postsContainer.insertBefore(card, postsContainer.childNodes[0]);
   }
 
-  // Mensagens na base de dados
-  $('#post-btn').click(function (event) {
-    event.preventDefault();
-    let newPost = $('#comment-text').val();
-
-    if (newPost !== '') {
-      database.ref('posts').push({
-        text: newPost,
-        date: getDate(),
-      })
-      $('#posts').append(`<li class='post-card'>${getDate()} <br> >>> ${newPost}</li>`);
-      $('#comment-text').val('');
-    } else {
-      alert('O campo de texto não pode estar vazio :/');
+  $('#post-btn').click(function publishPost() {
+    let newPost = {
+      text: getText(),
+      date: getDate(),
     }
+
+    postsRef.child('/posts').push(newPost).then(() => postTemplate());
+
+    // clearText();
   });
+
+  // function clearText() {
+  //   $('#comment-text').val('');
+  // }
+
   
 };
 
