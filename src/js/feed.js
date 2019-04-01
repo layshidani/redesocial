@@ -45,18 +45,20 @@ window.onload = () => {
     header.innerText = date;
     
     // mensagem
-    let text = document.createElement('h4');
+    let text = document.createElement('p');
     text.setAttribute('class', 'text-post');
     text.innerText = textPost;
     
     // editar postagem
     let editPost = document.createElement('button');
-    editPost.setAttribute('class', 'edit-btn');
+    editPost.setAttribute('class', 'post-btn');
+    editPost.setAttribute('id', 'edit-btn');
     editPost.innerText = 'editar';
     
     // excluir postagem
     let deletePost = document.createElement('button');
-    deletePost.setAttribute('class', 'delete-btn');
+    deletePost.setAttribute('class', 'post-btn');
+    deletePost.setAttribute('id', 'delete-btn');
     deletePost.innerText = 'excluir';
 
     // botão curtir
@@ -66,7 +68,8 @@ window.onload = () => {
 
     // contador de curtidas
     let counter = document.createElement('span');
-    counter.setAttribute('id', 'showLikes');
+    counter.setAttribute('id', 'show-likes');
+    counter.setAttribute('class', 'show-likes');
     counter.innerHTML = 0 + ' curtidas';
 
     // card de postagem
@@ -105,18 +108,26 @@ window.onload = () => {
   // function clearText() {
   //   $('#comment-text').val('');
   // }
+  
 
-  $('#like-btn').click(function likePost(id) {
-    console.log('like');
-    
-    let countLikes = +likes.innerText;
-    countLikes = countLikes + 1;
-    
-
-    postsRef.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  })
-
+  // $('#delete-btn').click(function deletePost(event) {
+  //   var card = document.getElementById('.post-card');
+  //   postsRef.child('feed/posts').remove().then(() => {
+  //     card.remove();
+  //   });
+  // })
 
   
+  $('#like-btn').click(function likePost(event) {
+    
+    console.log('like');
+    
+    // let countLikes = +counter.innerText;
+    // countLikes = countLikes + 1;
+    
+
+    // postsRef.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
+  })
+ 
 };
 

@@ -333,8 +333,19 @@ a.socialIcon:hover, .socialHoverClass {
   font-weight: bold;
   padding: 0;
   margin-bottom: 0;
+  font-size: 12px;
 }
 
 .date-time {
   font-style: italic;
+  font-size: 12px;
+}
+
+.text-post {
+  font-size: 18px;
+}
+
+.show-likes {
+  padding-left: 10px;
+  color: #295f2d;
 }
