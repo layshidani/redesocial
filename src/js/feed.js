@@ -45,7 +45,7 @@ window.onload = () => {
     header.innerText = date;
     
     // mensagem
-    let text = document.createElement('h3');
+    let text = document.createElement('h4');
     text.setAttribute('class', 'text-post');
     text.innerText = textPost;
     
@@ -72,7 +72,7 @@ window.onload = () => {
     // card de postagem
     let card = document.createElement('div');
     card.setAttribute('class', 'post-card');
-    
+
     // inserir informações no card
     card.appendChild(name);
     card.appendChild(header);
