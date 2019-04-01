@@ -5,13 +5,15 @@ window.onload = () => {
   const postsContainer = $('#posts-container')[0];
   let likes = 0;
 
-  // firebase.database().ref('feed/posts').once('value').then(snapshot => {
-  //   console.log(snapshot.val());
-  //   snapshot.forEach(value => {
-  //     postTemplate(value.val());
-  //   })
-    
-  // })
+  firebase.database().ref('feed/posts').once('value').then(snapshot => {
+    console.log(snapshot.val());
+    snapshot.forEach(value => {
+      let firebaseDate = value.val().date;
+      let firebaseText = value.val().text;
+      postTemplate(firebaseDate, firebaseText);
+      
+    })
+  })
   
 
   // data e hora do post
@@ -33,18 +35,18 @@ window.onload = () => {
     return $('#comment-text').val();
   }
 
-  const postTemplate = function() {
+  const postTemplate = function(date, textPost) {
     // cabeçaho do post
     let name = document.createElement('h2');
     name.innerText = '@user';
 
     let header = document.createElement('h5');
-    header.innerText = getDate();
+    header.innerText = date;
     header.classList.add('post-title');
 
     // mensagem
     let text = document.createElement('p');
-    text.innerText = getText();
+    text.innerText = textPost;
     
     // editar postagem
     let editPost = document.createElement('button');
@@ -84,7 +86,7 @@ window.onload = () => {
       date: getDate(),
     }
 
-    postsRef.child('/posts').push(newPost).then(() => postTemplate());
+    postsRef.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
 
     // clearText();
   });
