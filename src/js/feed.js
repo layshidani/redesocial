@@ -110,16 +110,20 @@ window.onload = () => {
   // }
   
 
-  // $('#delete-btn').click(function deletePost(event) {
-  //   var card = document.getElementById('.post-card');
-  //   postsRef.child('feed/posts').remove().then(() => {
+  // $('#delete-btn').click(function deletePost(id) {
+  //   let card = document.getElementById(id);
+  //   postsRef.child(id).remove().then(() => {
   //     card.remove();
   //   });
   // })
 
-  
+  /*****************************************
+   * a funḉão abaixo não está dando 
+   * console.log 
+   * 
+   * ************************************ */
   $('#like-btn').click(function likePost(event) {
-    
+    event.preventDefault();
     console.log('like');
     
     // let countLikes = +counter.innerText;
