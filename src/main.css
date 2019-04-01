@@ -322,3 +322,19 @@ a.socialIcon:hover, .socialHoverClass {
   cursor: pointer;
   color: #295f2d;
 }
+
+.post-card {
+  background-color: #edffdc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.user-name {
+  font-weight: bold;
+  padding: 20px 0 0 0;
+  margin-bottom: 0;
+}
+
+.date-time {
+  font-style: italic;
+}
