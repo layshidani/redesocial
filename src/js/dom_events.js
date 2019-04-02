@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Butões html categorias
+    // Botões html categorias
     $('#jump-btn').click(function () {
         window.location.href = "feed.html"
     })
