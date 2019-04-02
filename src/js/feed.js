@@ -52,19 +52,19 @@ window.onload = () => {
     // editar postagem
     let editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
-    editPost.setAttribute('id', 'edit-btn');
-    editPost.innerText = 'editar';
+    editPost.setAttribute('class', 'far fa-edit');
+    editPost.innerText = '';
 
     // excluir postagem
     let deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
-    deletePost.setAttribute('id', 'delete-btn');
-    deletePost.innerText = 'excluir';
+    deletePost.setAttribute('class', 'far fa-trash-alt');
+    deletePost.innerText = '';
 
     // botão curtir
     let likeBtn = document.createElement('button');
-    likeBtn.setAttribute('id', 'like-btn');
-    likeBtn.innerText = 'curtir';
+    likeBtn.setAttribute('class', 'far fa-thumbs-up');
+    likeBtn.innerText = '';
 
     // contador de curtidas
     let counter = document.createElement('span');
