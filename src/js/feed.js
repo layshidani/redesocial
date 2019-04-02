@@ -1,4 +1,6 @@
 window.onload = () => {
+
+  event.preventDefault();
   // Get a reference to the database service
   const database = firebase.database();
   const postsRef = firebase.database().ref('feed');
@@ -50,30 +52,32 @@ window.onload = () => {
     text.innerText = textPost;
 
     // editar postagem
-    let editPost = document.createElement('button');
+    const editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
     editPost.innerText = '';
 
     // excluir postagem
-    let deletePost = document.createElement('button');
+    const deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
+    deletePost.setAttribute('id', 'delete-btn');
     deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
     deletePost.innerText = '';
 
     // botão curtir
-    let likeBtn = document.createElement('button');
+    const likeBtn = document.createElement('button');
+    likeBtn.setAttribute('id', 'like-btn');
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
     // contador de curtidas
-    let counter = document.createElement('span');
+    const counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
     counter.innerHTML = 0 + ' curtidas';
 
     // card de postagem
-    let card = document.createElement('div');
+    const card = document.createElement('div');
     card.setAttribute('class', 'post-card');
 
     // inserir informações no card
@@ -110,28 +114,30 @@ window.onload = () => {
   // }
 
 
-  // $('#delete-btn').click(function deletePost(id) {
-  //   let card = document.getElementById(id);
-  //   postsRef.child(id).remove().then(() => {
-  //     card.remove();
-  //   });
-  // })
+  $(document).on('click', '#delete-btn', function (id) {
+    let card = document.getElementById(id);
+    postsRef.child('/posts').remove(card).then(() => {
+      $('.post-card').remove();
+    })
+  })
+
 
   /*****************************************
    * a funḉão abaixo não está dando 
    * console.log 
    * 
    * ************************************ */
-  $('#like-btn').click(function likePost(event) {
-    event.preventDefault();
-    console.log('like');
+  // $('#like-btn').click(function likePost(event) {
+  //   event.preventDefault();
+  //   console.log('foi');
 
-    // let countLikes = +counter.innerText;
-    // countLikes = countLikes + 1;
+  //   let countLikes = counter++;
+  //   // for (let like in likes) {
+  //   //   countLikes = like++;
+  //   // }
 
-
-    // postsRef.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  })
+  //   postsRef.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
+  // })
 
 };
 
