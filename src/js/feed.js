@@ -30,8 +30,6 @@ window.onload = () => {
     return postDate;
   };
 
-
-
   function getText() {
     return $('#comment-text').val();
   }
