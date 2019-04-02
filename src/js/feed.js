@@ -17,7 +17,6 @@ window.onload = () => {
     })
   })
 
-
   // data e hora do post
   function getDate() {
     let date = new Date();
@@ -29,8 +28,6 @@ window.onload = () => {
     let postDate = `${day}/${month}/${year} - ${time}`
     return postDate;
   };
-
-
 
   function getText() {
     return $('#comment-text').val();
@@ -116,9 +113,9 @@ window.onload = () => {
 
   $(document).on('click', '#delete-btn', function (id) {
     let card = document.getElementById(id);
-    postsRef.child('/posts').remove(card).then(() => {
-      $('.post-card').remove();
-    })
+    postsRef.child('/posts/').remove().then(() => {
+      $(this).parent('.post-card').remove();
+    });
   })
 
 
