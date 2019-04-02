@@ -11,10 +11,10 @@ window.onload = () => {
       let firebaseDate = value.val().date;
       let firebaseText = value.val().text;
       postTemplate(firebaseDate, firebaseText);
-      
+
     })
   })
-  
+
 
   // data e hora do post
   function getDate() {
@@ -29,13 +29,13 @@ window.onload = () => {
     return postDate;
   };
 
-  
+
 
   function getText() {
     return $('#comment-text').val();
   }
 
-  const postTemplate = function(date, textPost) {
+  const postTemplate = function (date, textPost) {
     // cabeçaho do post
     let name = document.createElement('h2');
     name.innerText = '@user';
@@ -47,7 +47,7 @@ window.onload = () => {
     // mensagem
     let text = document.createElement('p');
     text.innerText = textPost;
-    
+
     // editar postagem
     let editPost = document.createElement('button');
     editPost.innerText = 'editar';
@@ -95,6 +95,6 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
-  
+
 };
 
