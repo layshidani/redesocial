@@ -60,6 +60,10 @@ body {
   color: #409946;
 }
 
+.far:hover {
+  color: #409946;
+}
+
 .form-signin {
   width: 100%;
 }

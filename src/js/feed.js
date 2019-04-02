@@ -52,18 +52,18 @@ window.onload = () => {
     // editar postagem
     let editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
-    editPost.setAttribute('class', 'far fa-edit');
+    editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
     editPost.innerText = '';
 
     // excluir postagem
     let deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
-    deletePost.setAttribute('class', 'far fa-trash-alt');
+    deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
     deletePost.innerText = '';
 
     // botão curtir
     let likeBtn = document.createElement('button');
-    likeBtn.setAttribute('class', 'far fa-thumbs-up');
+    likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
     // contador de curtidas
