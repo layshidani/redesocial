@@ -10,9 +10,9 @@ window.onload = () => {
   database.ref('feed/posts').once('value').then(snapshot => {
     console.log(snapshot.val());
     snapshot.forEach(value => {
-      var childkey = value.key;
+      let childkey = value.key;
       console.log('childkey: ', childkey);
-      var childData = value.val();
+      let childData = value.val();
       console.log('childData: ', childData);
       let firebaseDate = value.val().date;
       let firebaseText = value.val().text;
@@ -52,34 +52,35 @@ window.onload = () => {
     text.innerText = textPost;
 
     // editar postagem
-    const editPost = document.createElement('button');
+    let editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
     editPost.innerText = '';
 
     // excluir postagem
-    const deletePost = document.createElement('button');
+    let deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
     deletePost.setAttribute('id', 'delete-btn');
     deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
     deletePost.innerText = '';
 
     // botão curtir
-    const likeBtn = document.createElement('button');
+    let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
     // contador de curtidas
-    const counter = document.createElement('span');
+    let counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
     counter.innerHTML = 0 + ' curtidas';
 
     // card de postagem
-    const card = document.createElement('div');
+    let card = document.createElement('div');
     card.setAttribute('class', 'post-card');
-    card.setAttribute('card-id', key);
+    card.setAttribute('id', 'post-card-key');
+    card.setAttribute('data-idcard', key);
 
     // inserir informações no card
     card.appendChild(name);
@@ -101,7 +102,7 @@ window.onload = () => {
       curtidas: likes,
     }
 
-    feedDatabase.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
 
     // clearText();
   });
@@ -114,30 +115,16 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
-  // $(document).on('click', '#delete-btn', function () {
-  //   // e.preventDefault();
-  //   let deletePost = postsRef.child('/posts/');
-  //   // let card = document.getElementById(id);
-  //   deletePost.child(postKey).remove().then(() => {
-  //     $(this).parent('.post-card').remove();
-  //   });
-  // })
 
-
-  $(document).on('click', '#delete-btn', function (id) {
-
-    // // e.preventDefault();
-    // let postDelete = postsRef.child('/posts');
-    // postDelete.child(id).remove().then(() => {
-    //   let card = document.getElementById(id);
-    //   $(this).parent('.post-card').remove(card);
-
-    let card = document.getElementById(id);
-    feedDatabase.child('/posts/').remove().then(() => {
+  $(document).on('click', '#delete-btn', function () {
+    event.preventDefault();
+    let postKeycard = document.getElementById('post-card-key');
+    let cardPost = postKeycard.getAttribute('data-idcard');
+    feedDatabase.child('/posts/' + cardPost).remove().then(() => {
       $(this).parent('.post-card').remove();
-
     });
   })
+
 
 
   // $(document).on('click', '#delete-btn', function (id) {
