@@ -7,7 +7,7 @@ window.onload = () => {
   const postsContainer = $('#posts-container')[0];
   let likes = 0;
 
-  firebase.database().ref('feed/posts').once('value').then(snapshot => {
+  database.ref('feed/posts').once('value').then(snapshot => {
     console.log(snapshot.val());
     snapshot.forEach(value => {
       let firebaseDate = value.val().date;
@@ -91,7 +91,7 @@ window.onload = () => {
   }
 
   $('#post-btn').click(function publishPost() {
-    let newPost = {
+    const newPost = {
       text: getText(),
       date: getDate(),
       curtidas: likes,
@@ -110,13 +110,38 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
+  // $(document).on('click', '#delete-btn', function () {
+  //   // e.preventDefault();
+  //   let deletePost = postsRef.child('/posts/');
+  //   // let card = document.getElementById(id);
+  //   deletePost.child(postKey).remove().then(() => {
+  //     $(this).parent('.post-card').remove();
+  //   });
+  // })
+
 
   $(document).on('click', '#delete-btn', function (id) {
-    let card = document.getElementById(id);
-    postsRef.child('/posts/').remove().then(() => {
-      $(this).parent('.post-card').remove();
+    // e.preventDefault();
+    let postDelete = postsRef.child('/posts');
+    postDelete.child(id).remove().then(() => {
+      let card = document.getElementById(id);
+      $(this).parent('.post-card').remove(card);
     });
   })
+
+
+  // $(document).on('click', '#delete-btn', function (id) {
+  //   let card = document.getElementById(id);
+  //   let confirm = confirm('Tem certeza que quer excluir?');
+  //   if (confirm === true) {
+
+  //     postsRef.child('/posts/').remove().then(() => {
+  //       $(this).parent('.post-card').remove();
+  //     })
+  //   } else {
+
+  //   }
+  // })
 
 
   /*****************************************
