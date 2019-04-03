@@ -8,17 +8,11 @@ window.onload = () => {
   let likes = 0;
 
   firebase.database().ref('feed/posts').once('value').then(snapshot => {
-    // snapshot.forEach(childSnapshot => {
-    // });
-    
-    console.log(snapshot.val());
     snapshot.forEach(value => {
       var childkey = value.key;
-      console.log('childkey: ', childkey);
       var childData = value.val();
-      console.log('childData: ', childData);
-      let firebaseDate = value.val().date;
-      let firebaseText = value.val().text;
+      let firebaseDate = childData.date;
+      let firebaseText = childData.text;
       postTemplate(firebaseDate, firebaseText, childkey);
     })
   })
@@ -65,6 +59,7 @@ window.onload = () => {
     deletePost.setAttribute('class', 'post-btn');
     deletePost.setAttribute('id', 'delete-btn');
     deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
+    deletePost.setAttribute('data-id', key);
     deletePost.innerText = '';
 
     // botão curtir
@@ -82,7 +77,7 @@ window.onload = () => {
     // card de postagem
     const card = document.createElement('div');
     card.setAttribute('class', 'post-card');
-    card.setAttribute('card-id', key);
+    card.setAttribute('id', 'post-card');
 
     // inserir informações no card
     card.appendChild(name);
@@ -103,9 +98,11 @@ window.onload = () => {
       date: getDate(),
       curtidas: likes,
     }
+    
 
-    feedDatabase.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
-
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
+  
+    
     // clearText();
   });
 
@@ -117,13 +114,38 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
+  $(document).on('click', '#delete-btn', function deletePost() {
+    console.log('delete clicado');
+    
+    let del = document.getElementById('delete-btn');
+    let valor = del.dataset.id;
+    console.log(valor);
+    
 
-  $(document).on('click', '#delete-btn', function (id) {
-    let card = document.getElementById(id);
-    feedDatabase.child('/posts/').remove().then(() => {
+    firebase.database().ref('feed/posts/' + valor).remove().then(() => {
       $(this).parent('.post-card').remove();
+      console.log('del');
+      
     });
   })
+
+  // $(document).on('click', '#delete-btn', function deletePost() {
+  //   console.log('delete clicado');
+    
+  //   let del = document.getElementById('delete-btn');
+  //   let valor = del.dataset.id;
+  //   console.log(valor);
+    
+
+  //   firebase.database().ref('feed/posts/' + valor).remove().then(() => {
+  //     $(this).parent('.post-card').remove();
+  //     console.log('del');
+      
+  //   });
+  // })
+
+  // dataattribute
+  // atualizar navegador
 
 
   /*****************************************
