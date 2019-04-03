@@ -98,7 +98,6 @@ window.onload = () => {
     }
 
     postsRef.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
-
     // clearText();
   });
 
@@ -137,4 +136,6 @@ window.onload = () => {
   // })
 
 };
+
+
 
