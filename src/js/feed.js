@@ -7,7 +7,8 @@ window.onload = () => {
   const postsContainer = $('#posts-container')[0];
   let likes = 0;
 
-  firebase.database().ref('feed/posts').once('value').then(snapshot => {
+  database.ref('feed/posts').once('value').then(snapshot => {
+    console.log(snapshot.val());
     snapshot.forEach(value => {
       var childkey = value.key;
       var childData = value.val();
@@ -93,7 +94,7 @@ window.onload = () => {
   }
 
   $('#post-btn').click(function publishPost() {
-    let newPost = {
+    const newPost = {
       text: getText(),
       date: getDate(),
       curtidas: likes,
@@ -114,6 +115,7 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
+<<<<<<< HEAD
   $(document).on('click', '#delete-btn', function deletePost() {
     console.log('delete clicado');
     
@@ -126,6 +128,30 @@ window.onload = () => {
       $(this).parent('.post-card').remove();
       console.log('del');
       
+=======
+  // $(document).on('click', '#delete-btn', function () {
+  //   // e.preventDefault();
+  //   let deletePost = postsRef.child('/posts/');
+  //   // let card = document.getElementById(id);
+  //   deletePost.child(postKey).remove().then(() => {
+  //     $(this).parent('.post-card').remove();
+  //   });
+  // })
+
+
+  $(document).on('click', '#delete-btn', function (id) {
+
+    // // e.preventDefault();
+    // let postDelete = postsRef.child('/posts');
+    // postDelete.child(id).remove().then(() => {
+    //   let card = document.getElementById(id);
+    //   $(this).parent('.post-card').remove(card);
+
+    let card = document.getElementById(id);
+    feedDatabase.child('/posts/').remove().then(() => {
+      $(this).parent('.post-card').remove();
+
+>>>>>>> 7419f122d821ad9e11308521cb155be4391d7280
     });
   })
 
@@ -148,6 +174,20 @@ window.onload = () => {
   // atualizar navegador
 
 
+  // $(document).on('click', '#delete-btn', function (id) {
+  //   let card = document.getElementById(id);
+  //   let confirm = confirm('Tem certeza que quer excluir?');
+  //   if (confirm === true) {
+
+  //     postsRef.child('/posts/').remove().then(() => {
+  //       $(this).parent('.post-card').remove();
+  //     })
+  //   } else {
+
+  //   }
+  // })
+
+
   /*****************************************
    * a funḉão abaixo não está dando 
    * console.log 
@@ -166,4 +206,6 @@ window.onload = () => {
   // })
 
 };
+
+
 
