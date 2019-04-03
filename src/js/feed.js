@@ -3,7 +3,7 @@ window.onload = () => {
   event.preventDefault();
   // Get a reference to the database service
   const database = firebase.database();
-  const postsRef = firebase.database().ref('feed');
+  const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
   let likes = 0;
 
@@ -13,7 +13,6 @@ window.onload = () => {
       let firebaseDate = value.val().date;
       let firebaseText = value.val().text;
       postTemplate(firebaseDate, firebaseText);
-
     })
   })
 
@@ -97,7 +96,7 @@ window.onload = () => {
       curtidas: likes,
     }
 
-    postsRef.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
+    feedDatabase.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
 
     // clearText();
   });
@@ -113,7 +112,7 @@ window.onload = () => {
 
   $(document).on('click', '#delete-btn', function (id) {
     let card = document.getElementById(id);
-    postsRef.child('/posts/').remove().then(() => {
+    feedDatabase.child('/posts/').remove().then(() => {
       $(this).parent('.post-card').remove();
     });
   })
@@ -133,7 +132,7 @@ window.onload = () => {
   //   //   countLikes = like++;
   //   // }
 
-  //   postsRef.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
+  //    feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
   // })
 
 };
