@@ -49,12 +49,17 @@ window.onload = () => {
     // mensagem
     let text = document.createElement('p');
     text.setAttribute('class', 'text-post');
+    text.setAttribute('id', 'comment-post');
     text.innerText = textPost;
 
     // editar postagem
     let editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
+    editPost.setAttribute('id', 'edit-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
+    editPost.setAttribute('data-id', key);
+    editPost.setAttribute('data-target', '#newModal');
+    editPost.setAttribute('data-toggle', 'modal');
     editPost.innerText = '';
 
     // excluir postagem
@@ -158,6 +163,45 @@ window.onload = () => {
   //   // return likes;
   //   feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
   // }
+  $(document).on('click', '#edit-btn', function () {
+    event.preventDefault();
+    console.log('Sim')
+    let postKeycard = document.getElementById('post-card-key');
+    let cardPost = postKeycard.getAttribute('data-idcard');
+
+    let newText = $('#new-comment-text').val();
+    console.log('newText: ', newText);
+
+    feedDatabase.child('/posts/' + cardPost).update({
+      text: newText,
+
+    }).then(() => {
+      jQuery('#comment-post').html(newText);
+    })
+  });
+
+
+  // $(document).on('click', '#new-post-btn', function editPost() {
+  //   console.log('Confirme edit clicado');
+
+  //   let edit = document.getElementById('edit-btn');
+  //   let editId = edit.dataset.id;
+  //   let teste = firebase.database().ref('feed/posts/' + editId).once('value');
+  //   console.log('teste: ', teste);
+  //   let newText = $('#new-comment-text').val();
+  //   newText = teste;
+  //   console.log('newText: ', newText);
+  $(document).on('click', '#like-btn', function () {
+    likes++;
+    document.getElementById("show-likes").innerHTML = likes + ' curtidas';
+  })
+
+  //   firebase.database().ref('feed/posts/' + editId).update({
+  //     text: newText,
+  //   }).then(() => {
+  //     jQuery("#comment-post").html(newText);
+  //   })
+  // });
 
 
   /*****************************************
