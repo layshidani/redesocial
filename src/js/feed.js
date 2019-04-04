@@ -110,6 +110,7 @@ window.onload = () => {
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
 
     // clearText();
+
   });
 
   /************************
@@ -162,6 +163,10 @@ window.onload = () => {
   //   let newText = $('#new-comment-text').val();
   //   newText = teste;
   //   console.log('newText: ', newText);
+  $(document).on('click', '#like-btn', function () {
+    likes++;
+    document.getElementById("show-likes").innerHTML = likes + ' curtidas';
+  })
 
   //   firebase.database().ref('feed/posts/' + editId).update({
   //     text: newText,
@@ -189,4 +194,5 @@ window.onload = () => {
   // })
 
 };
+
 
