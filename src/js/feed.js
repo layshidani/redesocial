@@ -106,12 +106,6 @@ window.onload = () => {
 
     // clearText();
 
-    // let clck = document.getElementById('.like-btn');
-    // clck.addEventListener('click', count());
-    // function count(likes, clck){
-    //   likes = likes + 1;
-    //   clck.innerHTML = likes + ' curtidas';
-    // }
   });
 
   /************************
@@ -136,7 +130,10 @@ window.onload = () => {
     }
   })
 
-
+  $(document).on('click', '#like-btn', function () {
+      likes++;
+      document.getElementById("show-likes").innerHTML = likes + ' curtidas';
+  })
 
 
 
@@ -158,4 +155,5 @@ window.onload = () => {
   // })
 
 };
+
 
