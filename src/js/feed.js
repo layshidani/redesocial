@@ -118,27 +118,19 @@ window.onload = () => {
 
   $(document).on('click', '#delete-btn', function () {
     event.preventDefault();
-    let postKeycard = document.getElementById('post-card-key');
-    let cardPost = postKeycard.getAttribute('data-idcard');
-    feedDatabase.child('/posts/' + cardPost).remove().then(() => {
-      $(this).parent('.post-card').remove();
-    });
+    let confirmDelete = confirm('Tem certeza que quer excluir?');
+    if (confirmDelete === true) {
+      let postKeycard = document.getElementById('post-card-key');
+      let cardPost = postKeycard.getAttribute('data-idcard');
+      feedDatabase.child('/posts/' + cardPost).remove().then(() => {
+        $(this).parent('.post-card').remove();
+      });
+    } else {
+    }
   })
 
 
 
-  // $(document).on('click', '#delete-btn', function (id) {
-  //   let card = document.getElementById(id);
-  //   let confirm = confirm('Tem certeza que quer excluir?');
-  //   if (confirm === true) {
-
-  //     postsRef.child('/posts/').remove().then(() => {
-  //       $(this).parent('.post-card').remove();
-  //     })
-  //   } else {
-
-  //   }
-  // })
 
 
   /*****************************************
