@@ -104,6 +104,13 @@ window.onload = () => {
     feedDatabase.child('/posts').push(newPost).then(() => postTemplate(getDate(), getText()));
 
     // clearText();
+
+    // let clck = document.getElementById('.like-btn');
+    // clck.addEventListener('click', count());
+    // function count(likes, clck){
+    //   likes = likes + 1;
+    //   clck.innerHTML = likes + ' curtidas';
+    // }
   });
 
   /************************
@@ -172,6 +179,5 @@ window.onload = () => {
   // })
 
 };
-
 
 
