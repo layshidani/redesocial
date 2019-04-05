@@ -47,12 +47,17 @@ window.onload = () => {
     // mensagem
     let text = document.createElement('p');
     text.setAttribute('class', 'text-post');
+    text.setAttribute('id', 'comment-post');
     text.innerText = textPost;
 
     // editar postagem
     const editPost = document.createElement('button');
+    editPost.setAttribute('id', 'edit-btn');
+    // editPost.setAttribute('data-id', key);
     editPost.setAttribute('class', 'post-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
+    editPost.setAttribute('data-target', '#newModal');
+    editPost.setAttribute('data-toggle', 'modal');
     editPost.innerText = '';
 
     // excluir postagem
@@ -100,13 +105,25 @@ window.onload = () => {
       curtidas: likes,
     }
     
-
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
   
     
     // clearText();
   });
 
+  $(document).on('click', '#delete-btn', function deletePost() {
+    console.log('delete clicado');
+    
+    let del = document.getElementById('delete-btn');
+    let valor = this.getAttribute('data-id');
+    console.log(valor);
+    
+    firebase.database().ref('feed/posts/' + valor).remove().then(() => {
+      $(this).parent('.post-card').remove();
+      console.log('del');
+    });
+  });
+  
   /************************
   * funções em construção:
   *************************/
@@ -115,78 +132,23 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
-<<<<<<< HEAD
-  $(document).on('click', '#delete-btn', function deletePost() {
-    console.log('delete clicado');
+
+  $(document).on('click', '#new-post-btn', function editPost() {    
     
-    let del = document.getElementById('delete-btn');
-    let valor = del.dataset.id;
-    console.log(valor);
-    
+    // $(`button[data-id="${}"`)
 
-    firebase.database().ref('feed/posts/' + valor).remove().then(() => {
-      $(this).parent('.post-card').remove();
-      console.log('del');
-      
-=======
-  // $(document).on('click', '#delete-btn', function () {
-  //   // e.preventDefault();
-  //   let deletePost = postsRef.child('/posts/');
-  //   // let card = document.getElementById(id);
-  //   deletePost.child(postKey).remove().then(() => {
-  //     $(this).parent('.post-card').remove();
-  //   });
-  // })
+    let edit = document.getElementById('edit-btn');
+    let editId = edit.dataset.id;
+    console.log('id', editId);
+    let newText = $('#new-comment-text').val();
+    console.log('newText: ', newText);
 
-
-  $(document).on('click', '#delete-btn', function (id) {
-
-    // // e.preventDefault();
-    // let postDelete = postsRef.child('/posts');
-    // postDelete.child(id).remove().then(() => {
-    //   let card = document.getElementById(id);
-    //   $(this).parent('.post-card').remove(card);
-
-    let card = document.getElementById(id);
-    feedDatabase.child('/posts/').remove().then(() => {
-      $(this).parent('.post-card').remove();
-
->>>>>>> 7419f122d821ad9e11308521cb155be4391d7280
-    });
-  })
-
-  // $(document).on('click', '#delete-btn', function deletePost() {
-  //   console.log('delete clicado');
-    
-  //   let del = document.getElementById('delete-btn');
-  //   let valor = del.dataset.id;
-  //   console.log(valor);
-    
-
-  //   firebase.database().ref('feed/posts/' + valor).remove().then(() => {
-  //     $(this).parent('.post-card').remove();
-  //     console.log('del');
-      
-  //   });
-  // })
-
-  // dataattribute
-  // atualizar navegador
-
-
-  // $(document).on('click', '#delete-btn', function (id) {
-  //   let card = document.getElementById(id);
-  //   let confirm = confirm('Tem certeza que quer excluir?');
-  //   if (confirm === true) {
-
-  //     postsRef.child('/posts/').remove().then(() => {
-  //       $(this).parent('.post-card').remove();
-  //     })
-  //   } else {
-
-  //   }
-  // })
-
+    firebase.database().ref('feed/posts/' + editId).update({
+      text: newText,
+    }).then({
+      // $('#comment-post').innerText = newText;
+    })
+  });
 
   /*****************************************
    * a funḉão abaixo não está dando 
@@ -206,6 +168,3 @@ window.onload = () => {
   // })
 
 };
-
-
-

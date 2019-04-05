@@ -79,15 +79,48 @@
                   </div>
                 </div>
               </div>
-              <!-- Postagens no feed -->
-              <section class="container row mx-auto posts-feed">
-                <div id="posts-container" class="card mx-auto">
+              <!-- Editar avaliação Modal -->
+              <div class="container row">
+                <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Avaliação</h5>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="message-text" class="col-form-label">Local (Nome):</label>
+                            <input class="form-control" id="new-local-name"></input>
+                            <label for="message-text" class="col-form-label">Endereço:</label>
+                            <input class="form-control" id="new-adress"></input>
+                            <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
+                            <input class="form-control" id="new-message-text"></input>
+                            <label for="message-text" class="col-form-label">Média de Preço:</label>
+                            <textarea class="form-control" id="new-price-average"></textarea>
+                            <label for="message-text" class="col-form-label">Comentário:</label>
+                            <textarea class="form-control" id="new-comment-text"></textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button id="new-post-btn" type="button" class="btn btn-primary" data-dismiss="modal">Enviar
+                          Avaliação</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </section>
+                <!-- Postagens no feed -->
+                <section class="container row mx-auto posts-feed">
+                  <div id="posts-container" class="card mx-auto">
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
         </div>
-      </div>
   </section>
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
