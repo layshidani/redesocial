@@ -105,9 +105,10 @@ window.onload = () => {
       date: getDate(),
       curtidas: likes,
     }
-
+    
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
   });
+
 
   $(document).on('click', '#delete-btn', function() {
     let confirmDelete = confirm('Tem certeza que quer excluir?');
@@ -126,10 +127,8 @@ window.onload = () => {
 
   $(document).on('click', '#edit-btn', function() { 
     let editKey = this.getAttribute('edit-data-id');
-    console.log('editKey: ', editKey);
     
     let oldText = $(`p[text-data-id=${editKey}]`).text();
-    console.log('oldText: ', oldText);
 
     $('#new-comment-text').val(oldText);
 
