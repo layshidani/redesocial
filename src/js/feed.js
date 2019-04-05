@@ -1,6 +1,8 @@
 window.onload = () => {
   event.preventDefault();
   const database = firebase.database();
+  // const USER_ID = window.location.search.match(/\?id=(.*)/)[1];
+  // console.log('USER_ID: ', USER_ID);
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
   let likes = 0;
@@ -47,7 +49,7 @@ window.onload = () => {
     text.setAttribute('class', 'text-post');
     text.setAttribute('id', 'comment-post');
     text.setAttribute('text-data-id', key);
-    text.innerText = textPost;
+    text.innerHTML = textPost;
 
     // editar postagem
     let editPost = document.createElement('button');
@@ -134,7 +136,7 @@ window.onload = () => {
       console.log('newText: ', newText);
       
       feedDatabase.child('/posts/' + editKey).update({
-        text: `${newText} (editado)`,
+        text: `${newText}<span class='edited'>(editado)</span>`,
       }).then(() => {
         location.reload();
       })

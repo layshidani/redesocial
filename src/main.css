@@ -353,3 +353,10 @@ a.socialIcon:hover, .socialHoverClass {
   padding-left: 10px;
   color: #295f2d;
 }
+
+.edited {
+  font-style: italic;
+  font-size: 12px;
+  color: gray;
+  margin-left: 10px;
+}
