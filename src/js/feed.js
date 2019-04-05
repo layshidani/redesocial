@@ -137,6 +137,34 @@ window.onload = () => {
     }
   })
 
+
+  $(document).on('click', '#like-btn', function (postDate) {
+    // event.preventDefault();
+    likes++;
+    let postKeycard = document.getElementById('post-card-key');
+    let cardPost = postKeycard.getAttribute('data-idcard');
+    // lk precisa ser com o ID correspondente do card
+    let lk = document.getElementById("show-likes");
+    lk.innerHTML = likes + ' curtidas';
+    feedDatabase.child('/posts/' + cardPost).update({
+      curtidas: likes,
+    })
+    console.log(cardPost);
+    // return likes;
+  })
+
+  // let countLikes = 0;
+  // $(document).on('click', '#like-btn', getLikes(countLikes, postKeycard));
+  // function getLikes(countLikes, postKeycard) {
+  //   // pegar card
+  //   console.log(postKeycard);
+  //   // cada card tem um contador de likes
+  //   countLikes++;
+  //   document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
+
+  //   // return likes;
+  //   feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
+  // }
   $(document).on('click', '#edit-btn', function () {
     event.preventDefault();
     console.log('Sim')
