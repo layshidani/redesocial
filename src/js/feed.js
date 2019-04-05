@@ -10,10 +10,12 @@ window.onload = () => {
   database.ref('feed/posts').once('value').then(snapshot => {
     console.log(snapshot.val());
     snapshot.forEach(value => {
-      var childkey = value.key;
-      var childData = value.val();
-      let firebaseDate = childData.date;
-      let firebaseText = childData.text;
+      let childkey = value.key;
+      console.log('childkey: ', childkey);
+      let childData = value.val();
+      console.log('childData: ', childData);
+      let firebaseDate = value.val().date;
+      let firebaseText = value.val().text;
       postTemplate(firebaseDate, firebaseText, childkey);
     })
   })
@@ -51,39 +53,40 @@ window.onload = () => {
     text.innerText = textPost;
 
     // editar postagem
-    const editPost = document.createElement('button');
-    editPost.setAttribute('id', 'edit-btn');
-    // editPost.setAttribute('data-id', key);
+    let editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
+    editPost.setAttribute('id', 'edit-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
+    // editPost.setAttribute('data-id', key);
     editPost.setAttribute('data-target', '#newModal');
     editPost.setAttribute('data-toggle', 'modal');
     editPost.innerText = '';
 
     // excluir postagem
-    const deletePost = document.createElement('button');
+    let deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
     deletePost.setAttribute('id', 'delete-btn');
-    deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
     deletePost.setAttribute('data-id', key);
+    deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
     deletePost.innerText = '';
 
     // botão curtir
-    const likeBtn = document.createElement('button');
+    let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
     // contador de curtidas
-    const counter = document.createElement('span');
+    let counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
     counter.innerHTML = 0 + ' curtidas';
 
     // card de postagem
-    const card = document.createElement('div');
+    let card = document.createElement('div');
     card.setAttribute('class', 'post-card');
-    card.setAttribute('id', 'post-card');
+    card.setAttribute('id', 'post-card-key');
+    card.setAttribute('data-idcard', key);
 
     // inserir informações no card
     card.appendChild(name);
@@ -104,26 +107,27 @@ window.onload = () => {
       date: getDate(),
       curtidas: likes,
     }
-    
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
-  
-    
+
     // clearText();
+
   });
 
-  $(document).on('click', '#delete-btn', function deletePost() {
-    console.log('delete clicado');
+  $(document).on('click', '#delete-btn', function () {
     
-    let del = document.getElementById('delete-btn');
-    let valor = this.getAttribute('data-id');
-    console.log(valor);
-    
-    firebase.database().ref('feed/posts/' + valor).remove().then(() => {
-      $(this).parent('.post-card').remove();
-      console.log('del');
-    });
+    let confirmDelete = confirm('Tem certeza que quer excluir?');
+    if (confirmDelete) {
+      let cardKey = this.getAttribute('data-id');
+      feedDatabase.child('/posts/' + cardKey).remove().then(() => {
+        $(this).parent('.post-card').remove();
+      });
+    }
   });
   
+
+
+
+
   /************************
   * funções em construção:
   *************************/
@@ -132,6 +136,75 @@ window.onload = () => {
   //   $('#comment-text').val('');
   // }
 
+
+
+
+  $(document).on('click', '#like-btn', function (postDate) {
+    // event.preventDefault();
+    likes++;
+    let postKeycard = document.getElementById('post-card-key');
+    let cardPost = postKeycard.getAttribute('data-idcard');
+    // lk precisa ser com o ID correspondente do card
+    let lk = document.getElementById("show-likes");
+    lk.innerHTML = likes + ' curtidas';
+    feedDatabase.child('/posts/' + cardPost).update({
+      curtidas: likes,
+    })
+    console.log(cardPost);
+    // return likes;
+  })
+
+  // let countLikes = 0;
+  // $(document).on('click', '#like-btn', getLikes(countLikes, postKeycard));
+  // function getLikes(countLikes, postKeycard) {
+  //   // pegar card
+  //   console.log(postKeycard);
+  //   // cada card tem um contador de likes
+  //   countLikes++;
+  //   document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
+
+  //   // return likes;
+  //   feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
+  // }
+  $(document).on('click', '#edit-btn', function () {
+    event.preventDefault();
+    console.log('Sim')
+    let postKeycard = document.getElementById('post-card-key');
+    let cardPost = postKeycard.getAttribute('data-idcard');
+
+    let newText = $('#new-comment-text').val();
+    console.log('newText: ', newText);
+
+    feedDatabase.child('/posts/' + cardPost).update({
+      text: newText,
+
+    }).then(() => {
+      jQuery('#comment-post').html(newText);
+    })
+  });
+
+
+  // $(document).on('click', '#new-post-btn', function editPost() {
+  //   console.log('Confirme edit clicado');
+
+  //   let edit = document.getElementById('edit-btn');
+  //   let editId = edit.dataset.id;
+  //   let teste = firebase.database().ref('feed/posts/' + editId).once('value');
+  //   console.log('teste: ', teste);
+  //   let newText = $('#new-comment-text').val();
+  //   newText = teste;
+  //   console.log('newText: ', newText);
+  $(document).on('click', '#like-btn', function () {
+    likes++;
+    document.getElementById("show-likes").innerHTML = likes + ' curtidas';
+  })
+
+  //   firebase.database().ref('feed/posts/' + editId).update({
+  //     text: newText,
+  //   }).then(() => {
+  //     jQuery("#comment-post").html(newText);
+  //   })
+  // });
 
   $(document).on('click', '#new-post-btn', function editPost() {    
     
@@ -168,3 +241,5 @@ window.onload = () => {
   // })
 
 };
+
+
