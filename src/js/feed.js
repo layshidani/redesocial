@@ -107,8 +107,6 @@ window.onload = () => {
     }
 
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
-
-    // clearText();
   });
 
   $(document).on('click', '#delete-btn', function() {
@@ -121,10 +119,6 @@ window.onload = () => {
     }
   });
   
-
-
-
-
   /************************
   * funções em construção:
   *************************/
@@ -134,10 +128,10 @@ window.onload = () => {
     let editKey = this.getAttribute('edit-data-id');
     console.log('editKey: ', editKey);
     
-    // let oldText = feedDatabase.child('/posts/' + editKey);
-    // console.log('oldText: ', oldText);
+    let oldText = $(`p[text-data-id=${editKey}]`).text();
+    console.log('oldText: ', oldText);
 
-    // $('#new-comment-text').val() = oldText;
+    $('#new-comment-text').val(oldText);
 
     $('#new-post-btn').click(function() {
       let newText = $('#new-comment-text').val();
@@ -150,84 +144,4 @@ window.onload = () => {
       })
     })
   });
-
-  
-  // $(document).on('click', '#like-btn', function (postDate) {
-  //   // event.preventDefault();
-  //   likes++;
-  //   let postKeycard = document.getElementById('post-card-key');
-  //   let cardPost = postKeycard.getAttribute('data-idcard');
-  //   // lk precisa ser com o ID correspondente do card
-  //   let lk = document.getElementById("show-likes");
-  //   lk.innerHTML = likes + ' curtidas';
-  //   feedDatabase.child('/posts/' + cardPost).update({
-  //     curtidas: likes,
-  //   })
-  //   console.log(cardPost);
-  //   // return likes;
-  // })
-
-  // let countLikes = 0;
-  // $(document).on('click', '#like-btn', getLikes(countLikes, postKeycard));
-  // function getLikes(countLikes, postKeycard) {
-  //   // pegar card
-  //   console.log(postKeycard);
-  //   // cada card tem um contador de likes
-  //   countLikes++;
-  //   document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
-
-  //   // return likes;
-  //   feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  // }
- 
-
-
-
-  // $(document).on('click', '#new-post-btn', function editPost() {
-  //   console.log('Confirme edit clicado');
-
-  //   let edit = document.getElementById('edit-btn');
-  //   let editId = edit.dataset.id;
-  //   let teste = firebase.database().ref('feed/posts/' + editId).once('value');
-  //   console.log('teste: ', teste);
-  //   let newText = $('#new-comment-text').val();
-  //   newText = teste;
-  //   console.log('newText: ', newText);
-  // $(document).on('click', '#like-btn', function () {
-  //   likes++;
-  //   document.getElementById("show-likes").innerHTML = likes + ' curtidas';
-  // })
-
-  //   firebase.database().ref('feed/posts/' + editId).update({
-  //     text: newText,
-  //   }).then(() => {
-  //     jQuery("#comment-post").html(newText);
-  //   })
-  // });
-
-  
-
-  /*****************************************
-   * a funḉão abaixo não está dando 
-   * console.log 
-   * 
-   * ************************************ */
-  // $('#like-btn').click(function likePost(event) {
-  //   event.preventDefault();
-  //   console.log('foi');
-
-  //   let countLikes = counter++;
-  //   // for (let like in likes) {
-  //   //   countLikes = like++;
-  //   // }
-
-  //    feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  // })
-
-  // function clearText() {
-  //   $('#comment-text').val('');
-  // }
-
 };
-
-
