@@ -13,11 +13,11 @@ window.onload = () => {
       let childData = value.val();
       let firebaseDate = childData.date;
       let firebaseLocalName = childData.localName;
-      console.log('firebaseLocalName: ', firebaseLocalName);
       let firebaseLocalAdress = childData.localAdress;
-      console.log('firebaseLocalAdress: ', firebaseLocalAdress);
+      let firebaseLocalHourFrom = childData.localHourFrom;
+      let firebaseLocalHourTo = childData.localHourTo;
       let firebaseText = childData.text;
-      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress,  firebaseText, childkey);
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress,  firebaseLocalHourFrom, firebaseLocalHourTo, firebaseText, childkey);
     })
   });
 
@@ -34,7 +34,7 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, textPost, key) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, textPost, key) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -48,8 +48,11 @@ window.onload = () => {
     let localInfo = document.createElement('p');
     localInfo.setAttribute('class', 'local-info');
     localInfo.innerHTML = `<i class="fas fa-map-marker-alt"></i><span class="bold-text">${local}</span> - ${address}`;
-    console.log('address: ', address);
-    console.log('local: ', local);
+
+    // info horário de funcionamento
+    let operatingHours = document.createElement('p');
+    operatingHours.setAttribute('class', 'local-info');
+    operatingHours.innerHTML = `<i class="fas fa-clock"></i>Horário de funcionamento: ${hourFrom}h às ${hourTo}h`;
 
     // mensagem
     let text = document.createElement('p');
@@ -99,6 +102,7 @@ window.onload = () => {
     card.appendChild(name);
     card.appendChild(header);
     card.appendChild(localInfo);
+    card.appendChild(operatingHours);
     card.appendChild(text);
     card.appendChild(editPost);
     card.appendChild(deletePost);
@@ -113,17 +117,21 @@ window.onload = () => {
   $('#post-btn').click(function publishPost() {
     var inputLocalName = $('#local-name').val();
     var inputLocalAdress = $('#adress').val();    
+    var inputLocalHourFrom = $('#hour-from').val();    
+    var inputLocalHourTo = $('#hour-to').val();    
     var inputText = $('#comment-text').val();
 
     const newPost = {
       date: getDate(),
       localName: inputLocalName,
       localAdress: inputLocalAdress,
+      localHourFrom: inputLocalHourFrom,
+      localHourTo: inputLocalHourTo,
       text: inputText,
       curtidas: likes
     }
     
-    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputText, snapshot.key));
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputText, snapshot.key));
   });
 
   // deletar post
