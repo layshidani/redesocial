@@ -12,8 +12,12 @@ window.onload = () => {
       let childkey = value.key;
       let childData = value.val();
       let firebaseDate = childData.date;
+      let firebaseLocalName = childData.localName;
+      console.log('firebaseLocalName: ', firebaseLocalName);
+      let firebaseLocalAdress = childData.localAdress;
+      console.log('firebaseLocalAdress: ', firebaseLocalAdress);
       let firebaseText = childData.text;
-      postTemplate(firebaseDate, firebaseText, childkey);
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress,  firebaseText, childkey);
     })
   });
 
@@ -29,12 +33,8 @@ window.onload = () => {
     return postDate;
   };
 
-  function getText() {
-    return $('#comment-text').val();
-  }
-
   // template dos posts
-  const postTemplate = function (date, textPost, key) {
+  const postTemplate = function (date, local, address, textPost, key) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -43,6 +43,13 @@ window.onload = () => {
     let header = document.createElement('span');
     header.setAttribute('class', 'date-time');
     header.innerText = date;
+
+    // info local
+    let localInfo = document.createElement('p');
+    localInfo.setAttribute('class', 'local-info');
+    localInfo.innerHTML = `<i class="fas fa-map-marker-alt"></i><span class="bold-text">${local}</span> - ${address}`;
+    console.log('address: ', address);
+    console.log('local: ', local);
 
     // mensagem
     let text = document.createElement('p');
@@ -91,6 +98,7 @@ window.onload = () => {
     // inserir informações no card
     card.appendChild(name);
     card.appendChild(header);
+    card.appendChild(localInfo);
     card.appendChild(text);
     card.appendChild(editPost);
     card.appendChild(deletePost);
@@ -103,13 +111,19 @@ window.onload = () => {
 
   // publicar post
   $('#post-btn').click(function publishPost() {
+    var inputLocalName = $('#local-name').val();
+    var inputLocalAdress = $('#adress').val();    
+    var inputText = $('#comment-text').val();
+
     const newPost = {
-      text: getText(),
       date: getDate(),
+      localName: inputLocalName,
+      localAdress: inputLocalAdress,
+      text: inputText,
       curtidas: likes
     }
     
-    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputText, snapshot.key));
   });
 
   // deletar post

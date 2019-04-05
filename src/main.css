@@ -360,3 +360,20 @@ a.socialIcon:hover, .socialHoverClass {
   color: gray;
   margin-left: 10px;
 }
+
+.local-info {
+  font-style: italic;
+  font-size: 12px;
+  color: #295f2d;
+}
+
+.fa-map-marker-alt {
+  font-style: italic;
+  font-size: 12px;
+  margin-right: 5px;
+  color: #295f2d;
+}
+
+.bold-text {
+  font-weight: bold;
+}
