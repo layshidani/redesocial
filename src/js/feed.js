@@ -134,10 +134,10 @@ window.onload = () => {
     let editKey = this.getAttribute('edit-data-id');
     console.log('editKey: ', editKey);
     
-    let oldText = feedDatabase.child('/posts/' + editKey).val(text)
-    console.log('oldText: ', oldText);
+    // let oldText = feedDatabase.child('/posts/' + editKey);
+    // console.log('oldText: ', oldText);
 
-    $('#new-comment-text').innerHTML = oldText;
+    // $('#new-comment-text').val() = oldText;
 
     $('#new-post-btn').click(function() {
       let newText = $('#new-comment-text').val();
