@@ -57,7 +57,7 @@ window.onload = () => {
     editPost.setAttribute('class', 'post-btn');
     editPost.setAttribute('id', 'edit-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
-    editPost.setAttribute('data-id', key);
+    editPost.setAttribute('data-idedit', key);
     editPost.setAttribute('data-target', '#newModal');
     editPost.setAttribute('data-toggle', 'modal');
     editPost.innerText = '';
@@ -73,19 +73,21 @@ window.onload = () => {
     let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
+    likeBtn.setAttribute('data-idlike', key);
     likeBtn.innerText = '';
 
     // contador de curtidas
     let counter = document.createElement('span');
-    counter.setAttribute('id', 'show-likes');
+    counter.setAttribute('id', 'show-likes-id');
     counter.setAttribute('class', 'show-likes');
-    counter.innerHTML = 0 + ' curtidas';
+    counter.innerHTML = likes + ' curtidas';
 
     // card de postagem
     let card = document.createElement('div');
     card.setAttribute('class', 'post-card');
     card.setAttribute('id', 'post-card-key');
     card.setAttribute('data-idcard', key);
+    // card.setAttribute('id', key);
 
     // inserir informações no card
     card.appendChild(name);
@@ -104,7 +106,7 @@ window.onload = () => {
     const newPost = {
       text: getText(),
       date: getDate(),
-      curtidas: likes,
+      curtidas: likes
     }
 
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
@@ -138,17 +140,25 @@ window.onload = () => {
   $(document).on('click', '#edit-btn', function () {
     event.preventDefault();
     console.log('Sim')
-    let postKeycard = document.getElementById('post-card-key');
-    let cardPost = postKeycard.getAttribute('data-idcard');
+
+
+    // let postKeyedit = document.getElementById('edit-btn');
+    // console.log('foi', postKeyedit)
+    // let cardEdit = postKeyedit.getAttribute('data-idedit');
+    // console.log('xuxu: ', cardEdit);
+
+    let cardEdit = $(this).attr('data-idedit');
+    console.log('xuxu: ', cardEdit);
 
     let newText = $('#new-comment-text').val();
     console.log('newText: ', newText);
 
-    feedDatabase.child('/posts/' + cardPost).update({
+    feedDatabase.child('/posts/' + cardEdit).update({
       text: newText,
 
     }).then(() => {
-      jQuery('#comment-post').html(newText);
+      $(this).parent('#comment-post').html(newText);
+      // $('#comment-post').html(newText);
     })
   });
 
@@ -163,10 +173,7 @@ window.onload = () => {
   //   let newText = $('#new-comment-text').val();
   //   newText = teste;
   //   console.log('newText: ', newText);
-  $(document).on('click', '#like-btn', function () {
-    likes++;
-    document.getElementById("show-likes").innerHTML = likes + ' curtidas';
-  })
+
 
   //   firebase.database().ref('feed/posts/' + editId).update({
   //     text: newText,
@@ -191,6 +198,39 @@ window.onload = () => {
   //   // }
 
   //    feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
+  // })
+
+  $(document).on('click', '#like-btn', function () {
+    event.preventDefault();
+    let postKeycard = document.getElementById('post-card-key');
+    console.log("postKey", postKeycard)
+    let cardPost = postKeycard.getAttribute('data-idcard');
+    console.log("cardPOst", cardPost)
+    let countLikes = likes++;
+    console.log("counter", countLikes)
+    feedDatabase.child('/posts/childkey/curtidas/' + cardPost).then(() => {
+      $(this).parent('.post-card');
+    });
+
+  })
+
+  // let postKeycard = document.getElementById('post-card-key');
+  // console.log("postKey", postKeycard)
+  // let cardPost = postKeycard.getAttribute('data-idcard');
+  // console.log("cardPOst", cardPost)
+  // feedDatabase.child('/posts/' + cardPost).update(() => {
+  //   likes
+  // }).then(() => {
+  //   $(this).parent('.post-card').snapshot(() => {
+  //     let showLikes = document.getElementById("show-likes-id").innerHTML = countLikes + ' curtidas';
+  //     console.log("show", showLikes)
+  //   });
+  // });
+  // let showLikes = document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
+  // feedDatabase.child('/curtidas').set(countLikes).then(() => {
+  //   let showLikes = document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
+  //   $("#comment-post").html(showLikes);
+
   // })
 
 };
