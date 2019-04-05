@@ -47,17 +47,23 @@ window.onload = () => {
 
     // info local
     let localInfo = document.createElement('p');
+    localInfo.setAttribute('id', 'local-info');
     localInfo.setAttribute('class', 'local-info');
+    localInfo.setAttribute('info-data-id', key);
     localInfo.innerHTML = `<i class="fas fa-map-marker-alt"></i><span class="bold-text">${local}</span> - ${address}`;
 
     // info horário de funcionamento
     let operatingHours = document.createElement('p');
+    operatingHours.setAttribute('id', 'local-operating');
     operatingHours.setAttribute('class', 'local-info');
+    operatingHours.setAttribute('hour-data-id', key);
     operatingHours.innerHTML = `<i class="fas fa-history"></i>Horário de funcionamento: ${hourFrom}h às ${hourTo}h`;
 
     // info preço médio
     let localPrice = document.createElement('p');
+    localPrice.setAttribute('id', 'local-price');
     localPrice.setAttribute('class', 'local-info');
+    localPrice.setAttribute('price-data-id', key);
     localPrice.innerHTML = `<i class="fas fa-hand-holding-usd"></i>${price},00`
 
 
@@ -165,21 +171,32 @@ window.onload = () => {
   $(document).on('click', '#edit-btn', function() { 
     let editKey = this.getAttribute('edit-data-id');
     
-    let oldLocalName = $(`p[text-data-id=${editKey}]`).text();
-    let oldLocalAddress = $(`p[text-data-id=${editKey}]`).text();
-    let oldHourFrom = $(`p[text-data-id=${editKey}]`).text();
-    let oldHourTo = $(`p[text-data-id=${editKey}]`).text();
-    let oldAveragePrice = $(`p[text-data-id=${editKey}]`).text();
+    let oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
+    let oldOperating = $(`p[hour-data-id=${editKey}]`).text();
+    let oldAveragePrice = $(`p[price-data-id=${editKey}]`).text();
     let oldText = $(`p[text-data-id=${editKey}]`).text();
 
+    $('#new-local-name').val(oldLocalinfo);
+    // $('#new-adress').val(oldLocalinfo);
+    $('#new-hour-from').val(oldOperating);
+    $('#new-price').val(oldAveragePrice);
     $('#new-comment-text').val(oldText);
 
     $('#new-post-btn').click(function() {
+      let newName = $('#new-local-name').val();
+      let newAdress = $('#new-adress').val();
+      let newOperating = $('#new-hour-from').val();
+      let newPrice = $('#new-price').val();
       let newText = $('#new-comment-text').val();
-      console.log('newText: ', newText);
       
       feedDatabase.child('/posts/' + editKey).update({
+        localName: newName,
+        localAdress: newAdress,
+        localHourFrom: newOperating,
+        // localHourTo: newHourTo,
+        localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
+        
       }).then(() => {
         location.reload();
       })
