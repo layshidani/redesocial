@@ -16,8 +16,9 @@ window.onload = () => {
       let firebaseLocalAdress = childData.localAdress;
       let firebaseLocalHourFrom = childData.localHourFrom;
       let firebaseLocalHourTo = childData.localHourTo;
+      let firebaseLocalPrice = childData.localPrice;
       let firebaseText = childData.text;
-      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress,  firebaseLocalHourFrom, firebaseLocalHourTo, firebaseText, childkey);
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, childkey);
     })
   });
 
@@ -34,7 +35,7 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, textPost, key) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, key) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -52,7 +53,13 @@ window.onload = () => {
     // info horário de funcionamento
     let operatingHours = document.createElement('p');
     operatingHours.setAttribute('class', 'local-info');
-    operatingHours.innerHTML = `<i class="fas fa-clock"></i>Horário de funcionamento: ${hourFrom}h às ${hourTo}h`;
+    operatingHours.innerHTML = `<i class="fas fa-history"></i>Horário de funcionamento: ${hourFrom}h às ${hourTo}h`;
+
+    // info preço médio
+    let localPrice = document.createElement('p');
+    localPrice.setAttribute('class', 'local-info');
+    localPrice.innerHTML = `<i class="fas fa-hand-holding-usd"></i>${price},00`
+
 
     // mensagem
     let text = document.createElement('p');
@@ -98,12 +105,19 @@ window.onload = () => {
     card.setAttribute('id', 'post-card-key');
     card.setAttribute('data-idcard', key);
 
+    // linha horizontal
+    let headerLine = document.createElement('hr');
+    let footerLine = document.createElement('hr');
+
     // inserir informações no card
     card.appendChild(name);
     card.appendChild(header);
     card.appendChild(localInfo);
     card.appendChild(operatingHours);
+    card.appendChild(localPrice);
+    card.appendChild(headerLine);
     card.appendChild(text);
+    card.appendChild(footerLine);
     card.appendChild(editPost);
     card.appendChild(deletePost);
     card.appendChild(likeBtn);
@@ -119,6 +133,7 @@ window.onload = () => {
     var inputLocalAdress = $('#adress').val();    
     var inputLocalHourFrom = $('#hour-from').val();    
     var inputLocalHourTo = $('#hour-to').val();    
+    var inputLocalPrice = $('#average-price').val();    
     var inputText = $('#comment-text').val();
 
     const newPost = {
@@ -127,11 +142,12 @@ window.onload = () => {
       localAdress: inputLocalAdress,
       localHourFrom: inputLocalHourFrom,
       localHourTo: inputLocalHourTo,
+      localPrice: inputLocalPrice,
       text: inputText,
       curtidas: likes
     }
     
-    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputText, snapshot.key));
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, snapshot.key));
   });
 
   // deletar post
@@ -149,6 +165,11 @@ window.onload = () => {
   $(document).on('click', '#edit-btn', function() { 
     let editKey = this.getAttribute('edit-data-id');
     
+    let oldLocalName = $(`p[text-data-id=${editKey}]`).text();
+    let oldLocalAddress = $(`p[text-data-id=${editKey}]`).text();
+    let oldHourFrom = $(`p[text-data-id=${editKey}]`).text();
+    let oldHourTo = $(`p[text-data-id=${editKey}]`).text();
+    let oldAveragePrice = $(`p[text-data-id=${editKey}]`).text();
     let oldText = $(`p[text-data-id=${editKey}]`).text();
 
     $('#new-comment-text').val(oldText);

@@ -349,6 +349,7 @@ a.socialIcon:hover, .socialHoverClass {
 
 .text-post {
   font-size: 18px;
+  margin-top: 10px;
 }
 
 .show-likes {
@@ -370,7 +371,7 @@ a.socialIcon:hover, .socialHoverClass {
   margin-bottom: 0;
 }
 
-.fa-map-marker-alt, .fa-clock, .fa-bookmark {
+.fa-map-marker-alt, .fa-clock, .fa-bookmark, .fa-hand-holding-usd, .fa-history {
   font-style: italic;
   font-size: 12px;
   margin-right: 5px;
