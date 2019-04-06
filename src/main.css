@@ -278,7 +278,9 @@ a.socialIcon:hover, .socialHoverClass {
   height: 300px;
   display: flex;
   justify-content: center;
-
+  background-color: #eff1ed;
+  width: 90%;
+  margin-top: 20px;
 }
 
 .post-card {
@@ -288,7 +290,7 @@ a.socialIcon:hover, .socialHoverClass {
   border-radius: 5px;
   background-color: #eff1ed;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
 }
 
 .cashback {
@@ -347,9 +349,35 @@ a.socialIcon:hover, .socialHoverClass {
 
 .text-post {
   font-size: 18px;
+  margin-top: 10px;
 }
 
 .show-likes {
   padding-left: 10px;
   color: #295f2d;
+}
+
+.edited {
+  font-style: italic;
+  font-size: 12px;
+  color: gray;
+  margin-left: 10px;
+}
+
+.local-info {
+  font-style: italic;
+  font-size: 12px;
+  color: #295f2d;
+  margin-bottom: 0;
+}
+
+.fa-map-marker-alt, .fa-clock, .fa-bookmark, .fa-hand-holding-usd, .fa-history {
+  font-style: italic;
+  font-size: 12px;
+  margin-right: 5px;
+  color: #295f2d;
+}
+
+.bold-text {
+  font-weight: bold;
 }
