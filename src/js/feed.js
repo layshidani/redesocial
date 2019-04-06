@@ -11,9 +11,9 @@ window.onload = () => {
     console.log(snapshot.val());
     snapshot.forEach(value => {
       let childkey = value.key;
-      console.log('childkey: ', childkey);
+      // console.log('childkey: ', childkey);
       let childData = value.val();
-      console.log('childData: ', childData);
+      // console.log('childData: ', childData);
       let firebaseDate = value.val().date;
       let firebaseText = value.val().text;
       postTemplate(firebaseDate, firebaseText, childkey);
@@ -72,6 +72,7 @@ window.onload = () => {
     // botão curtir
     let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
+    likeBtn.setAttribute('data-id', key);
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
@@ -98,6 +99,10 @@ window.onload = () => {
 
     // adiciona nos posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
+    
+    var kk = document.getElementById('post-card-key');
+    var jj = kk.getAttribute('data-idcard');
+    console.log(jj);
   }
 
   $('#post-btn').click(function publishPost() {
@@ -110,7 +115,7 @@ window.onload = () => {
     feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), getText(), snapshot.key));
 
     // clearText();
-
+    
   });
 
   /************************
@@ -136,18 +141,18 @@ window.onload = () => {
   })
 
 
-  $(document).on('click', '#like-btn', function (postDate) {
+  $(document).on('click', '#like-btn', function () {
     // event.preventDefault();
     likes++;
     let postKeycard = document.getElementById('post-card-key');
     let cardPost = postKeycard.getAttribute('data-idcard');
-    // lk precisa ser com o ID correspondente do card
+    console.log(cardPost);
     let lk = document.getElementById("show-likes");
     lk.innerHTML = likes + ' curtidas';
     feedDatabase.child('/posts/' + cardPost).update({
       curtidas: likes,
     })
-    console.log(cardPost);
+    
     // return likes;
   })
 
@@ -191,10 +196,10 @@ window.onload = () => {
   //   let newText = $('#new-comment-text').val();
   //   newText = teste;
   //   console.log('newText: ', newText);
-  $(document).on('click', '#like-btn', function () {
-    likes++;
-    document.getElementById("show-likes").innerHTML = likes + ' curtidas';
-  })
+  // $(document).on('click', '#like-btn', function () {
+  //   likes++;
+  //   document.getElementById("show-likes").innerHTML = likes + ' curtidas';
+  // })
 
   //   firebase.database().ref('feed/posts/' + editId).update({
   //     text: newText,
