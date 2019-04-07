@@ -105,6 +105,7 @@ window.onload = () => {
     counter.setAttribute('class', 'show-likes');
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
+   
 
     // card de postagem
     let card = document.createElement('div');
@@ -132,12 +133,17 @@ window.onload = () => {
 
     // adiciona card no container de posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
-
-    var kk = document.getElementById('post-card-key');
-    var jj = kk.getAttribute('data-idcard');
-    // console.log(jj);
   }
-
+  
+  $('#comment-text').keyup(function desablePost() {
+    if ($('#comment-text').val().length > 0) {
+      console.log($('#comment-text').val().length);
+      $('#post-btn').prop("disabled", false); 
+    } else {
+      $('#post-btn').prop("disabled", true);
+    }
+  });
+  
   // publicar post
   $('#post-btn').click(function publishPost() {
     var inputLocalName = $('#local-name').val();
@@ -147,7 +153,7 @@ window.onload = () => {
     var inputLocalPrice = $('#average-price').val();
     var inputText = $('#comment-text').val();
     var likeInit = 0;
-
+    
     const newPost = {
       date: getDate(),
       localName: inputLocalName,
@@ -182,6 +188,15 @@ window.onload = () => {
     feedDatabase.child('posts/' + likeId + '/curtidas').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     });
+  });
+
+  $('#new-comment-text').keyup(function() {
+    if ($('#new-comment-text').val().length > 0) {
+      console.log($('#new-comment-text').val().length);
+      $('#new-post-btn').prop("disabled", false); 
+    } else {
+      $('#new-post-btn').prop("disabled", true);
+    }
   });
 
   // editar post
