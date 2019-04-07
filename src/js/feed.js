@@ -5,7 +5,6 @@ window.onload = () => {
   // console.log('USER_ID: ', USER_ID);
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
-  let likes = 0;
 
   database.ref('feed/posts').once('value').then(snapshot => {
     snapshot.forEach(value => {
@@ -18,7 +17,8 @@ window.onload = () => {
       let firebaseLocalHourTo = childData.localHourTo;
       let firebaseLocalPrice = childData.localPrice;
       let firebaseText = childData.text;
-      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, childkey);
+      let firebaseLikes = childData.curtidas;
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey);
     })
   });
 
@@ -35,7 +35,7 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, key) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -95,15 +95,15 @@ window.onload = () => {
     // botão curtir
     let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
-    likeBtn.setAttribute('data-id', key);
+    likeBtn.setAttribute('like-data-id', key);
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
-    likeBtn.setAttribute('data-idlike', key);
     likeBtn.innerText = '';
 
     // contador de curtidas
     let counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
+    counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
 
     // card de postagem
@@ -132,20 +132,21 @@ window.onload = () => {
 
     // adiciona card no container de posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
-    
+
     var kk = document.getElementById('post-card-key');
     var jj = kk.getAttribute('data-idcard');
-    console.log(jj);
+    // console.log(jj);
   }
 
   // publicar post
   $('#post-btn').click(function publishPost() {
     var inputLocalName = $('#local-name').val();
-    var inputLocalAdress = $('#adress').val();    
-    var inputLocalHourFrom = $('#hour-from').val();    
-    var inputLocalHourTo = $('#hour-to').val();    
-    var inputLocalPrice = $('#average-price').val();    
+    var inputLocalAdress = $('#adress').val();
+    var inputLocalHourFrom = $('#hour-from').val();
+    var inputLocalHourTo = $('#hour-to').val();
+    var inputLocalPrice = $('#average-price').val();
     var inputText = $('#comment-text').val();
+    var likeInit = 0;
 
     const newPost = {
       date: getDate(),
@@ -155,10 +156,10 @@ window.onload = () => {
       localHourTo: inputLocalHourTo,
       localPrice: inputLocalPrice,
       text: inputText,
-      curtidas: likes
+      likes: likeInit
     }
-    
-    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, snapshot.key));
+
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key));
   });
 
   // deletar post
@@ -173,82 +174,20 @@ window.onload = () => {
   })
 
   // curtidas
-  $(document).on('click', '#like-btn', function () {
-    // event.preventDefault();
-    likes++;
-    let postKeycard = document.getElementById('post-card-key');
-    let cardPost = postKeycard.getAttribute('data-idcard');
-    console.log(cardPost);
-    let lk = document.getElementById("show-likes");
-    lk.innerHTML = likes + ' curtidas';
-    feedDatabase.child('/posts/' + cardPost).update({
-      curtidas: likes,
-    })
-    
-    // return likes;
-  })
+  $(document).on('click', '#like-btn', function() {
+    let likeId = this.getAttribute('like-data-id');
+    let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
+    countLikes = countLikes + 1;
 
-  // let countLikes = 0;
-  // $(document).on('click', '#like-btn', getLikes(countLikes, postKeycard));
-  // function getLikes(countLikes, postKeycard) {
-  //   // pegar card
-  //   console.log(postKeycard);
-  //   // cada card tem um contador de likes
-  //   countLikes++;
-  //   document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
-
-  //   // return likes;
-  //   feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  // }
-
-
-
-  // $(document).on('click', '#new-post-btn', function editPost() {
-  //   console.log('Confirme edit clicado');
-
-  //   let edit = document.getElementById('edit-btn');
-  //   let editId = edit.dataset.id;
-  //   let teste = firebase.database().ref('feed/posts/' + editId).once('value');
-  //   console.log('teste: ', teste);
-  //   let newText = $('#new-comment-text').val();
-  //   newText = teste;
-  //   console.log('newText: ', newText);
-  // $(document).on('click', '#like-btn', function () {
-  //   likes++;
-  //   document.getElementById("show-likes").innerHTML = likes + ' curtidas';
-  // })
-
-  //   firebase.database().ref('feed/posts/' + editId).update({
-  //     text: newText,
-  //   }).then(() => {
-  //     jQuery("#comment-post").html(newText);
-  //   })
-  // });
-
-
-  /*****************************************
-   * a funḉão abaixo não está dando 
-   * console.log 
-   * 
-   * ************************************ */
-  // $('#like-btn').click(function likePost(event) {
-  //   event.preventDefault();
-  //   console.log('foi');
-
-  //   let countLikes = counter++;
-  //   // for (let like in likes) {
-  //   //   countLikes = like++;
-  //   // }
-
-  //    feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  // })
-
+    feedDatabase.child('posts/' + likeId + '/curtidas').set(countLikes).then(() => {
+      $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
+    });
   });
 
   // editar post
-  $(document).on('click', '#edit-btn', function() { 
+  $(document).on('click', '#edit-btn', function() {
     let editKey = this.getAttribute('edit-data-id');
-    
+
     let oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
     let oldOperating = $(`p[hour-data-id=${editKey}]`).text();
     let oldAveragePrice = $(`p[price-data-id=${editKey}]`).text();
@@ -260,13 +199,13 @@ window.onload = () => {
     $('#new-price').val(oldAveragePrice);
     $('#new-comment-text').val(oldText);
 
-    $('#new-post-btn').click(function() {
+    $('#new-post-btn').click(function () {
       let newName = $('#new-local-name').val();
       let newAdress = $('#new-adress').val();
       let newOperating = $('#new-hour-from').val();
       let newPrice = $('#new-price').val();
       let newText = $('#new-comment-text').val();
-      
+
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
         localAdress: newAdress,
@@ -274,7 +213,7 @@ window.onload = () => {
         // localHourTo: newHourTo,
         localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
-        
+        curtidas: parseInt($(`span[counter-data-id="${editKey}"`).text()), 
       }).then(() => {
         location.reload();
       })
