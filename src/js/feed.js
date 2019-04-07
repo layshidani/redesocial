@@ -5,7 +5,7 @@ window.onload = () => {
   const postsContainer = $('#posts-container')[0];
 
   var name, email, photoUrl, uid, emailVerified;
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // user signed in
       name = user.displayName;
@@ -16,7 +16,7 @@ window.onload = () => {
       console.log('photoUrl: ', photoUrl);
       emailVerified = user.emailVerified;
       console.log('emailVerified: ', emailVerified);
-      uid = user.uid; 
+      uid = user.uid;
     } else {
       // No user is signed in.
     }
@@ -24,21 +24,21 @@ window.onload = () => {
 
   // mostrar todos os posts
   database.ref('feed/posts').once('value').then(snapshot => {
-  snapshot.forEach(value => {
-    let childkey = value.key;
-    let childData = value.val();
-    let firebaseDate = childData.date;
-    let firebaseLocalName = childData.localName;
-    let firebaseLocalAdress = childData.localAdress;
-    let firebaseLocalHourFrom = childData.localHourFrom;
-    let firebaseLocalHourTo = childData.localHourTo;
-    let firebaseLocalPrice = childData.localPrice;
-    let firebaseText = childData.text;
-    let firebaseLikes = childData.curtidas;
-    let firebaseName = childData.name;
-    let firebaseEmail = childData.email;
-    
-    postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+    snapshot.forEach(value => {
+      let childkey = value.key;
+      let childData = value.val();
+      let firebaseDate = childData.date;
+      let firebaseLocalName = childData.localName;
+      let firebaseLocalAdress = childData.localAdress;
+      let firebaseLocalHourFrom = childData.localHourFrom;
+      let firebaseLocalHourTo = childData.localHourTo;
+      let firebaseLocalPrice = childData.localPrice;
+      let firebaseText = childData.text;
+      let firebaseLikes = childData.curtidas;
+      let firebaseName = childData.name;
+      let firebaseEmail = childData.email;
+
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
     })
   });
 
@@ -125,7 +125,7 @@ window.onload = () => {
     counter.setAttribute('class', 'show-likes');
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
-   
+
     // público ou privado
     var showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
@@ -135,8 +135,8 @@ window.onload = () => {
     } else {
       showSelected.innerText = 'privado';
     }
-    
-    
+
+
 
     // card de postagem
     let card = document.createElement('div');
@@ -166,16 +166,16 @@ window.onload = () => {
     // adiciona card no container de posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
   }
-  
+
   $('#comment-text').keyup(function desablePost() {
     if ($('#comment-text').val().length > 0) {
       console.log($('#comment-text').val().length);
-      $('#post-btn').prop("disabled", false); 
+      $('#post-btn').prop("disabled", false);
     } else {
-      $('#post-btn').prop("disabled", true);
+      $('#post-btn').prop("disabled", true)
     }
   });
-  
+
   // publicar post
   $('#post-btn').click(function publishPost() {
     var inputLocalName = $('#local-name').val();
@@ -185,7 +185,7 @@ window.onload = () => {
     var inputLocalPrice = $('#average-price').val();
     var inputText = $('#comment-text').val();
     var likeInit = 0;
-    
+
     const newPost = {
       name: name,
       email: email,
@@ -199,7 +199,7 @@ window.onload = () => {
       likes: likeInit,
     }
 
-    
+
     if ($('#select-post-type').val() === 'postPublic') {
       feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
     } else {
@@ -208,10 +208,10 @@ window.onload = () => {
   });
 
   // deletar post
-  $(document).on('click', '#delete-btn', function() {
+  $(document).on('click', '#delete-btn', function () {
     let confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
-      let cardKey = this.getAttribute('data-id');
+      let cardKey = $(this).attr('data-id');
       feedDatabase.child('/posts/' + cardKey).remove().then(() => {
         $(this).parent('.post-card').remove();
       });
@@ -219,28 +219,29 @@ window.onload = () => {
   })
 
   // curtidas
-  $(document).on('click', '#like-btn', function() {
-    let likeId = this.getAttribute('like-data-id');
+  $(document).on('click', '#like-btn', function () {
+    let likeId = $(this).attr('like-data-id');
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
-    countLikes = countLikes + 1;
+    countLikes++;
 
     feedDatabase.child('posts/' + likeId + '/curtidas').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     });
-  });
+  })
 
-  $('#new-comment-text').keyup(function() {
+  $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
       console.log($('#new-comment-text').val().length);
-      $('#new-post-btn').prop("disabled", false); 
+      $('#new-post-btn').prop("disabled", false);
     } else {
       $('#new-post-btn').prop("disabled", true);
+
     }
   });
 
   // editar post
-  $(document).on('click', '#edit-btn', function() {
-    let editKey = this.getAttribute('edit-data-id');
+  $(document).on('click', '#edit-btn', function () {
+    let editKey = $(this).attr('edit-data-id');
 
     let oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
     let oldOperating = $(`p[hour-data-id=${editKey}]`).text();
@@ -267,7 +268,7 @@ window.onload = () => {
         // localHourTo: newHourTo,
         localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
-        curtidas: parseInt($(`span[counter-data-id="${editKey}"`).text()), 
+        curtidas: parseInt($(`span[counter-data-id="${editKey}"`).text()),
       }).then(() => {
         location.reload();
       })
