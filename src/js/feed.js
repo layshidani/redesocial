@@ -127,13 +127,13 @@ window.onload = () => {
     counter.innerHTML = likes + ' curtidas';
 
     // público ou privado
-    var showSelected = document.createElement('p');
+    let showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
     if ($('#select-post-type').val() === 'postPublic') {
-      showSelected.innerText = 'público';
+      showSelected.innerText = 'Público';
     } else {
-      showSelected.innerText = 'privado';
+      showSelected.innerText = 'Privado';
     }
 
 
@@ -178,13 +178,13 @@ window.onload = () => {
 
   // publicar post
   $('#post-btn').click(function publishPost() {
-    var inputLocalName = $('#local-name').val();
-    var inputLocalAdress = $('#adress').val();
-    var inputLocalHourFrom = $('#hour-from').val();
-    var inputLocalHourTo = $('#hour-to').val();
-    var inputLocalPrice = $('#average-price').val();
-    var inputText = $('#comment-text').val();
-    var likeInit = 0;
+    let inputLocalName = $('#local-name').val();
+    let inputLocalAdress = $('#adress').val();
+    let inputLocalHourFrom = $('#hour-from').val();
+    let inputLocalHourTo = $('#hour-to').val();
+    let inputLocalPrice = $('#average-price').val();
+    let inputText = $('#comment-text').val();
+    let likeInit = 0;
 
     const newPost = {
       name: name,
@@ -221,13 +221,14 @@ window.onload = () => {
   // curtidas
   $(document).on('click', '#like-btn', function () {
     let likeId = $(this).attr('like-data-id');
+    console.log(likeId)
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
-    countLikes++;
-
+    console.log(countLikes)
+    countLikes++
     feedDatabase.child('posts/' + likeId + '/curtidas').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     });
-  })
+  });
 
   $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
