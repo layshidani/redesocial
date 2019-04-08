@@ -17,13 +17,13 @@ $(document).ready(function () {
           displayName: userName,
           photoURL: '',
         })
-        .then(() => {
-          window.location.href = "categories_create_user.html";
-        });
-        
-        
+          .then(() => {
+            window.location.href = "categories_create_user.html";
+          });
+
+
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -31,8 +31,8 @@ $(document).ready(function () {
         $('#error-msg').text(errorMessage);
         console.log('errorMessage: ', errorMessage);
       });
-      
-    });
+
+  });
 
   $('#btnLogin').click(function () {
     event.preventDefault();
@@ -44,7 +44,7 @@ $(document).ready(function () {
       .then(function (users) {
         window.location.href = "feed.html";
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;

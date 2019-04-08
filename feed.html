@@ -46,7 +46,7 @@
               </div>
             </section>
             <!-- Postar avaliação Modal -->
-            <section class="container row">
+            <div class="container row">
               <textarea id="post-feed" class="post" data-toggle="modal" placeholder="Avalie aqui"
                 data-target="#exampleModal"></textarea>
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -113,16 +113,16 @@
                           <textarea class="form-control" id="comment-text" value=""></textarea>
                         </div>
                         <!-- Público ou Privado -->
-                        <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
+                        <!-- <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            <option value="postPublic" class="dropdown-item fas fa-users">&#xf0c0; Público</option>
-                            <option value="postPrivate" class="dropdown-item fas fa-user">&#xf007; Privado</option>
+                            <option value="postPublic" class="dropdown-item fas fa-users">Público</option>
+                            <option value="postPrivate" class="dropdown-item fas fa-user">Privado</option>
                           </div>
-                        </select>
-                        <!-- <select id="select-post-type">
+                        </select> -->
+                        <select id="select-post-type">
                           <option value="postPublic"><i class="fas fa-users"></i>Público</option>
                           <option value="postPrivate"><i class="fas fa-user-lock"></i>Privado</option>
-                        </select> -->
+                        </select>
                       </form>
                     </div>
                     <div class="modal-footer">
@@ -200,17 +200,17 @@
                             <textarea class="form-control" id="new-comment-text" value=""></textarea>
                           </div>
                           <!-- Público ou Privado -->
-                          <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
+                          <!-- <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                              <option value="postPublic" class="dropdown-item fas fa-users">&#xf0c0; Público</option>
-                              <option value="postPrivate" class="dropdown-item fas fa-user">&#xf007; Privado</option>
+                              <option value="postPublic" class="dropdown-item fas fa-users">Público</option>
+                              <option value="postPrivate" class="dropdown-item fas fa-user">Privado</option>
                             </div>
-                          </select>
+                          </select> -->
 
-                          <!-- <select id="select-post-type">
+                          <select id="select-post-type">
                             <option value="postPublic"><i class="fas fa-users"></i> público</option>
                             <option value="postPrivate"><i class="fas fa-user"></i> privado</option>
-                          </select> -->
+                          </select>
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -222,24 +222,57 @@
                     </div>
                   </div>
                 </div>
+                <!-- filtro -->
+                <div class="container">
+                  <div class="row">
+                    <span>Filtrar postagens: </span>
+                    <select id="filter-posts" value="all">
+                      <option value="all">Todas</option>
+                      <option value="public">Públicas</option>
+                      <option value="private">Privadas</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Postagens no feed -->
+                <section>
+                  <div class="container">
+                    <div class="row">
+                      <div class="posts-feed card-container my-5 row mx-auto">
+                        <div id="posts-container" class="card mx-auto posts-cards">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
   <!-- filtro -->
+  <span>Filtrar postagens: </span>
   <select id="filter-posts" value="all">
-    <span>Filtrar postagens: </span>
     <option value="all">Todas</option>
     <option value="public">Públicas</option>
     <option value="private">Privadas</option>
-  </select>
+  </select> -->
+
   <!-- Postagens no feed -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="posts-feed">
+          <div id="posts-container" class="card mx-auto">
+          </div>
+        </div>
+      </div>
   <section class="container row mx-auto posts-feed">
     <div id="posts-container" class="card mx-auto" style="overflow: scroll; width: auto; height: 300px">
     </div>
-  </section>
+  </section> -->
+
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
