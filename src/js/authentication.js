@@ -6,8 +6,6 @@ $(document).ready(function () {
     console.log(email)
     let password = $('#input-password').val();
     let name = $('#input-name').val();
-    console.log(name)
-
 
     firebase
       .auth()
@@ -18,7 +16,7 @@ $(document).ready(function () {
           .currentUser;
 
         user.updateProfile({
-          displayName: $('#input-name').val(),
+          displayName: name,
           photoURL: ''
         })
         window.location.href = "categories_create_user.html";

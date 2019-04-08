@@ -276,12 +276,13 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .posts-feed {
-  height: 300px;
+  /* height: 300px; */
   display: flex;
   justify-content: center;
   background-color: #eff1ed;
-  width: 90%;
-  margin-top: 20px;
+  /* width: 90%; */
+  /* margin-top: 20px; */
+  align-content: center;
 }
 
 .post-card {
@@ -330,11 +331,11 @@ a.socialIcon:hover, .socialHoverClass {
   color: #295f2d;
 }
 
-.post-card {
+/* .post-card {
   background-color: #edffdc;
   padding: 20px;
   border-radius: 5px;
-}
+} */
 
 .user-name {
   font-weight: bold;
@@ -386,4 +387,9 @@ a.socialIcon:hover, .socialHoverClass {
 .fa-select {
   font-family:'Font Awesome 5 Free';
   /* font-weight: 900; */
+}
+
+.post-cards {
+  display: flex;
+  justify-content: center;
 }
