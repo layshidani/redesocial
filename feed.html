@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="src/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -23,7 +24,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <div class="card card-signin my-5">
+          <div class="card card-container my-5">
             <div class="header-serview">
               <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
               <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
@@ -101,7 +102,8 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                             </div>
-                            <input id="average-price" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="average-price" type="number" class="form-control"
+                              aria-label="Amount (to the nearest dollar)">
                             <div class="input-group-append">
                               <span class="input-group-text">.00</span>
                             </div>
@@ -110,11 +112,23 @@
                           <label for="message-text" class="col-form-label">Comentário:</label>
                           <textarea class="form-control" id="comment-text" value=""></textarea>
                         </div>
+                        <!-- Público ou Privado -->
+                        <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            <option value="postPublic" class="dropdown-item fas fa-users">&#xf0c0; Público</option>
+                            <option value="postPrivate" class="dropdown-item fas fa-user">&#xf007; Privado</option>
+                          </div>
+                        </select>
+                        <!-- <select id="select-post-type">
+                          <option value="postPublic"><i class="fas fa-users"></i>Público</option>
+                          <option value="postPrivate"><i class="fas fa-user-lock"></i>Privado</option>
+                        </select> -->
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                      <button id="post-btn" type="button" class="btn btn-primary" data-dismiss="modal">Enviar
+                      <button id="post-btn" type="button" class="btn btn-primary" data-dismiss="modal"
+                        disabled='true'>Enviar
                         Avaliação</button>
                     </div>
                   </div>
@@ -175,7 +189,8 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
                               </div>
-                              <input id="new-price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                              <input id="new-price" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                               <div class="input-group-append">
                                 <span class="input-group-text">.00</span>
                               </div>
@@ -184,11 +199,24 @@
                             <label for="message-text" class="col-form-label">Comentário:</label>
                             <textarea class="form-control" id="new-comment-text" value=""></textarea>
                           </div>
+                          <!-- Público ou Privado -->
+                          <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                              <option value="postPublic" class="dropdown-item fas fa-users">&#xf0c0; Público</option>
+                              <option value="postPrivate" class="dropdown-item fas fa-user">&#xf007; Privado</option>
+                            </div>
+                          </select>
+
+                          <!-- <select id="select-post-type">
+                            <option value="postPublic"><i class="fas fa-users"></i> público</option>
+                            <option value="postPrivate"><i class="fas fa-user"></i> privado</option>
+                          </select> -->
                         </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button id="new-post-btn" type="button" class="btn btn-primary" data-dismiss="modal">Salvar
+                        <button id="new-post-btn" type="button" class="btn btn-primary" data-dismiss="modal"
+                          disabled="true">Salvar
                           Alteração</button>
                       </div>
                     </div>
@@ -205,7 +233,7 @@
     <div id="posts-container" class="card mx-auto">
     </div>
   </section>
-  
+
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

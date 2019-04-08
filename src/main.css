@@ -5,6 +5,7 @@
 
 body {
   background: linear-gradient(to right, #295f2d, #409946);
+  font-family: 'PT Serif', serif;
 }
 
 .header-serview {
@@ -27,20 +28,20 @@ body {
   margin: 10px;
 }
 
-.card-signin {
+.card-container {
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   background-color: #eff1ed;
 }
 
-.card-signin .card-title {
+.card-container .card-title {
   margin-bottom: 2rem;
   font-weight: 300;
   font-size: 1.5rem;
 }
 
-.card-signin .card-body {
+.card-container .card-body {
   padding: 2rem;
   padding-top: 0;
 }
@@ -380,4 +381,9 @@ a.socialIcon:hover, .socialHoverClass {
 
 .bold-text {
   font-weight: bold;
+}
+
+.fa-select {
+  font-family:'Font Awesome 5 Free';
+  /* font-weight: 900; */
 }

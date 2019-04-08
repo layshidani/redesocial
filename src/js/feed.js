@@ -1,12 +1,28 @@
 window.onload = () => {
   event.preventDefault();
   const database = firebase.database();
-  // const USER_ID = window.location.search.match(/\?id=(.*)/)[1];
-  // console.log('USER_ID: ', USER_ID);
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
-  let likes = 0;
 
+  var name, email, photoUrl, uid, emailVerified;
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // user signed in
+      name = user.displayName;
+      console.log('name: ', name);
+      email = user.email;
+      console.log('email: ', email);
+      photoUrl = user.photoURL;
+      console.log('photoUrl: ', photoUrl);
+      emailVerified = user.emailVerified;
+      console.log('emailVerified: ', emailVerified);
+      uid = user.uid;
+    } else {
+      // No user is signed in.
+    }
+  });
+
+  // mostrar todos os posts
   database.ref('feed/posts').once('value').then(snapshot => {
     snapshot.forEach(value => {
       let childkey = value.key;
@@ -18,7 +34,11 @@ window.onload = () => {
       let firebaseLocalHourTo = childData.localHourTo;
       let firebaseLocalPrice = childData.localPrice;
       let firebaseText = childData.text;
-      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, childkey);
+      let firebaseLikes = childData.curtidas;
+      let firebaseName = childData.name;
+      let firebaseEmail = childData.email;
+
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
     })
   });
 
@@ -35,11 +55,11 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, key) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
-    name.innerText = '@user';
+    name.innerHTML = `${userName} - ${userEmail}`;
 
     let header = document.createElement('span');
     header.setAttribute('class', 'date-time');
@@ -95,15 +115,28 @@ window.onload = () => {
     // botão curtir
     let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
+    likeBtn.setAttribute('like-data-id', key);
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
-    likeBtn.setAttribute('data-idlike', key);
     likeBtn.innerText = '';
 
     // contador de curtidas
     let counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
+    counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
+
+    // público ou privado
+    let showSelected = document.createElement('p');
+    showSelected.setAttribute('selected-data-id', key);
+    showSelected.setAttribute('id', 'show-selected');
+    if ($('#select-post-type').val() === 'postPublic') {
+      showSelected.innerText = 'Público';
+    } else {
+      showSelected.innerText = 'Privado';
+    }
+
+
 
     // card de postagem
     let card = document.createElement('div');
@@ -128,22 +161,34 @@ window.onload = () => {
     card.appendChild(deletePost);
     card.appendChild(likeBtn);
     card.appendChild(counter);
+    card.appendChild(showSelected);
 
     // adiciona card no container de posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
-    
   }
+
+  $('#comment-text').keyup(function desablePost() {
+    if ($('#comment-text').val().length > 0) {
+      console.log($('#comment-text').val().length);
+      $('#post-btn').prop("disabled", false);
+    } else {
+      $('#post-btn').prop("disabled", true)
+    }
+  });
 
   // publicar post
   $('#post-btn').click(function publishPost() {
-    var inputLocalName = $('#local-name').val();
-    var inputLocalAdress = $('#adress').val();    
-    var inputLocalHourFrom = $('#hour-from').val();    
-    var inputLocalHourTo = $('#hour-to').val();    
-    var inputLocalPrice = $('#average-price').val();    
-    var inputText = $('#comment-text').val();
+    let inputLocalName = $('#local-name').val();
+    let inputLocalAdress = $('#adress').val();
+    let inputLocalHourFrom = $('#hour-from').val();
+    let inputLocalHourTo = $('#hour-to').val();
+    let inputLocalPrice = $('#average-price').val();
+    let inputText = $('#comment-text').val();
+    let likeInit = 0;
 
     const newPost = {
+      name: name,
+      email: email,
       date: getDate(),
       localName: inputLocalName,
       localAdress: inputLocalAdress,
@@ -151,17 +196,22 @@ window.onload = () => {
       localHourTo: inputLocalHourTo,
       localPrice: inputLocalPrice,
       text: inputText,
-      curtidas: likes
+      likes: likeInit,
     }
-    
-    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, snapshot.key));
+
+
+    if ($('#select-post-type').val() === 'postPublic') {
+      feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
+    } else {
+      feedDatabase.child('/posts/' + 'privados/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
+    }
   });
 
   // deletar post
-  $(document).on('click', '#delete-btn', function() {
+  $(document).on('click', '#delete-btn', function () {
     let confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
-      let cardKey = this.getAttribute('data-id');
+      let cardKey = $(this).attr('data-id');
       feedDatabase.child('/posts/' + cardKey).remove().then(() => {
         $(this).parent('.post-card').remove();
       });
@@ -181,68 +231,29 @@ window.onload = () => {
       curtidas: likes,
     })
   })
+    let likeId = $(this).attr('like-data-id');
+    console.log(likeId)
+    let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
+    console.log(countLikes)
+    countLikes++
+    feedDatabase.child('posts/' + likeId + '/curtidas').set(countLikes).then(() => {
+      $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
+    });
 
-  // let countLikes = 0;
-  // $(document).on('click', '#like-btn', getLikes(countLikes, postKeycard));
-  // function getLikes(countLikes, postKeycard) {
-  //   // pegar card
-  //   console.log(postKeycard);
-  //   // cada card tem um contador de likes
-  //   countLikes++;
-  //   document.getElementById("show-likes").innerHTML = countLikes + ' curtidas';
+  $('#new-comment-text').keyup(function () {
+    if ($('#new-comment-text').val().length > 0) {
+      console.log($('#new-comment-text').val().length);
+      $('#new-post-btn').prop("disabled", false);
+    } else {
+      $('#new-post-btn').prop("disabled", true);
 
-  //   // return likes;
-  //   feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  // }
-
-
-
-  // $(document).on('click', '#new-post-btn', function editPost() {
-  //   console.log('Confirme edit clicado');
-
-  //   let edit = document.getElementById('edit-btn');
-  //   let editId = edit.dataset.id;
-  //   let teste = firebase.database().ref('feed/posts/' + editId).once('value');
-  //   console.log('teste: ', teste);
-  //   let newText = $('#new-comment-text').val();
-  //   newText = teste;
-  //   console.log('newText: ', newText);
-  // $(document).on('click', '#like-btn', function () {
-  //   likes++;
-  //   document.getElementById("show-likes").innerHTML = likes + ' curtidas';
-  // })
-
-  //   firebase.database().ref('feed/posts/' + editId).update({
-  //     text: newText,
-  //   }).then(() => {
-  //     jQuery("#comment-post").html(newText);
-  //   })
-  // });
-
-
-  /*****************************************
-   * a funḉão abaixo não está dando 
-   * console.log 
-   * 
-   * ************************************ */
-  // $('#like-btn').click(function likePost(event) {
-  //   event.preventDefault();
-  //   console.log('foi');
-
-  //   let countLikes = counter++;
-  //   // for (let like in likes) {
-  //   //   countLikes = like++;
-  //   // }
-
-  //    feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
-  // })
-
-  }
+    }
+  });
 
   // editar post
-  $(document).on('click', '#edit-btn', function() { 
-    let editKey = this.getAttribute('edit-data-id');
-    
+  $(document).on('click', '#edit-btn', function () {
+    let editKey = $(this).attr('edit-data-id');
+
     let oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
     let oldOperating = $(`p[hour-data-id=${editKey}]`).text();
     let oldAveragePrice = $(`p[price-data-id=${editKey}]`).text();
@@ -254,13 +265,13 @@ window.onload = () => {
     $('#new-price').val(oldAveragePrice);
     $('#new-comment-text').val(oldText);
 
-    $('#new-post-btn').click(function() {
+    $('#new-post-btn').click(function () {
       let newName = $('#new-local-name').val();
       let newAdress = $('#new-adress').val();
       let newOperating = $('#new-hour-from').val();
       let newPrice = $('#new-price').val();
       let newText = $('#new-comment-text').val();
-      
+
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
         localAdress: newAdress,
@@ -268,9 +279,10 @@ window.onload = () => {
         // localHourTo: newHourTo,
         localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
-        
+        curtidas: parseInt($(`span[counter-data-id="${editKey}"`).text()),
       }).then(() => {
         location.reload();
       })
     })
   });
+}
