@@ -3,30 +3,36 @@ $(document).ready(function () {
   $('#btn-create-user').click(function () {
     event.preventDefault();
     let email = $('#input-email').val();
-    console.log(email)
+    console.log(email);
     let password = $('#input-password').val();
-    let name = $('#input-name').val();
-    console.log(name)
-
+    let userName = $('#input-name').val();
+    console.log(userName);
 
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function (users) {
-        let user = firebase
-          .auth()
-          .currentUser;
-
+        let user = firebase.auth().currentUser;
         user.updateProfile({
-          displayName: $('#input-name').val(),
-          photoURL: ''
+          displayName: userName,
+          photoURL: '',
         })
-        window.location.href = "categories_create_user.html";
+        .then(() => {
+          window.location.href = "categories_create_user.html";
+        });
+        
+        
       })
-      .catch(function (error) {
-        alert('Falha na autenticação');
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // alert(errorMessage);
+        $('#error-msg').text(errorMessage);
+        console.log('errorMessage: ', errorMessage);
       });
-  });
+      
+    });
 
   $('#btnLogin').click(function () {
     event.preventDefault();
@@ -38,8 +44,11 @@ $(document).ready(function () {
       .then(function (users) {
         window.location.href = "feed.html";
       })
-      .catch(function (error) {
-        alert('Falha no Login');
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        $('#error-msg').text(errorMessage);
       });
   });
 
