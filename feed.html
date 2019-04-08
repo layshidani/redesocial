@@ -31,7 +31,7 @@
             </div>
 
             <!-- navbar -->
-            <div class="navbar">
+            <section class="navbar">
               <button id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
               <button id="icon-cashback" class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></button>
               <button id="icon-search" class="btn btn-default navbar-btn"><i class="fas fa-search"></i></button>
@@ -44,9 +44,9 @@
                   <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
                 </div>
               </div>
-            </div>
+            </section>
             <!-- Postar avaliação Modal -->
-            <div class="container row">
+            <section class="container row">
               <textarea id="post-feed" class="post" data-toggle="modal" placeholder="Avalie aqui"
                 data-target="#exampleModal"></textarea>
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -234,10 +234,18 @@
                   </div>
                 </section>
               </div>
-            </div>
           </div>
         </div>
+      </div>
+    </div>
   </section>
+  <!-- filtro -->
+  <select id="filter-posts" value="all">
+    <span>Filtrar postagens: </span>
+    <option value="all">Todas</option>
+    <option value="public">Públicas</option>
+    <option value="private">Privadas</option>
+  </select>
 
   <!-- Postagens no feed -->
   <!-- <section>
@@ -248,6 +256,8 @@
           </div>
         </div>
       </div>
+  <section class="container row mx-auto posts-feed">
+    <div id="posts-container" class="card mx-auto" style="overflow: scroll; width: auto; height: 300px">
     </div>
   </section> -->
 
