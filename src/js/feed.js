@@ -11,7 +11,7 @@ window.onload = () => {
     if (user) {
       // user signed in
       name = user.displayName;
-      console.log('name: ', user);
+      console.log('name: ', name);
       email = user.email;
       console.log('email: ', email);
       photoUrl = user.photoURL;
@@ -27,19 +27,19 @@ window.onload = () => {
   // mostrar todos os posts
   database.ref('feed/posts').once('value').then(snapshot => {
     snapshot.forEach(value => {
-      var childkey = value.key;
-      var childData = value.val();
-      var firebaseDate = childData.date;
-      var firebaseLocalName = childData.localName;
-      var firebaseLocalAdress = childData.localAdress;
-      var firebaseLocalHourFrom = childData.localHourFrom;
-      var firebaseLocalHourTo = childData.localHourTo;
-      var firebaseLocalPrice = childData.localPrice;
-      var firebaseText = childData.text;
-      var firebaseLikes = childData.curtidas;
-      var firebaseName = childData.name;
-      var firebaseEmail = childData.email;
-      var firebasePostType = childData.postType;
+      const childkey = value.key;
+      const childData = value.val();
+      const firebaseDate = childData.date;
+      const firebaseLocalName = childData.localName;
+      const firebaseLocalAdress = childData.localAdress;
+      const firebaseLocalHourFrom = childData.localHourFrom;
+      const firebaseLocalHourTo = childData.localHourTo;
+      const firebaseLocalPrice = childData.localPrice;
+      const firebaseText = childData.text;
+      const firebaseLikes = childData.likes;
+      const firebaseName = childData.name;
+      const firebaseEmail = childData.email;
+      const firebasePostType = childData.postType;
 
       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
 
@@ -252,7 +252,7 @@ window.onload = () => {
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
-    });
+    })
   });
 
   $('#new-comment-text').keyup(function () {
