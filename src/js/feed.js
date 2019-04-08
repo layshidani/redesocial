@@ -232,14 +232,14 @@ window.onload = () => {
       curtidas: likes,
     })
   })
-    let likeId = $(this).attr('like-data-id');
-    console.log(likeId)
-    let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
-    console.log(countLikes)
-    countLikes++
-    feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
-      $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
-    });
+    // let likeId = $(this).attr('like-data-id');
+    // console.log(likeId)
+    // let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
+    // console.log(countLikes)
+    // countLikes++
+    // feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
+    //   $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
+    // });
 
   $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
