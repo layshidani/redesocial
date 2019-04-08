@@ -3,8 +3,9 @@ window.onload = () => {
   const database = firebase.database();
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
+  const users = database.ref('users');
 
-  var name, email, photoUrl, uid, emailVerified;
+  let name, email, photoUrl, uid, emailVerified;
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // user signed in
@@ -236,7 +237,7 @@ window.onload = () => {
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
     console.log(countLikes)
     countLikes++
-    feedDatabase.child('posts/' + likeId + '/curtidas').set(countLikes).then(() => {
+    feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     });
 
@@ -279,7 +280,7 @@ window.onload = () => {
         // localHourTo: newHourTo,
         localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
-        curtidas: parseInt($(`span[counter-data-id="${editKey}"`).text()),
+        likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
       }).then(() => {
         location.reload();
       })
