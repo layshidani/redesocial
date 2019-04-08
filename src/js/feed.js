@@ -7,10 +7,11 @@ window.onload = () => {
 
   let name, email, photoUrl, uid, emailVerified;
   firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth
     if (user) {
       // user signed in
       name = user.displayName;
-      console.log('name: ', name);
+      console.log('name: ', user);
       email = user.email;
       console.log('email: ', email);
       photoUrl = user.photoURL;
@@ -40,22 +41,24 @@ window.onload = () => {
       var firebaseEmail = childData.email;
       var firebasePostType = childData.postType;
   
-      $('#filter-posts').change(function() {
-        if ($('#filter-posts').val() === 'all') {
-          $('#posts-container').empty();
-          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-        } else if ($('#filter-posts').val() === 'private') {
-          // $('#posts-container').empty();
-          if (firebasePostType === 'postPrivate') {
-            postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-          }
-        } else if ($('#filter-posts').val() === 'public') {
-          // $('#posts-container').empty();
-          if (firebasePostType === 'postPublic') {
-            postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-          }
-        }
-      })
+      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+
+      // $('#filter-posts').change(function() {
+      //   if ($('#filter-posts').val() === 'all') {
+      //     $('#posts-container').empty();
+      //     postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+      //   } else if ($('#filter-posts').val() === 'private') {
+      //     // $('#posts-container').empty();
+      //     if (firebasePostType === 'postPrivate') {
+      //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+      //     }
+      //   } else if ($('#filter-posts').val() === 'public') {
+      //     // $('#posts-container').empty();
+      //     if (firebasePostType === 'postPublic') {
+      //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+      //     }
+      //   }
+      // })
     })
   })
         
@@ -241,12 +244,12 @@ $('#comment-text').keyup(function desablePost() {
   })
 
   // curtidas
-  $(document).on('click', '#like-btn', function () {
+  $(document).on('click', '#like-btn', function() {
     let likeId = $(this).attr('like-data-id');
     console.log(likeId)
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
     console.log(countLikes)
-    countLikes++
+    countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     });
@@ -258,7 +261,6 @@ $('#comment-text').keyup(function desablePost() {
       $('#new-post-btn').prop("disabled", false);
     } else {
       $('#new-post-btn').prop("disabled", true);
-
     }
   });
 
