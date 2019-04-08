@@ -95,7 +95,6 @@ window.onload = () => {
     // botão curtir
     let likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
-    likeBtn.setAttribute('data-id', key);
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.setAttribute('data-idlike', key);
     likeBtn.innerText = '';
@@ -133,9 +132,6 @@ window.onload = () => {
     // adiciona card no container de posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
     
-    var kk = document.getElementById('post-card-key');
-    var jj = kk.getAttribute('data-idcard');
-    console.log(jj);
   }
 
   // publicar post
@@ -173,19 +169,17 @@ window.onload = () => {
   })
 
   // curtidas
+  // ARRUMAR A CONTAGEM DE CURTIDAS NA PÁGINA
   $(document).on('click', '#like-btn', function () {
-    // event.preventDefault();
     likes++;
-    let postKeycard = document.getElementById('post-card-key');
-    let cardPost = postKeycard.getAttribute('data-idcard');
-    console.log(cardPost);
+    let keyCurtida = this.getAttribute('data-idlike');
+    console.log(keyCurtida);
+    console.log(likes);
     let lk = document.getElementById("show-likes");
-    lk.innerHTML = likes + ' curtidas';
-    feedDatabase.child('/posts/' + cardPost).update({
+    keyCurtida.innerHTML = likes + ' curtidas';
+    feedDatabase.child('/posts/' + keyCurtida).update({
       curtidas: likes,
     })
-    
-    // return likes;
   })
 
   // let countLikes = 0;
@@ -243,7 +237,7 @@ window.onload = () => {
   //    feedDatabase.child(id + '/curtidas').set(countLikes).then(counter.innerText = countLikes);
   // })
 
-  });
+  }
 
   // editar post
   $(document).on('click', '#edit-btn', function() { 
@@ -280,4 +274,3 @@ window.onload = () => {
       })
     })
   });
-};
