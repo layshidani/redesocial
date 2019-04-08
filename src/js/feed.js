@@ -23,24 +23,45 @@ window.onload = () => {
   });
 
   // mostrar todos os posts
+  
+  
   database.ref('feed/posts').once('value').then(snapshot => {
-  snapshot.forEach(value => {
-    let childkey = value.key;
-    let childData = value.val();
-    let firebaseDate = childData.date;
-    let firebaseLocalName = childData.localName;
-    let firebaseLocalAdress = childData.localAdress;
-    let firebaseLocalHourFrom = childData.localHourFrom;
-    let firebaseLocalHourTo = childData.localHourTo;
-    let firebaseLocalPrice = childData.localPrice;
-    let firebaseText = childData.text;
-    let firebaseLikes = childData.curtidas;
-    let firebaseName = childData.name;
-    let firebaseEmail = childData.email;
-    
-    postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+    snapshot.forEach(value => {
+      var childkey = value.key;
+      var childData = value.val();
+      var firebaseDate = childData.date;
+      var firebaseLocalName = childData.localName;
+      var firebaseLocalAdress = childData.localAdress;
+      var firebaseLocalHourFrom = childData.localHourFrom;
+      var firebaseLocalHourTo = childData.localHourTo;
+      var firebaseLocalPrice = childData.localPrice;
+      var firebaseText = childData.text;
+      var firebaseLikes = childData.curtidas;
+      var firebaseName = childData.name;
+      var firebaseEmail = childData.email;
+      var firebasePostType = childData.postType;
+  
+      $('#filter-posts').change(function() {
+        if ($('#filter-posts').val() === 'all') {
+          $('#posts-container').empty();
+          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+        } else if ($('#filter-posts').val() === 'private') {
+          // $('#posts-container').empty();
+          if (firebasePostType === 'postPrivate') {
+            postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+          }
+        } else if ($('#filter-posts').val() === 'public') {
+          // $('#posts-container').empty();
+          if (firebasePostType === 'postPublic') {
+            postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+          }
+        }
+      })
     })
-  });
+  })
+        
+  
+  
 
   // data e hora do post
   function getDate() {
@@ -55,7 +76,7 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, postTypeChoose) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -130,14 +151,8 @@ window.onload = () => {
     var showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
-    if ($('#select-post-type').val() === 'postPublic') {
-      showSelected.innerText = 'público';
-    } else {
-      showSelected.innerText = 'privado';
-    }
-    
-    
 
+ 
     // card de postagem
     let card = document.createElement('div');
     card.setAttribute('class', 'post-card');
@@ -167,6 +182,7 @@ window.onload = () => {
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
   }
   
+  // desabilita postagem caso campo vazio
   $('#comment-text').keyup(function desablePost() {
     if ($('#comment-text').val().length > 0) {
       console.log($('#comment-text').val().length);
@@ -197,14 +213,10 @@ window.onload = () => {
       localPrice: inputLocalPrice,
       text: inputText,
       likes: likeInit,
+      postType: $('#select-post-type').val(),
     }
 
-    
-    if ($('#select-post-type').val() === 'postPublic') {
-      feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
-    } else {
-      feedDatabase.child('/posts/' + 'privados/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
-    }
+    feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
   });
 
   // deletar post
