@@ -394,7 +394,12 @@ a.socialIcon:hover, .socialHoverClass {
   /* font-weight: 900; */
 }
 
-.post-cards {
+.container {
   display: flex;
   justify-content: center;
+  align-self: center;
+}
+
+.filter {
+  width: 2%;
 }
