@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="src/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -23,7 +24,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <div class="card card-signin my-5">
+          <div class="card card-container my-5">
             <div class="header-serview">
               <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
               <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
@@ -111,10 +112,17 @@
                           <label for="message-text" class="col-form-label">Comentário:</label>
                           <textarea class="form-control" id="comment-text" value=""></textarea>
                         </div>
-                        <select id="select-post-type">
-                          <option value="postPublic"><i class="fas fa-users"></i> público</option>
-                          <option value="postPrivate"><i class="fas fa-user"></i> privado</option>
+                        <!-- Público ou Privado -->
+                        <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            <option value="postPublic" class="dropdown-item fas fa-users">&#xf0c0; Público</option>
+                            <option value="postPrivate" class="dropdown-item fas fa-user">&#xf007; Privado</option>
+                          </div>
                         </select>
+                        <!-- <select id="select-post-type">
+                          <option value="postPublic"><i class="fas fa-users"></i>Público</option>
+                          <option value="postPrivate"><i class="fas fa-user-lock"></i>Privado</option>
+                        </select> -->
                       </form>
                     </div>
                     <div class="modal-footer">
@@ -126,83 +134,91 @@
                   </div>
                 </div>
               </div>
-            </section>
-            <!-- Editar avaliação Modal -->
-            <section class="container row">
-              <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Avaliação</h5>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Local (Nome):</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fas fa-bookmark"></i></span>
+              <!-- Editar avaliação Modal -->
+              <div class="container row">
+                <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Avaliação</h5>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="message-text" class="col-form-label">Local (Nome):</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-bookmark"></i></span>
+                              </div>
+                              <input class="form-control" id="new-local-name"></input>
                             </div>
-                            <input class="form-control" id="new-local-name"></input>
+                            <!-- endereço -->
+                            <label for="message-text" class="col-form-label">Endereço:</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                              </div>
+                              <input class="form-control" id="new-adress"></input>
+                            </div>
+                            <!-- Horário de Funcionamento -->
+                            <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
+                            <!-- container hora de -->
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">De</span>
+                              </div>
+                              <input id="new-hour-from" type="time" class="form-control">
+                              <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                              </div>
+                            </div>
+                            <!-- container hora à -->
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">De</span>
+                              </div>
+                              <input id="hour-to" type="time" class="form-control">
+                              <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                              </div>
+                            </div>
+                            <!-- media de preço -->
+                            <label for="message-text" class="col-form-label">Média de Preço:</label>
+                            <div id="price-average" class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                              </div>
+                              <input id="new-price" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
+                              <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                              </div>
+                            </div>
+                            <!-- Comentário -->
+                            <label for="message-text" class="col-form-label">Comentário:</label>
+                            <textarea class="form-control" id="new-comment-text" value=""></textarea>
                           </div>
-                          <!-- endereço -->
-                          <label for="message-text" class="col-form-label">Endereço:</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                          <!-- Público ou Privado -->
+                          <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                              <option value="postPublic" class="dropdown-item fas fa-users">&#xf0c0; Público</option>
+                              <option value="postPrivate" class="dropdown-item fas fa-user">&#xf007; Privado</option>
                             </div>
-                            <input class="form-control" id="new-adress"></input>
-                          </div>
-                          <!-- Horário de Funcionamento -->
-                          <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
-                          <!-- container hora de -->
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">De</span>
-                            </div>
-                            <input id="new-hour-from" type="time" class="form-control">
-                            <div class="input-group-append">
-                              <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                            </div>
-                          </div>
-                          <!-- container hora à -->
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">De</span>
-                            </div>
-                            <input id="hour-to" type="time" class="form-control">
-                            <div class="input-group-append">
-                              <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                            </div>
-                          </div>
-                          <!-- media de preço -->
-                          <label for="message-text" class="col-form-label">Média de Preço:</label>
-                          <div id="price-average" class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">$</span>
-                            </div>
-                            <input id="new-price" type="text" class="form-control"
-                              aria-label="Amount (to the nearest dollar)">
-                            <div class="input-group-append">
-                              <span class="input-group-text">.00</span>
-                            </div>
-                          </div>
-                          <!-- Comentário -->
-                          <label for="message-text" class="col-form-label">Comentário:</label>
-                          <textarea class="form-control" id="new-comment-text" value=""></textarea>
-                        </div>
-                        <select id="select-post-type">
-                          <option value="postPublic"><i class="fas fa-users"></i> público</option>
-                          <option value="postPrivate"><i class="fas fa-user"></i> privado</option>
-                        </select>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                      <button id="new-post-btn" type="button" class="btn btn-primary" data-dismiss="modal"
-                        disabled="true">Salvar
-                        Alteração</button>
+                          </select>
+
+                          <!-- <select id="select-post-type">
+                            <option value="postPublic"><i class="fas fa-users"></i> público</option>
+                            <option value="postPrivate"><i class="fas fa-user"></i> privado</option>
+                          </select> -->
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button id="new-post-btn" type="button" class="btn btn-primary" data-dismiss="modal"
+                          disabled="true">Salvar
+                          Alteração</button>
+                      </div>
                     </div>
                   </div>
                 </div>

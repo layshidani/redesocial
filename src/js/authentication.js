@@ -29,8 +29,13 @@ $(document).ready(function () {
       .then(function (users) {
         window.location.href = "categories_create_user.html";
       })
-      .catch(function (error) {
-        alert('Falha na autenticação');
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // alert(errorMessage);
+        $('#error-msg').text(errorMessage);
+        console.log('errorMessage: ', errorMessage);
       });
   });
 
@@ -44,8 +49,10 @@ $(document).ready(function () {
       .then(function (users) {
         window.location.href = "feed.html";
       })
-      .catch(function (error) {
-        alert('Falha no Login');
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
       });
   });
 
