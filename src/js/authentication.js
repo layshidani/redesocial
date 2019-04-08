@@ -1,32 +1,26 @@
 $(document).ready(function () {
 
-  // firebase.auth().onAuthStateChanged(function(user) {
-  //   var name, email, photoUrl, uid, emailVerified;
-  //   if (user) {
-  //     // user signed in
-  //     name = user.displayName;
-  //     console.log('name: ', name);
-  //     email = user.email;
-  //     console.log('email: ', email);
-  //     photoUrl = user.photoURL;
-  //     console.log('photoUrl: ', photoUrl);
-  //     emailVerified = user.emailVerified;
-  //     console.log('emailVerified: ', emailVerified);
-  //     uid = user.uid; 
-  //   } else {
-  //     // No user is signed in.
-  //   }
-  // });
-
   $('#btn-create-user').click(function () {
     event.preventDefault();
     let email = $('#input-email').val();
+    console.log(email)
     let password = $('#input-password').val();
+    let name = $('#input-name').val();
+    console.log(name)
+
 
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function (users) {
+        let user = firebase
+          .auth()
+          .currentUser;
+
+        user.updateProfile({
+          displayName: $('#input-name').val(),
+          photoURL: ''
+        })
         window.location.href = "categories_create_user.html";
       })
       .catch(function(error) {
