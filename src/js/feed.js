@@ -299,4 +299,4 @@ $('#comment-text').keyup(function desablePost() {
       })
     })
   });
-};
+}
