@@ -222,25 +222,26 @@ window.onload = () => {
   // curtidas
   // ARRUMAR A CONTAGEM DE CURTIDAS NA PÁGINA
   $(document).on('click', '#like-btn', function () {
-    likes++;
-    let keyCurtida = this.getAttribute('data-idlike');
-    console.log(keyCurtida);
-    console.log(likes);
-    let lk = document.getElementById("show-likes");
-    keyCurtida.innerHTML = likes + ' curtidas';
-    feedDatabase.child('/posts/' + keyCurtida).update({
-      curtidas: likes,
-    })
-  })
-    // let likeId = $(this).attr('like-data-id');
-    // console.log(likeId)
-    // let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
-    // console.log(countLikes)
-    // countLikes++
-    // feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
-    //   $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
-    // });
-
+  //   likes++;
+  //   let keyCurtida = this.getAttribute('like-data-id');
+  //   console.log(keyCurtida);
+  //   console.log(likes);
+  //   let lk = document.getElementById("show-likes");
+  //   keyCurtida.innerHTML = likes + ' curtidas';
+  //   feedDatabase.child('/posts/' + keyCurtida).update({
+  //     curtidas: likes,
+  //   })
+  // })
+    let likeId = $(this).attr('like-data-id');
+    console.log(likeId)
+    let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
+    console.log(countLikes)
+    countLikes++
+    feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
+      $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
+    });
+  });
+  
   $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
       console.log($('#new-comment-text').val().length);
@@ -286,4 +287,5 @@ window.onload = () => {
       })
     })
   });
+
 }
