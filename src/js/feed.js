@@ -36,7 +36,7 @@ window.onload = () => {
       var firebaseLocalHourTo = childData.localHourTo;
       var firebaseLocalPrice = childData.localPrice;
       var firebaseText = childData.text;
-      var firebaseLikes = childData.curtidas;
+      var firebaseLikes = childData.likes;
       var firebaseName = childData.name;
       var firebaseEmail = childData.email;
       var firebasePostType = childData.postType;
@@ -254,7 +254,7 @@ $('#comment-text').keyup(function desablePost() {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     });
   });
-  
+
   $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
       console.log($('#new-comment-text').val().length);
