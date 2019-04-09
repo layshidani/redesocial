@@ -290,7 +290,6 @@ window.onload = () => {
   // desabilita postagem caso campo vazio
   $('#comment-text').keyup(function desablePost() {
     if ($('#comment-text').val().length > 0) {
-      console.log($('#comment-text').val().length);
       $('#post-btn').prop("disabled", false);
     } else {
       $('#post-btn').prop("disabled", true)
@@ -322,6 +321,8 @@ window.onload = () => {
       likes: likeInit,
       postType: typeSelected,
     }
+
+    $('#filter-posts').val('all');
 
     feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, typeSelected));
 
@@ -385,6 +386,7 @@ window.onload = () => {
       let newOperating = $('#new-hour-from').val();
       let newPrice = $('#new-price').val();
       let newText = $('#new-comment-text').val();
+      let newType = $('#select-new-post-type').val();
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
@@ -394,10 +396,10 @@ window.onload = () => {
         localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
         likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
+        postType: newType,
       }).then(() => {
         location.reload();
       })
     })
   });
-
 };
