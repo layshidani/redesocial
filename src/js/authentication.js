@@ -3,17 +3,35 @@ $(document).ready(function () {
   $('#btn-create-user').click(function () {
     event.preventDefault();
     let email = $('#input-email').val();
+    console.log(email);
     let password = $('#input-password').val();
+    let userName = $('#input-name').val();
+    console.log(userName);
 
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function (users) {
-        window.location.href = "categories_create_user.html";
+        let user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: userName,
+          photoURL: '',
+        })
+          .then(() => {
+            window.location.href = "categories_create_user.html";
+          });
+
+
       })
       .catch(function (error) {
-        alert('Falha na autenticação');
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // alert(errorMessage);
+        $('#error-msg').text(errorMessage);
+        console.log('errorMessage: ', errorMessage);
       });
+
   });
 
   $('#btnLogin').click(function () {
@@ -27,7 +45,10 @@ $(document).ready(function () {
         window.location.href = "feed.html";
       })
       .catch(function (error) {
-        alert('Falha no Login');
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        $('#error-msg').text(errorMessage);
       });
   });
 

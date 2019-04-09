@@ -2,107 +2,106 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SerView - Login</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="src/img/logo/logo_final_img.png">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" media="screen" href="src/main.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
-	<script src="src/js/config_firebase.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SerView - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="src/img/logo/logo_final_img.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="src/main.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
+  <script src="src/js/config_firebase.js"></script>
 </head>
 
 <body>
-	<section>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-					<div class="card card-signin my-5">
-						<div class="header-login">
-							<img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
-							<img class="logo-name" src="src/img/logo/logo_final_nome.png"
-								alt="logotipo imagem com texto SerView">
-						</div>
-						<div class="text-categories">
-							<p>Seja Bem-vindo(a)!</p>
-							<p>Escolha as categorias de sua preferência</p>
-						</div>
-						<div class="container">
-							<div class="row align-items-center">
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Bares, Cafés e
-										Restaurantes</button>
-								</div>
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Alimentos e
-										Bebidas</button>
-								</div>
-							</div>
-							<div class="row align-items-center">
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Tecnologia</button>
-								</div>
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Esporte e
-										Lazer</button>
-								</div>
-							</div>
-							<div class="row align-items-center">
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Automotivo</button>
-								</div>
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Moda</button>
-								</div>
-							</div>
-							<div class="row align-items-center">
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Beleza</button>
-								</div>
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Viagem e
-										Turismo</button>
-								</div>
-							</div>
-							<div class="row align-items-center">
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Saúde</button>
-								</div>
-								<div class="col categories-login">
-									<button class="btn btn-primary btn-block">Saúde
-										Animal</button>
-								</div>
-							</div>
-							<div class="next">
-								<button id="jump-btn" class="btn btn-next">Pular</button>
-								<button id="next-btn" class="btn btn-next">Próxima</button>
-							</div>
-							<hr>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="header-login">
+              <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
+              <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
+            </div>
+            <div class="text-categories">
+              <p>Seja Bem-vindo(a)!</p>
+              <p>Escolha as categorias de sua preferência</p>
+            </div>
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Bares, Cafés e
+                    Restaurantes</button>
+                </div>
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Alimentos e
+                    Bebidas</button>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Tecnologia</button>
+                </div>
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Esporte e
+                    Lazer</button>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Automotivo</button>
+                </div>
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Moda</button>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Beleza</button>
+                </div>
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Viagem e
+                    Turismo</button>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Saúde</button>
+                </div>
+                <div class="col categories-login">
+                  <button class="btn btn-primary btn-block">Saúde
+                    Animal</button>
+                </div>
+              </div>
+              <div class="next">
+                <button id="jump-btn" class="btn btn-next">Pular</button>
+                <button id="next-btn" class="btn btn-next">Próxima</button>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script src="src/js/authentication.js"></script> -->
-	<script src="src/js/feed.js"></script>
-	<script src="src/js/dom_events.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="src/js/authentication.js"></script>
+  <script src="src/js/feed.js"></script>
+  <script src="src/js/dom_events.js"></script>
 </body>
 
 </html>

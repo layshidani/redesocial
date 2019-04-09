@@ -5,6 +5,7 @@
 
 body {
   background: linear-gradient(to right, #295f2d, #409946);
+  font-family: 'PT Serif', serif;
 }
 
 .header-serview {
@@ -27,20 +28,25 @@ body {
   margin: 10px;
 }
 
-.card-signin {
+.error-msg {
+  color: red;
+  font-style: italic;
+}
+
+.card-container {
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   background-color: #eff1ed;
 }
 
-.card-signin .card-title {
+.card-container .card-title {
   margin-bottom: 2rem;
   font-weight: 300;
   font-size: 1.5rem;
 }
 
-.card-signin .card-body {
+.card-container .card-body {
   padding: 2rem;
   padding-top: 0;
 }
@@ -275,12 +281,13 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .posts-feed {
-  height: 300px;
+  /* height: 300px; */
   display: flex;
   justify-content: center;
   background-color: #eff1ed;
-  width: 90%;
-  margin-top: 20px;
+  /* width: 90%; */
+  /* margin-top: 20px; */
+  align-content: center;
 }
 
 .post-card {
@@ -300,19 +307,19 @@ a.socialIcon:hover, .socialHoverClass {
   font-size: 25px;
 }
 
-.cashback i {
-  font-size: 60px;
-}
-
-.title {
+.title-cashback {
   color: #409946;
   font-size: 35px;
-  margin-left: 40px;
-}
-
-.square {
   width: auto;
-  height: 240px;
+  height: 500px;
+}
+ 
+.title-friends {
+  color: #409946;
+  font-size: 35px;
+  width: auto;
+  height: 500px;
+  text-align: center;
 }
 
 .cont-list {
@@ -327,12 +334,6 @@ a.socialIcon:hover, .socialHoverClass {
 .list:hover {
   cursor: pointer;
   color: #295f2d;
-}
-
-.post-card {
-  background-color: #edffdc;
-  padding: 20px;
-  border-radius: 5px;
 }
 
 .user-name {
@@ -380,4 +381,20 @@ a.socialIcon:hover, .socialHoverClass {
 
 .bold-text {
   font-weight: bold;
+}
+
+option::first-letter {
+  font-family:'Font Awesome 5 Free';
+  /* font-weight: 900; */
+}
+
+.posts-cards, .container, .row {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.filter {
+  margin-top: 5%;
+  margin-bottom: -5%;
 }
