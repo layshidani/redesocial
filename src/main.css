@@ -307,19 +307,19 @@ a.socialIcon:hover, .socialHoverClass {
   font-size: 25px;
 }
 
-.cashback i {
-  font-size: 60px;
-}
-
-.title {
+.title-cashback {
   color: #409946;
   font-size: 35px;
-  margin-left: 40px;
-}
-
-.square {
   width: auto;
-  height: 240px;
+  height: 500px;
+}
+ 
+.title-friends {
+  color: #409946;
+  font-size: 35px;
+  width: auto;
+  height: 500px;
+  text-align: center;
 }
 
 .cont-list {
@@ -335,12 +335,6 @@ a.socialIcon:hover, .socialHoverClass {
   cursor: pointer;
   color: #295f2d;
 }
-
-/* .post-card {
-  background-color: #edffdc;
-  padding: 20px;
-  border-radius: 5px;
-} */
 
 .user-name {
   font-weight: bold;
@@ -389,12 +383,18 @@ a.socialIcon:hover, .socialHoverClass {
   font-weight: bold;
 }
 
-.fa-select {
+option::first-letter {
   font-family:'Font Awesome 5 Free';
   /* font-weight: 900; */
 }
 
-.post-cards {
+.posts-cards, .container, .row {
   display: flex;
   justify-content: center;
+  align-self: center;
+}
+
+.filter {
+  margin-top: 5%;
+  margin-bottom: -5%;
 }

@@ -29,7 +29,6 @@
               <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
               <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
             </div>
-
             <!-- navbar -->
             <section class="navbar">
               <button id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
@@ -120,8 +119,8 @@
                           </div>
                         </select> -->
                         <select id="select-post-type">
-                          <option value="postPublic"><i class="fas fa-users"></i>Público</option>
-                          <option value="postPrivate"><i class="fas fa-user-lock"></i>Privado</option>
+                          <option value="public"><i class="fas fa-users"></i>Público</option>
+                          <option value="private"><i class="fas fa-user-lock"></i>Privado</option>
                         </select>
                       </form>
                     </div>
@@ -208,9 +207,8 @@
                           </select> -->
 
                           <select id="select-post-type">
-                            <option value="postPublic">Público</option>
-                            <span><i class="fas fa-users"></i></span>
-                            <option value="postPrivate"><i class="fas fa-user"></i> Privado</option>
+                            <option value="public"><i class="fas fa-users"></i> público</option>
+                            <option value="private"><i class="fas fa-user"></i> privado</option>
                           </select>
                         </form>
                       </div>
@@ -223,21 +221,19 @@
                     </div>
                   </div>
                 </div>
-                <!-- filtro -->
-                <div class="container">
-                  <div class="row">
-                    <span>Filtrar postagens: </span>
-                    <select id="filter-posts">
-                      <option value="all">Todas</option>
-                      <option value="public">Públicas</option>
-                      <option value="private">Privadas</option>
-                    </select>
-                  </div>
-                </div>
-                <!-- Postagens no feed -->
                 <section>
-                  <div class="container">
+                  <!-- Postagens no feed -->
+                  <div class="container posts-cards">
                     <div class="row">
+                      <!-- filtro -->
+                      <div class="mx-auto filter">
+                        <span>Filtrar postagens: </span>
+                        <select id="filter-posts" data-show-icon="true">
+                          <option value="all">Todas</option>
+                          <option value="public" id="public">Público</option>
+                          <option value="private">Privadas</option>
+                        </select>
+                      </div>
                       <div class="posts-feed card-container my-5 row mx-auto">
                         <div id="posts-container" class="card mx-auto posts-cards">
                         </div>
@@ -251,29 +247,6 @@
         </div>
       </div>
   </section>
-  <!-- filtro -->
-  <!-- <span>Filtrar postagens: </span>
-  <select id="filter-posts" value="all">
-    <option value="all">Todas</option>
-    <option value="public">Públicas</option>
-    <option value="private">Privadas</option>
-  </select> -->
-
-  <!-- Postagens no feed -->
-  <!-- <section>
-    <div class="container">
-      <div class="row">
-        <div class="posts-feed">
-          <div id="posts-container" class="card mx-auto">
-          </div>
-        </div>
-      </div>
-  <section class="container row mx-auto posts-feed">
-    <div id="posts-container" class="card mx-auto" style="overflow: scroll; width: auto; height: 300px">
-    </div>
-  </section> -->
-
-
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
