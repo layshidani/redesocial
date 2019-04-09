@@ -24,6 +24,11 @@ window.onload = () => {
     }
   });
 
+  feedDatabase.child('posts/privates/').once('value').then(snapshot => {
+    console.log(snapshot.val())
+
+  })
+
   // mostrar todos os posts
   database.ref('feed/posts').once('value').then(snapshot => {
     snapshot.forEach(value => {
@@ -43,17 +48,41 @@ window.onload = () => {
 
       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
 
-      // $('#filter-posts').change(function() {
+      let filter = $('#filter-posts');
+      filter.change(function () {
+        let filterChoice = filter.val();
+        console.log(filterChoice)
+        if (filterChoice === 'all') {
+          $('#posts-container').empty();
+          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+        } else if (filterChoice === 'private') {
+          $('#posts-container').empty();
+          if (firebasePostType === 'postPrivate') {
+            feedDatabase.child('posts/privates/').once('value').then(snapshot => {
+              console.log(snapshot.val())
+              let userPrivatePost = snapshot.val();
+
+            })
+            postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+          }
+        } else if (filterChoice === 'public') {
+          $('#posts-container').empty();
+          if (firebasePostType === 'postPublic') {
+            postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+          }
+        }
+      })
+      // $('#filter-posts').change(function () {
       //   if ($('#filter-posts').val() === 'all') {
       //     $('#posts-container').empty();
       //     postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
       //   } else if ($('#filter-posts').val() === 'private') {
-      //     // $('#posts-container').empty();
+      //     $('#posts-container').empty();
       //     if (firebasePostType === 'postPrivate') {
       //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
       //     }
       //   } else if ($('#filter-posts').val() === 'public') {
-      //     // $('#posts-container').empty();
+      //     $('#posts-container').empty();
       //     if (firebasePostType === 'postPublic') {
       //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
       //     }
@@ -226,9 +255,9 @@ window.onload = () => {
     // feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
 
     if ($('#select-post-type').val() === 'postPublic') {
-      feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
+      feedDatabase.child('/posts/' + 'publics/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
     } else {
-      feedDatabase.child('/posts/' + 'privados/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
+      feedDatabase.child('/posts/' + 'privates/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
     }
   });
 
