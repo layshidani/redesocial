@@ -281,7 +281,7 @@ window.onload = () => {
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
-    });
+    })
   });
 
   $('#new-comment-text').keyup(function () {
