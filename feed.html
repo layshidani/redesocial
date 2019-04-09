@@ -120,8 +120,8 @@
                           </div>
                         </select> -->
                         <select id="select-post-type">
-                          <option value="postPublic"><i class="fas fa-users"></i>Público</option>
-                          <option value="postPrivate"><i class="fas fa-user-lock"></i>Privado</option>
+                          <option value="public"><i class="fas fa-users"></i>Público</option>
+                          <option value="private"><i class="fas fa-user-lock"></i>Privado</option>
                         </select>
                       </form>
                     </div>
@@ -208,8 +208,8 @@
                           </select> -->
 
                           <select id="select-post-type">
-                            <option value="postPublic"><i class="fas fa-users"></i> público</option>
-                            <option value="postPrivate"><i class="fas fa-user"></i> privado</option>
+                            <option value="public"><i class="fas fa-users"></i> público</option>
+                            <option value="private"><i class="fas fa-user"></i> privado</option>
                           </select>
                         </form>
                       </div>
@@ -222,8 +222,16 @@
                     </div>
                   </div>
                 </div>
+                
                 <!-- Postagens no feed -->
                 <section>
+                    <!-- filtro -->
+                    <span>Filtrar postagens: </span>
+                    <select id="filter-posts">
+                      <option value="all">Todas</option>
+                      <option value="public">Públicas</option>
+                      <option value="private">Privadas</option>
+                    </select>
                   <div class="container">
                     <div class="row">
                       <div class="posts-feed card-container my-5 row mx-auto">
@@ -239,13 +247,6 @@
       </div>
     </div>
   </section>
-  <!-- filtro -->
-  <span>Filtrar postagens: </span>
-  <select id="filter-posts" value="all">
-    <option value="all">Todas</option>
-    <option value="public">Públicas</option>
-    <option value="private">Privadas</option>
-  </select>
 
   <!-- Postagens no feed -->
   <!-- <section>

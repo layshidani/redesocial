@@ -1,3 +1,8 @@
+// sirley:
+
+// feedDatabase.child('posts/privados/').once('value').then(snapshot => { console.log(snapshot.val()) })
+
+
 window.onload = () => {
   event.preventDefault();
   const database = firebase.database();
@@ -11,7 +16,7 @@ window.onload = () => {
     if (user) {
       // user signed in
       name = user.displayName;
-      console.log('name: ', user);
+      console.log('name: ', name);
       email = user.email;
       console.log('email: ', email);
       photoUrl = user.photoURL;
@@ -19,51 +24,80 @@ window.onload = () => {
       emailVerified = user.emailVerified;
       console.log('emailVerified: ', emailVerified);
       uid = user.uid;
+      // padrão mostra todos posts
+      console.log('uid: ', uid);
+      showAllPosts(uid);
     } else {
       // No user is signed in.
     }
   });
 
-  // mostrar todos os posts
-  database.ref('feed/posts').once('value').then(snapshot => {
-    snapshot.forEach(value => {
-      var childkey = value.key;
-      var childData = value.val();
-      var firebaseDate = childData.date;
-      var firebaseLocalName = childData.localName;
-      var firebaseLocalAdress = childData.localAdress;
-      var firebaseLocalHourFrom = childData.localHourFrom;
-      var firebaseLocalHourTo = childData.localHourTo;
-      var firebaseLocalPrice = childData.localPrice;
-      var firebaseText = childData.text;
-      var firebaseLikes = childData.likes;
-      var firebaseName = childData.name;
-      var firebaseEmail = childData.email;
-      var firebasePostType = childData.postType;
 
-      postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
+  // mostra posts filtrados
+  let filter = $('#filter-posts');
+  filter.change(function () {
+    let filterChoice = filter.val();
+    console.log('filterChoice: ', filterChoice);
+    $('#posts-container').empty();
 
-      // $('#filter-posts').change(function() {
-      //   if ($('#filter-posts').val() === 'all') {
-      //     $('#posts-container').empty();
-      //     postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-      //   } else if ($('#filter-posts').val() === 'private') {
-      //     // $('#posts-container').empty();
-      //     if (firebasePostType === 'postPrivate') {
-      //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-      //     }
-      //   } else if ($('#filter-posts').val() === 'public') {
-      //     // $('#posts-container').empty();
-      //     if (firebasePostType === 'postPublic') {
-      //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-      //     }
-      //   }
-      // })
-    })
+    if (filterChoice === 'all') {
+      showAllPosts(uid);
+    }
+    showPostsFiltered(filterChoice, uid)
   })
 
+  function showAllPosts(uid) {
+    database.ref('feed/posts').once('value').then(snapshot => {
+      snapshot.forEach(value => {
+        var childkey = value.key;
+        var childData = value.val();
+        var firebasePostType = childData.postType;
+
+        if (childData.uid === uid) {
+          var firebaseDate = childData.date;
+          var firebaseLocalName = childData.localName;
+          var firebaseLocalAdress = childData.localAdress;
+          var firebaseLocalHourFrom = childData.localHourFrom;
+          var firebaseLocalHourTo = childData.localHourTo;
+          var firebaseLocalPrice = childData.localPrice;
+          var firebaseText = childData.text;
+          var firebaseLikes = childData.likes;
+          var firebaseName = childData.name;
+          var firebaseEmail = childData.email;
+          // 
+          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType);
+        }
+      })
+    })
+
+  }
+
+  function showPostsFiltered(type, uid) {
+    database.ref('feed/posts').once('value').then(snapshot => {
+      snapshot.forEach(value => {
+        var childkey = value.key;
+        var childData = value.val();
+        var firebasePostType = childData.postType;
+
+        if (firebasePostType === type && childData.uid === uid) {
+          var firebaseDate = childData.date;
+          var firebaseLocalName = childData.localName;
+          var firebaseLocalAdress = childData.localAdress;
+          var firebaseLocalHourFrom = childData.localHourFrom;
+          var firebaseLocalHourTo = childData.localHourTo;
+          var firebaseLocalPrice = childData.localPrice;
+          var firebaseText = childData.text;
+          var firebaseLikes = childData.likes;
+          var firebaseName = childData.name;
+          var firebaseEmail = childData.email;
+          // 
+          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType);
+        }
+      })
+    })
 
 
+  }
 
   // data e hora do post
   function getDate() {
@@ -78,11 +112,12 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, postTypeChoose) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, typeChoose) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
     name.innerHTML = `${userName} - ${userEmail}`;
+
 
     let header = document.createElement('span');
     header.setAttribute('class', 'date-time');
@@ -154,11 +189,8 @@ window.onload = () => {
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
 
-    if ($('#select-post-type').val() === 'postPublic') {
-      showSelected.innerText = 'Público';
-    } else {
-      showSelected.innerText = 'Privado';
-    }
+    showSelected.innerHTML = `${typeChoose}`;
+
 
     // card de postagem
     let card = document.createElement('div');
@@ -207,10 +239,12 @@ window.onload = () => {
     let inputLocalHourTo = $('#hour-to').val();
     let inputLocalPrice = $('#average-price').val();
     let inputText = $('#comment-text').val();
+    let typeSelected = $('#select-post-type').val();
     let likeInit = 0;
 
     const newPost = {
       name: name,
+      uid: uid,
       email: email,
       date: getDate(),
       localName: inputLocalName,
@@ -220,16 +254,11 @@ window.onload = () => {
       localPrice: inputLocalPrice,
       text: inputText,
       likes: likeInit,
-      postType: $('#select-post-type').val(),
+      postType: typeSelected,
     }
 
-    // feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
+    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, typeSelected));
 
-    if ($('#select-post-type').val() === 'postPublic') {
-      feedDatabase.child('/posts').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
-    } else {
-      feedDatabase.child('/posts/' + 'privados/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
-    }
   });
 
   // deletar post
