@@ -280,6 +280,10 @@ a.socialIcon:hover, .socialHoverClass {
   background-color: #eff1ed;
 }
 
+.dropdown-item:hover{
+  color: #409946;
+}
+
 .posts-feed {
   /* height: 300px; */
   display: flex;
@@ -397,4 +401,25 @@ option::first-letter {
 .filter {
   margin-top: 5%;
   margin-bottom: -5%;
+}
+
+.select-filter {
+ color: #295f2d;
+ background-color: #eff1ed;
+}
+
+.span-filter {
+  color: #0a250c;
+  font-weight: bold;
+}
+
+.stars input[type=radio] {
+  display: none;
+}
+.stars label i.fa:before {
+  content:'\f005';
+  color: #FC0;
+}
+.stars input[type=radio]:checked ~ label i.fa:before {
+  color: #CCC;
 }

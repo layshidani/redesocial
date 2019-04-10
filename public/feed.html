@@ -13,6 +13,8 @@
   <link rel="stylesheet" type="text/css" media="screen" href="src/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
@@ -112,6 +114,19 @@
                           <label for="message-text" class="col-form-label">Comentário:</label>
                           <textarea class="form-control" id="comment-text" value=""></textarea>
                         </div>
+                        <div class="stars">
+                          <input type="radio" id="star-empty" name="fb" value="" checked />
+                          <label for="star-1"><i class="fa"></i></label>
+                          <input type="radio" id="star-1" name="fb" value="1" />
+                          <label for="star-2"><i class="fa"></i></label>
+                          <input type="radio" id="star-2" name="fb" value="2" />
+                          <label for="star-3"><i class="fa"></i></label>
+                          <input type="radio" id="star-3" name="fb" value="3" />
+                          <label for="star-4"><i class="fa"></i></label>
+                          <input type="radio" id="star-4" name="fb" value="4" />
+                          <label for="star-5"><i class="fa"></i></label>
+                          <input type="radio" id="star-5" name="fb" value="5" />
+                        </div>
                         <!-- Público ou Privado -->
                         <!-- <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
@@ -199,6 +214,20 @@
                             <label for="message-text" class="col-form-label">Comentário:</label>
                             <textarea class="form-control" id="new-comment-text" value=""></textarea>
                           </div>
+                          <div class="stars">
+                            <input type="radio" id="new-star-empty" name="fb" value="" checked />
+                            <label for="new-star-1"><i class="fa"></i></label>
+                            <input type="radio" id="new-star-1" name="fb" value="1" />
+                            <label for="new-star-2"><i class="fa"></i></label>
+                            <input type="radio" id="new-star-2" name="fb" value="2" />
+                            <label for="new-star-3"><i class="fa"></i></label>
+                            <input type="radio" id="new-star-3" name="fb" value="3" />
+                            <label for="new-star-4"><i class="fa"></i></label>
+                            <input type="radio" id="new-star-4" name="fb" value="4" />
+                            <label for="new-star-5"><i class="fa"></i></label>
+                            <input type="radio" id="new-star-5" name="fb" value="5" />
+                          </div>
+
                           <!-- Público ou Privado -->
                           <!-- <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
@@ -228,11 +257,12 @@
                     <div class="row">
                       <!-- filtro -->
                       <div class="mx-auto filter">
-                        <span>Filtrar postagens: </span>
-                        <select id="filter-posts" data-show-icon="true">
-                          <option value="all">Todas</option>
-                          <option value="public" id="public">Público</option>
-                          <option value="private">Privadas</option>
+                        <span class="span-filter">Filtrar postagens: </span>
+                        <select id="filter-posts" class="select-filter" data-show-icon="true">
+                          <option value="all" class="options-filter">Todas</option>
+                          <option value="public" class="options-filter" id="public">Público</option>
+                          <label for="public"><i class="fa"></i></label>
+                          <option value="private" class="options-filter">Privadas</option>
                         </select>
                       </div>
                       <div class="posts-feed card-container my-5 row mx-auto">

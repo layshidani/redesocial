@@ -39,23 +39,24 @@ window.onload = () => {
   function showAllPosts(uid) {
     database.ref('feed/posts').once('value').then(snapshot => {
       snapshot.forEach(value => {
-        var childkey = value.key;
-        var childData = value.val();
-        var firebasePostType = childData.postType;
+        let childkey = value.key;
+        let childData = value.val();
+        let firebasePostType = childData.postType;
 
         if (childData.uid === uid) {
-          var firebaseDate = childData.date;
-          var firebaseLocalName = childData.localName;
-          var firebaseLocalAdress = childData.localAdress;
-          var firebaseLocalHourFrom = childData.localHourFrom;
-          var firebaseLocalHourTo = childData.localHourTo;
-          var firebaseLocalPrice = childData.localPrice;
-          var firebaseText = childData.text;
-          var firebaseLikes = childData.likes;
-          var firebaseName = childData.name;
-          var firebaseEmail = childData.email;
+          let firebaseDate = childData.date;
+          let firebaseLocalName = childData.localName;
+          let firebaseLocalAdress = childData.localAdress;
+          let firebaseLocalHourFrom = childData.localHourFrom;
+          let firebaseLocalHourTo = childData.localHourTo;
+          let firebaseLocalPrice = childData.localPrice;
+          let firebaseText = childData.text;
+          let firebaseLikes = childData.likes;
+          let firebaseName = childData.name;
+          let firebaseEmail = childData.email;
+          let firbaseCountStars = childData.stars;
           // 
-          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType);
+          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firbaseCountStars, firebasePostType);
         }
       })
     // })
@@ -65,23 +66,24 @@ window.onload = () => {
   function showPostsFiltered(type, uid) {
     database.ref('feed/posts').once('value').then(snapshot => {
       snapshot.forEach(value => {
-        var childkey = value.key;
-        var childData = value.val();
-        var firebasePostType = childData.postType;
+        let childkey = value.key;
+        let childData = value.val();
+        let firebasePostType = childData.postType;
 
         if (firebasePostType === type && childData.uid === uid) {
-          var firebaseDate = childData.date;
-          var firebaseLocalName = childData.localName;
-          var firebaseLocalAdress = childData.localAdress;
-          var firebaseLocalHourFrom = childData.localHourFrom;
-          var firebaseLocalHourTo = childData.localHourTo;
-          var firebaseLocalPrice = childData.localPrice;
-          var firebaseText = childData.text;
-          var firebaseLikes = childData.likes;
-          var firebaseName = childData.name;
-          var firebaseEmail = childData.email;
+          let firebaseDate = childData.date;
+          let firebaseLocalName = childData.localName;
+          let firebaseLocalAdress = childData.localAdress;
+          let firebaseLocalHourFrom = childData.localHourFrom;
+          let firebaseLocalHourTo = childData.localHourTo;
+          let firebaseLocalPrice = childData.localPrice;
+          let firebaseText = childData.text;
+          let firebaseLikes = childData.likes;
+          let firebaseName = childData.name;
+          let firebaseEmail = childData.email;
+          let firbaseCountStars = childData.stars;
           // 
-          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType);
+          postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType, firbaseCountStars);
         }
       })
     })
@@ -101,7 +103,7 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, typeChoose) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, stars, typeChoose) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -173,11 +175,41 @@ window.onload = () => {
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
 
+    // estrelas
+    let countStars = document.createElement('div');
+    countStars.setAttribute('class', 'stars');
+    countStars.innerHTML = `${stars}`;
+    // if (`(${stars})` === 1) {
+    //   console.log(`(${stars})`)
+    //   countStars.innerText = `<label for="star-1"><i class="fa"></i></label>`
+    // } else if (`(${stars})` === 2) {
+    //   countStars.innerText = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    // } else if (`(${stars})` === 3) {
+    //   countStars.innerText = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    // } else if (`(${stars})` === 4) {
+    //   countStars.innerText = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    // } else if (`(${stars})` === 5) {
+    //   countStars.innerText = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    // }
+
+    // countStars.innerHTML = `
+    //     <input type="radio" id="star-empty" name="fb" value="" checked />
+    //     <label for="star-1"><i class="fa"></i></label>
+    //     <input type="radio" id="star-1" name="fb" value="1" />
+    //     <label for="star-2"><i class="fa"></i></label>
+    //     <input type="radio" id="star-2" name="fb" value="2" />
+    //     <label for="star-3"><i class="fa"></i></label>
+    //     <input type="radio" id="star-3" name="fb" value="3" />
+    //     <label for="star-4"><i class="fa"></i></label>
+    //     <input type="radio" id="star-4" name="fb" value="4" />
+    //     <label for="star-5"><i class="fa"></i></label>
+    //     <input type="radio" id="star-5" name="fb" value="5" />`
+    // // countStars.innerHTML = `${stars}`;
+
     // público ou privado
     let showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
-
     showSelected.innerHTML = `${typeChoose}`;
 
 
@@ -204,6 +236,7 @@ window.onload = () => {
     card.appendChild(deletePost);
     card.appendChild(likeBtn);
     card.appendChild(counter);
+    card.appendChild(countStars);
     card.appendChild(showSelected);
 
     // adiciona card no container de posts
@@ -229,6 +262,8 @@ window.onload = () => {
     let inputText = $('#comment-text').val();
     let typeSelected = $('#select-post-type').val();
     let likeInit = 0;
+    const divStars = $('input[name="fb"]:checked').val();
+    console.log(divStars)
 
     const newPost = {
       name: name,
@@ -242,12 +277,37 @@ window.onload = () => {
       localPrice: inputLocalPrice,
       text: inputText,
       likes: likeInit,
+      stars: divStars,
       postType: typeSelected,
     }
 
-    $('#filter-posts').val('all');
+    // function teste() {
+    // let inputStars = $('input[name="fb"]:checked').val();
+    // console.log(inputStars)
+    // feedDatabase.child('/posts/' + uid).once('value').then(snapshot => {
+    //   console.log(snapshot.val())
+    //   snapshot.forEach(function (child) {
+    //     console.log(child.val())
+    //   })
+    // })
 
-    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, typeSelected));
+    //   if (stars === 1) {
+    //     countStars.innerText = `<label for="star-1"><i class="fa"></i></label>`
+    //   } else if (stars === 2) {
+    //     countStars.innerText = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    //   } else if (stars === 3) {
+    //     countStars.innerText = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    //   } else if (stars === 4) {
+    //     countStars.innerText = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    //   } else if (stars === 5) {
+    //     countStars.innerText = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    //   }
+    // }
+    // teste()
+
+    $('#filter-posts').val('all');
+    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, divStars, typeSelected));
+
 
     // if ($('#select-post-type').val() === 'postPublic') {
     //   feedDatabase.child('/posts/' + 'publics/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
@@ -255,6 +315,10 @@ window.onload = () => {
     //   feedDatabase.child('/posts/' + 'privates/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
     // }
   });
+
+  // let inputStars = $('input[name="fb"]:checked').val();
+  // console.log(inputStars)
+
 
   // deletar post
   $(document).on('click', '#delete-btn', function () {
