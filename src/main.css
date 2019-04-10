@@ -392,7 +392,7 @@ option::first-letter {
   /* font-weight: 900; */
 }
 
-.posts-cards, .container, .row {
+.posts-cards, .row{
   display: flex;
   justify-content: center;
   align-self: center;
