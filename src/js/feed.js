@@ -104,7 +104,7 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, stars, typeChoose) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, typeChoose, stars) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
@@ -177,33 +177,17 @@ window.onload = () => {
     // estrelas
     let countStars = document.createElement('div');
     countStars.setAttribute('class', 'stars');
-    countStars.innerHTML = `${stars}`;
-    // if (`(${stars})` === 1) {
-    //   console.log(`(${stars})`)
-    //   countStars.innerText = `<label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 2) {
-    //   countStars.innerText = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 3) {
-    //   countStars.innerText = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 4) {
-    //   countStars.innerText = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 5) {
-    //   countStars.innerText = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // }
-
-    // countStars.innerHTML = `
-    //     <input type="radio" id="star-empty" name="fb" value="" checked />
-    //     <label for="star-1"><i class="fa"></i></label>
-    //     <input type="radio" id="star-1" name="fb" value="1" />
-    //     <label for="star-2"><i class="fa"></i></label>
-    //     <input type="radio" id="star-2" name="fb" value="2" />
-    //     <label for="star-3"><i class="fa"></i></label>
-    //     <input type="radio" id="star-3" name="fb" value="3" />
-    //     <label for="star-4"><i class="fa"></i></label>
-    //     <input type="radio" id="star-4" name="fb" value="4" />
-    //     <label for="star-5"><i class="fa"></i></label>
-    //     <input type="radio" id="star-5" name="fb" value="5" />`
-    // // countStars.innerHTML = `${stars}`;
+    if (stars === '1') {
+      countStars.innerHTML = `<label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '2') {
+      countStars.innerHTML = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '3') {
+      countStars.innerHTML = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '4') {
+      countStars.innerHTML = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '5') {
+      countStars.innerHTML = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    }
 
     // público ou privado
     let showSelected = document.createElement('p');
@@ -262,7 +246,7 @@ window.onload = () => {
     let typeSelected = $('#select-post-type').val();
     let likeInit = 0;
     const divStars = $('input[name="fb"]:checked').val();
-    console.log(divStars)
+    // console.log(divStars)
 
     const newPost = {
       name: name,
@@ -280,32 +264,8 @@ window.onload = () => {
       postType: typeSelected,
     }
 
-    // function teste() {
-    // let inputStars = $('input[name="fb"]:checked').val();
-    // console.log(inputStars)
-    // feedDatabase.child('/posts/' + uid).once('value').then(snapshot => {
-    //   console.log(snapshot.val())
-    //   snapshot.forEach(function (child) {
-    //     console.log(child.val())
-    //   })
-    // })
-
-    //   if (stars === 1) {
-    //     countStars.innerText = `<label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 2) {
-    //     countStars.innerText = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 3) {
-    //     countStars.innerText = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 4) {
-    //     countStars.innerText = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 5) {
-    //     countStars.innerText = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   }
-    // }
-    // teste()
-
     $('#filter-posts').val('all');
-    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, divStars, typeSelected));
+    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, typeSelected, divStars));
 
   });
 
@@ -363,6 +323,7 @@ window.onload = () => {
       let newPrice = $('#new-price').val();
       let newText = $('#new-comment-text').val();
       let newType = $('#select-new-post-type').val();
+      let newStar = $('input[class="star-edit"]:checked').val();
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
@@ -373,6 +334,7 @@ window.onload = () => {
         text: `${newText}<span class='edited'>(editado)</span>`,
         likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
         postType: newType,
+        stars: newStar,
       }).then(() => {
         location.reload();
       })
