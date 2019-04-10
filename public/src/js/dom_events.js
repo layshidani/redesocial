@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Botões html categorias
     $('#jump-btn').click(function () {
         window.location.href = "feed.html"
     })
@@ -7,7 +6,6 @@ $(document).ready(function () {
         window.location.href = "feed.html"
     })
 
-    // Ícone nav-bar menu fixo
     $('#icon-home').click(function () {
         window.location.href = "feed.html"
     })
@@ -21,13 +19,8 @@ $(document).ready(function () {
         window.location.href = "friends.html"
     })
 
-
-    // Modal
     $('#exampleModal').on('show.bs.modal', function (event) {
-        let button = $(event.relatedTarget)
-        // var recipient = button.data('whatever')
         let modal = $(this)
         modal.find('.modal-title').text('Avaliação')
     })
-
 });

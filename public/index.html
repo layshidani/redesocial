@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,11 +16,8 @@
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
   <script src="src/js/config_firebase.js"></script>
-
 </head>
-
 <body>
-  <!-- tela Login -->
   <section>
     <div class="container">
       <div class="row">
@@ -35,23 +31,19 @@
               <h5 class="card-title text-center">Sign In</h5>
               <p id="error-msg" class="error-msg"></p>
               <form class="form-signin">
-                <!-- Nome -->
                 <div class="form-label-group">
                   <input type="name" id="input-name" class="form-control" placeholder="Nome" required autofocus>
                   <label for="input-name">Nome</label>
                 </div>
-                <!-- Email -->
                 <div class="form-label-group">
                   <input type="email" id="input-email" class="form-control" placeholder="Email address" required
                     autofocus>
                   <label for="input-email">Email</label>
                 </div>
-                <!-- Senha -->
                 <div class="form-label-group">
                   <input type="password" id="input-password" class="form-control" placeholder="Password" required>
                   <label for="input-password">Senha (mínimo 6 caracteres)</label>
                 </div>
-                <!-- Butões -->
                 <div class="custom-control custom-checkbox mb-3">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Lembrar senha</label>
@@ -76,7 +68,6 @@
       </div>
     </div>
   </section>
-
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -89,5 +80,4 @@
   <script src="src/js/feed.js"></script>
   <script src="src/js/dom_events.js"></script>
 </body>
-
 </html>

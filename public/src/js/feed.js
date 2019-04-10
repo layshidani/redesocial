@@ -3,30 +3,24 @@ window.onload = () => {
   const database = firebase.database();
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
-  const users = database.ref('users');
   const user = firebase.auth().currentUser;
-  let name, email, photoUrl, uid, emailVerified;
+  let name, email, photoURL, uid;
 
   firebase.auth().onAuthStateChanged(function (user) {
     firebase.auth
     if (user) {
-      // user signed in
       name = user.displayName;
       email = user.email;
-      photoUrl = user.photoURL;
-      emailVerified = user.emailVerified;
+      photoURl = user.photoURL;
       uid = user.uid;
-      // padrão mostra todos posts
       showAllPosts(uid);
     } else {
-      // No user is signed in.
     }
   });
 
   const filter = $('#filter-posts');
   filter.change(function () {
     let filterChoice = filter.val();
-    console.log('filterChoice: ', filterChoice);
     $('#posts-container').empty();
 
     if (filterChoice === 'all') {
@@ -54,7 +48,6 @@ window.onload = () => {
           const firebaseName = childData.name;
           const firebaseEmail = childData.email;
           const firbaseCountStars = childData.stars;
-          // 
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firbaseCountStars, firebasePostType);
         }
       })
@@ -80,14 +73,13 @@ window.onload = () => {
           const firebaseName = childData.name;
           const firebaseEmail = childData.email;
           const firbaseCountStars = childData.stars;
-          // 
+
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType, firbaseCountStars);
         }
       })
     })
   }
 
-  // data e hora do post
   function getDate() {
     const date = new Date();
     const year = date.getFullYear();
@@ -99,9 +91,8 @@ window.onload = () => {
     return postDate;
   };
 
-  // template dos posts
   const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, typeChoose, stars) {
-    // cabeçaho do post
+
     const name = document.createElement('p');
     name.setAttribute('class', 'user-name');
     name.innerHTML = `${userName} - ${userEmail}`;
@@ -110,28 +101,24 @@ window.onload = () => {
     header.setAttribute('class', 'date-time');
     header.innerText = date;
 
-    // info local
     const localInfo = document.createElement('p');
     localInfo.setAttribute('id', 'local-info');
     localInfo.setAttribute('class', 'local-info');
     localInfo.setAttribute('info-data-id', key);
     localInfo.innerHTML = `<i class="fas fa-map-marker-alt"></i><span class="bold-text">${local}</span> - ${address}`;
 
-    // info horário de funcionamento
     const operatingHours = document.createElement('p');
     operatingHours.setAttribute('id', 'local-operating');
     operatingHours.setAttribute('class', 'local-info');
     operatingHours.setAttribute('hour-data-id', key);
     operatingHours.innerHTML = `<i class="fas fa-history"></i>Horário de funcionamento: ${hourFrom}h às ${hourTo}h`;
 
-    // info preço médio
     const localPrice = document.createElement('p');
     localPrice.setAttribute('id', 'local-price');
     localPrice.setAttribute('class', 'local-info');
     localPrice.setAttribute('price-data-id', key);
     localPrice.innerHTML = `<i class="fas fa-hand-holding-usd"></i>${price},00`
 
-    // estrelas
     const countStars = document.createElement('div');
     countStars.setAttribute('class', 'stars');
     if (stars === '1') {
@@ -146,14 +133,12 @@ window.onload = () => {
       countStars.innerHTML = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
     }
 
-    // mensagem
     const text = document.createElement('p');
     text.setAttribute('class', 'text-post');
     text.setAttribute('id', 'comment-post');
     text.setAttribute('text-data-id', key);
     text.innerHTML = textPost;
 
-    // editar postagem
     const editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
     editPost.setAttribute('id', 'edit-btn');
@@ -163,7 +148,6 @@ window.onload = () => {
     editPost.setAttribute('data-toggle', 'modal');
     editPost.innerText = '';
 
-    // excluir postagem
     const deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
     deletePost.setAttribute('id', 'delete-btn');
@@ -171,37 +155,31 @@ window.onload = () => {
     deletePost.setAttribute('class', 'far fa-trash-alt btn btn-default navbar-btn');
     deletePost.innerText = '';
 
-    // botão curtir
     const likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
     likeBtn.setAttribute('like-data-id', key);
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
-    // contador de curtidas
     const counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
 
-    // público ou privado
     const showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
     showSelected.innerHTML = `${typeChoose}`;
 
-    // card de postagem
     const card = document.createElement('div');
     card.setAttribute('class', 'post-card');
     card.setAttribute('id', 'post-card-key');
     card.setAttribute('data-idcard', key);
 
-    // linha horizontal
     const headerLine = document.createElement('hr');
     const footerLine = document.createElement('hr');
 
-    // inserir informações no card
     card.appendChild(name);
     card.appendChild(header);
     card.appendChild(localInfo);
@@ -217,25 +195,17 @@ window.onload = () => {
     card.appendChild(counter);
     card.appendChild(showSelected);
 
-    // adiciona card no container de posts
     postsContainer.insertBefore(card, postsContainer.childNodes[0]);
   }
 
-  // desabilita postagem caso campo vazio
-  function desablePost() {
-    if ($('#comment-text').val().length > 0) {
+  $('#local-name').keyup(function desablePost() {
+    if ($('#local-name').val().length > 0) {
       $('#post-btn').prop("disabled", false);
     } else {
       $('#post-btn').prop("disabled", true)
     }
-  };
+  });
 
-  $('#local-name').keyup(desablePost());
-  $('#address').keyup(desablePost());
-  $('#local-name').keyup(desablePost());
-  $('#local-name').keyup(desablePost());
-
-  // publicar post
   $('#post-btn').click(function publishPost() {
     const inputLocalName = $('#local-name').val();
     const inputLocalAdress = $('#adress').val();
@@ -246,7 +216,6 @@ window.onload = () => {
     const typeSelected = $('#select-post-type').val();
     const likeInit = 0;
     const divStars = $('input[name="fb"]:checked').val();
-    // console.log(divStars)
 
     const newPost = {
       name: name,
@@ -266,10 +235,8 @@ window.onload = () => {
 
     $('#filter-posts').val('all');
     feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, typeSelected, divStars));
-
   });
 
-  // deletar post
   $(document).on('click', '#delete-btn', function () {
     const confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
@@ -280,7 +247,6 @@ window.onload = () => {
     }
   })
 
-  // curtidas
   $(document).on('click', '#like-btn', function () {
     const likeId = $(this).attr('like-data-id');
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
@@ -290,15 +256,14 @@ window.onload = () => {
     })
   });
 
-  $('#new-comment-text').keyup(function () {
-    if ($('#new-comment-text').val().length > 0) {
+  $('#new-local-name').keyup(function () {
+    if ($('#new-local-name').val().length > 0) {
       $('#new-post-btn').prop("disabled", false);
     } else {
       $('#new-post-btn').prop("disabled", true);
     }
   });
 
-  // editar post
   $(document).on('click', '#edit-btn', function () {
     const editKey = $(this).attr('edit-data-id');
 
@@ -308,7 +273,6 @@ window.onload = () => {
     const oldText = $(`p[text-data-id=${editKey}]`).text();
 
     $('#new-local-name').val(oldLocalinfo);
-    $('#new-adress').val(oldLocalinfo);
     $('#new-hour-from').val(oldOperating);
     $('#new-price').val(oldAveragePrice);
     $('#new-comment-text').val(oldText);

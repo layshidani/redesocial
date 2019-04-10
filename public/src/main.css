@@ -19,7 +19,6 @@ body {
   width: 15%;
   height: 10%;
   margin: 10px;
-  
 }
 
 .logo-name {
@@ -117,7 +116,6 @@ body {
   display: block;
   width: 100%;
   margin-bottom: 0;
-  /* Override default `<label>` margin */
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
@@ -190,10 +188,6 @@ padding: 10px;
   justify-content: space-evenly;
 }
 
-/*=========================
-  Icons
- ================= */
-
 ul.social-network {
 	list-style: none;
 	display: inline;
@@ -252,7 +246,8 @@ a.socialIcon:hover, .socialHoverClass {
 	-moz-transition: all 0.2s;
 	-o-transition: all 0.2s;
 	-ms-transition: all 0.2s;
-	transition: all 0.2s;
+  transition: all 0.2s;
+  
 }
 .social-circle i {
 	color: #fff;
@@ -285,12 +280,9 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .posts-feed {
-  /* height: 300px; */
   display: flex;
   justify-content: center;
   background-color: #eff1ed;
-  /* width: 90%; */
-  /* margin-top: 20px; */
   align-content: center;
 }
 
@@ -387,11 +379,6 @@ a.socialIcon:hover, .socialHoverClass {
   font-weight: bold;
 }
 
-option::first-letter {
-  font-family:'Font Awesome 5 Free';
-  /* font-weight: 900; */
-}
-
 .posts-cards, .row{
   display: flex;
   justify-content: center;
@@ -416,10 +403,12 @@ option::first-letter {
 .stars input[type=radio] {
   display: none;
 }
+
 .stars label i.fa:before {
   content:'\f005';
   color: #FC0;
 }
+
 .stars input[type=radio]:checked ~ label i.fa:before {
   color: #CCC;
 }

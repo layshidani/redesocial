@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +19,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
   <script src="src/js/config_firebase.js"></script>
 </head>
-
 <body>
-
   <section>
     <div class="container">
       <div class="row">
@@ -32,7 +29,6 @@
               <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
               <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
             </div>
-            <!-- navbar -->
             <section class="navbar">
               <button id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
               <button id="icon-cashback" class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></button>
@@ -47,7 +43,6 @@
                 </div>
               </div>
             </section>
-            <!-- Postar avaliação Modal -->
             <div class="container row">
               <textarea id="post-feed" class="post" data-toggle="modal" placeholder="Avalie aqui"
                 data-target="#exampleModal"></textarea>
@@ -68,7 +63,6 @@
                             </div>
                             <input class="form-control" id="local-name" required></input>
                           </div>
-                          <!-- endereço -->
                           <label for="message-text" class="col-form-label">Endereço:</label>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -76,9 +70,7 @@
                             </div>
                             <input class="form-control" id="adress" required></input>
                           </div>
-                          <!-- Horário de Funcionamento -->
                           <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
-                          <!-- container hora de -->
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text">De</span>
@@ -88,7 +80,6 @@
                               <span class="input-group-text"><i class="fas fa-clock"></i></span>
                             </div>
                           </div>
-                          <!-- container hora à -->
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text">De</span>
@@ -98,7 +89,6 @@
                               <span class="input-group-text"><i class="fas fa-clock"></i></span>
                             </div>
                           </div>
-                          <!-- media de preço -->
                           <label for="message-text" class="col-form-label">Média de Preço:</label>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -123,7 +113,6 @@
                             <label for="star-5"><i class="fa"></i></label>
                             <input type="radio" id="star-5" name="fb" value="5" />
                           </div>
-                          <!-- Comentário -->
                           <label for="message-text" class="col-form-label">Comentário:</label>
                           <textarea class="form-control" id="comment-text" value=""></textarea>
                         </div>
@@ -142,7 +131,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Editar avaliação Modal -->
               <div class="container row">
                 <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                   aria-hidden="true">
@@ -161,7 +149,6 @@
                               </div>
                               <input class="form-control" id="new-local-name" required></input>
                             </div>
-                            <!-- endereço -->
                             <label for="message-text" class="col-form-label">Endereço:</label>
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -169,9 +156,7 @@
                               </div>
                               <input class="form-control" id="new-adress" required></input>
                             </div>
-                            <!-- Horário de Funcionamento -->
                             <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
-                            <!-- container hora de -->
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">De</span>
@@ -181,7 +166,6 @@
                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                               </div>
                             </div>
-                            <!-- container hora à -->
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">De</span>
@@ -191,7 +175,6 @@
                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                               </div>
                             </div>
-                            <!-- media de preço -->
                             <label for="message-text" class="col-form-label">Média de Preço:</label>
                             <div id="price-average" class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -216,7 +199,6 @@
                               <label for="new-star-5"><i class="fa"></i></label>
                               <input type="radio" id="new-star-5" class="star-edit" name="fb" value="5" />
                             </div>
-                            <!-- Comentário -->
                             <label for="message-text" class="col-form-label">Comentário:</label>
                             <textarea class="form-control" id="new-comment-text" value=""></textarea>
                           </div>
@@ -236,10 +218,8 @@
                   </div>
                 </div>
                 <section>
-                  <!-- Postagens no feed -->
                   <div class="container posts-cards">
                     <div class="row posts-cards">
-                      <!-- filtro -->
                       <div class="mx-auto filter">
                         <span class="span-filter">Filtrar postagens: </span>
                         <select id="filter-posts" class="select-filter" data-show-icon="true">
@@ -262,7 +242,6 @@
         </div>
       </div>
   </section>
-
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -275,5 +254,4 @@
   <script src="src/js/feed.js"></script>
   <script src="src/js/dom_events.js"></script>
 </body>
-
 </html>
