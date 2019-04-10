@@ -4,23 +4,20 @@ Projeto rede social <Laboratoria>
 ## Índice
 
 * [Definição do produto](#definição-do-produto)
-* [Pesquisa com usuários](#Pesquisa-com-usuários)
 * [Personas](#personas)
 * [Histórias de usuário](#Histórias-de-usuário)
   * [Definição de pronto](#Definição-de-pronto)
 * [Protótipo](#protótipo)
-* [Testes de usabilidade](#testes-de-usabilidade)
-* [Planejamento e design sprint](#Planejamento-e-design-sprint)
+* [Pesquisa com usuários](#Pesquisa-com-usuários)
+  * [Testes de usabilidade](#testes-de-usabilidade)
 
-[Link da aplicação](https://hlays.github.io/redesocial/)
+[Link da aplicação](https://serview-2019.firebaseapp.com/)
 
 ## Definição do produto
 A SerView é uma rede social para avaliar e consultar outras avaliações sobre serviços e estabelecimentos.
 
 Os usuários podem interagir curtindo as publicações e assim estimular a credibilidade das avaliações e melhoria dos serviços prestados pelas empresas.
 
-
-## Pesquisa com usuários
 
 ## Personas
 
@@ -71,6 +68,16 @@ O protótipo da Serview, pode ser visualizado no link abaixo:
 
 [Protótipo da aplicação](https://marvelapp.com/4h44fca)
 
-## Testes de usabilidade
+## Pesquisa com usuários
+  A pesquisa foi feita com 24 usuários e os dados foram coletados através de [Formulário de pesquisa](https://docs.google.com/forms/d/e/1FAIpQLSfDOZbfNN8p-GSgj2NvS4w2G5F3ycRkkmwtvty7NMaTUAe5vQ/viewform).
+  
+  Os resultados da pesquisa podem ser conferidos neste [link]().
 
-## Planejamento e design sprint
+  Com base nas respostas obtidas, pudemos constatar que:
+  * 37,5% dos usuários têm o costume de avaliar os serviços que utiliza, e 8,3% avalia algumas vezes;
+  * 89,5% dos usuários que não tem o costume de avaliar serviços, passaria a avaliar os serviços caso recebesse algum tipo de cashback;
+  * 83,3% gostaria de saber mais sobre os serviços através da opinião de outros usuários;
+  * 70,8% utilizaria um aplicativo/rede social de avaliações de serviços diversos.
+  
+### Testes de usabilidade
+  Durante os testes com protótipo foi constatado a necessidade de mudar o local da navbar para o topo da aplicação.

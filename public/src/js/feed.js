@@ -4,23 +4,19 @@ window.onload = () => {
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
   const users = database.ref('users');
-
+  const user = firebase.auth().currentUser;
   let name, email, photoUrl, uid, emailVerified;
+
   firebase.auth().onAuthStateChanged(function (user) {
     firebase.auth
     if (user) {
       // user signed in
       name = user.displayName;
-      console.log('name: ', name);
       email = user.email;
-      console.log('email: ', email);
-      photoURL = user.photoURL;
-      console.log('photoUrl: ', photoURL);
+      photoUrl = user.photoURL;
       emailVerified = user.emailVerified;
-      console.log('emailVerified: ', emailVerified);
       uid = user.uid;
       // padrão mostra todos posts
-      console.log('uid: ', uid);
       showAllPosts(uid);
     } else {
       // No user is signed in.
@@ -37,7 +33,7 @@ window.onload = () => {
       showAllPosts(uid);
     }
     showPostsFiltered(filterChoice, uid)
-  })
+  });
 
   function showAllPosts(uid) {
     database.ref('feed/posts').once('value').then(snapshot => {
@@ -226,13 +222,18 @@ window.onload = () => {
   }
 
   // desabilita postagem caso campo vazio
-  $('#comment-text').keyup(function desablePost() {
+  function desablePost() {
     if ($('#comment-text').val().length > 0) {
       $('#post-btn').prop("disabled", false);
     } else {
       $('#post-btn').prop("disabled", true)
     }
-  });
+  };
+
+  $('#local-name').keyup(desablePost());
+  $('#address').keyup(desablePost());
+  $('#local-name').keyup(desablePost());
+  $('#local-name').keyup(desablePost());
 
   // publicar post
   $('#post-btn').click(function publishPost() {

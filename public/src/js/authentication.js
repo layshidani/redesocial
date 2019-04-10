@@ -1,13 +1,10 @@
 $(document).ready(function () {
-
   $('#btn-create-user').click(function () {
     event.preventDefault();
     let email = $('#input-email').val();
-    console.log(email);
     let password = $('#input-password').val();
     let userName = $('#input-name').val();
-    console.log(userName);
-
+    
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -20,8 +17,6 @@ $(document).ready(function () {
           .then(() => {
             window.location.href = "categories_create_user.html";
           });
-
-
       })
       .catch(function (error) {
         // Handle Errors here.
@@ -31,7 +26,6 @@ $(document).ready(function () {
         $('#error-msg').text(errorMessage);
         console.log('errorMessage: ', errorMessage);
       });
-
   });
 
   $('#btnLogin').click(function () {
@@ -64,7 +58,9 @@ $(document).ready(function () {
         let name = result.user.displayName;
         window.location.href = "feed.html";
       }).catch(function (error) {
-        alert('Falha na autenticação');
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        $('#error-msg').text(errorMessage);
       });
   });
 
@@ -80,11 +76,11 @@ $(document).ready(function () {
         let name = result.user.displayName;
         window.location.href = "feed.html";
       }).catch(function (error) {
-        alert('Falha na autenticação');
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        $('#error-msg').text(errorMessage);
       });
   });
-
-  var user = firebase.auth().currentUser;
 
   $('#logout-btn').click(function () {
     firebase
@@ -94,7 +90,6 @@ $(document).ready(function () {
         window.location.href = "index.html";
       });
   });
-
 });
 
 
