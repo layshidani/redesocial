@@ -54,7 +54,7 @@ window.onload = () => {
           let firebaseName = childData.name;
           let firebaseEmail = childData.email;
           let firbaseCountStars = childData.stars;
-          // 
+          
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firbaseCountStars, firebasePostType);
         }
       })
@@ -80,7 +80,7 @@ window.onload = () => {
           let firebaseName = childData.name;
           let firebaseEmail = childData.email;
           let firbaseCountStars = childData.stars;
-          // 
+          
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType, firbaseCountStars);
         }
       })
@@ -222,13 +222,18 @@ window.onload = () => {
   }
 
   // desabilita postagem caso campo vazio
-  $('#comment-text').keyup(function desablePost() {
+  function desablePost() {
     if ($('#comment-text').val().length > 0) {
       $('#post-btn').prop("disabled", false);
     } else {
       $('#post-btn').prop("disabled", true)
     }
-  });
+  };
+  
+  $('#local-name').keyup(desablePost());
+  $('#address').keyup(desablePost());
+  $('#local-name').keyup(desablePost());
+  $('#local-name').keyup(desablePost());
 
   // publicar post
   $('#post-btn').click(function publishPost() {
