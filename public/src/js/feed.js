@@ -23,7 +23,6 @@ window.onload = () => {
     }
   });
 
-  // mostra posts filtrados
   let filter = $('#filter-posts');
   filter.change(function () {
     let filterChoice = filter.val();
@@ -59,8 +58,7 @@ window.onload = () => {
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firbaseCountStars, firebasePostType);
         }
       })
-    // })
-
+    })
   }
 
   function showPostsFiltered(type, uid) {
@@ -87,7 +85,6 @@ window.onload = () => {
         }
       })
     })
-
   }
 
   // data e hora do post
@@ -103,12 +100,11 @@ window.onload = () => {
   };
 
   // template dos posts
-  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, stars, typeChoose) {
+  const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, typeChoose, stars) {
     // cabeçaho do post
     let name = document.createElement('p');
     name.setAttribute('class', 'user-name');
     name.innerHTML = `${userName} - ${userEmail}`;
-
 
     let header = document.createElement('span');
     header.setAttribute('class', 'date-time');
@@ -135,6 +131,20 @@ window.onload = () => {
     localPrice.setAttribute('price-data-id', key);
     localPrice.innerHTML = `<i class="fas fa-hand-holding-usd"></i>${price},00`
 
+    // estrelas
+    let countStars = document.createElement('div');
+    countStars.setAttribute('class', 'stars');
+    if (stars === '1') {
+      countStars.innerHTML = `<label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '2') {
+      countStars.innerHTML = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '3') {
+      countStars.innerHTML = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '4') {
+      countStars.innerHTML = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '5') {
+      countStars.innerHTML = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    }
 
     // mensagem
     let text = document.createElement('p');
@@ -175,43 +185,11 @@ window.onload = () => {
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
 
-    // estrelas
-    let countStars = document.createElement('div');
-    countStars.setAttribute('class', 'stars');
-    countStars.innerHTML = `${stars}`;
-    // if (`(${stars})` === 1) {
-    //   console.log(`(${stars})`)
-    //   countStars.innerText = `<label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 2) {
-    //   countStars.innerText = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 3) {
-    //   countStars.innerText = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 4) {
-    //   countStars.innerText = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // } else if (`(${stars})` === 5) {
-    //   countStars.innerText = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    // }
-
-    // countStars.innerHTML = `
-    //     <input type="radio" id="star-empty" name="fb" value="" checked />
-    //     <label for="star-1"><i class="fa"></i></label>
-    //     <input type="radio" id="star-1" name="fb" value="1" />
-    //     <label for="star-2"><i class="fa"></i></label>
-    //     <input type="radio" id="star-2" name="fb" value="2" />
-    //     <label for="star-3"><i class="fa"></i></label>
-    //     <input type="radio" id="star-3" name="fb" value="3" />
-    //     <label for="star-4"><i class="fa"></i></label>
-    //     <input type="radio" id="star-4" name="fb" value="4" />
-    //     <label for="star-5"><i class="fa"></i></label>
-    //     <input type="radio" id="star-5" name="fb" value="5" />`
-    // // countStars.innerHTML = `${stars}`;
-
     // público ou privado
     let showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
     showSelected.innerHTML = `${typeChoose}`;
-
 
     // card de postagem
     let card = document.createElement('div');
@@ -229,6 +207,7 @@ window.onload = () => {
     card.appendChild(localInfo);
     card.appendChild(operatingHours);
     card.appendChild(localPrice);
+    card.appendChild(countStars);
     card.appendChild(headerLine);
     card.appendChild(text);
     card.appendChild(footerLine);
@@ -236,7 +215,6 @@ window.onload = () => {
     card.appendChild(deletePost);
     card.appendChild(likeBtn);
     card.appendChild(counter);
-    card.appendChild(countStars);
     card.appendChild(showSelected);
 
     // adiciona card no container de posts
@@ -263,7 +241,7 @@ window.onload = () => {
     let typeSelected = $('#select-post-type').val();
     let likeInit = 0;
     const divStars = $('input[name="fb"]:checked').val();
-    console.log(divStars)
+    // console.log(divStars)
 
     const newPost = {
       name: name,
@@ -281,44 +259,10 @@ window.onload = () => {
       postType: typeSelected,
     }
 
-    // function teste() {
-    // let inputStars = $('input[name="fb"]:checked').val();
-    // console.log(inputStars)
-    // feedDatabase.child('/posts/' + uid).once('value').then(snapshot => {
-    //   console.log(snapshot.val())
-    //   snapshot.forEach(function (child) {
-    //     console.log(child.val())
-    //   })
-    // })
-
-    //   if (stars === 1) {
-    //     countStars.innerText = `<label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 2) {
-    //     countStars.innerText = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 3) {
-    //     countStars.innerText = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 4) {
-    //     countStars.innerText = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   } else if (stars === 5) {
-    //     countStars.innerText = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    //   }
-    // }
-    // teste()
-
     $('#filter-posts').val('all');
-    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, divStars, typeSelected));
+    feedDatabase.child('/posts/').push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email, typeSelected, divStars));
 
-
-    // if ($('#select-post-type').val() === 'postPublic') {
-    //   feedDatabase.child('/posts/' + 'publics/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
-    // } else {
-    //   feedDatabase.child('/posts/' + 'privates/' + uid).push(newPost).then((snapshot) => postTemplate(getDate(), inputLocalName, inputLocalAdress, inputLocalHourFrom, inputLocalHourTo, inputLocalPrice, inputText, likeInit, snapshot.key, name, email));
-    // }
   });
-
-  // let inputStars = $('input[name="fb"]:checked').val();
-  // console.log(inputStars)
-
 
   // deletar post
   $(document).on('click', '#delete-btn', function () {
@@ -371,6 +315,7 @@ window.onload = () => {
       let newPrice = $('#new-price').val();
       let newText = $('#new-comment-text').val();
       let newType = $('#select-new-post-type').val();
+      let newStar = $('input[class="star-edit"]:checked').val();
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
@@ -381,6 +326,7 @@ window.onload = () => {
         text: `${newText}<span class='edited'>(editado)</span>`,
         likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
         postType: newType,
+        stars: newStar,
       }).then(() => {
         location.reload();
       })

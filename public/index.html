@@ -21,75 +21,73 @@
 </head>
 
 <body>
-
-  <header>
-    <!-- tela Login -->
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-container my-5">
-              <div class="header-serview">
-                <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
-                <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title text-center">Sign In</h5>
-                <p id="error-msg" class="error-msg"></p>
-                <form class="form-signin">
-                  <!-- Nome -->
-                  <div class="form-label-group">
-                    <input type="name" id="input-name" class="form-control" placeholder="Nome" required autofocus>
-                    <label for="input-name">Nome</label>
+  <!-- tela Login -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-container my-5">
+            <div class="header-serview">
+              <img class="logo" src="src/img/logo/logo_final_img.png" alt="logotipo">
+              <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center">Sign In</h5>
+              <p id="error-msg" class="error-msg"></p>
+              <form class="form-signin">
+                <!-- Nome -->
+                <div class="form-label-group">
+                  <input type="name" id="input-name" class="form-control" placeholder="Nome" required autofocus>
+                  <label for="input-name">Nome</label>
+                </div>
+                <!-- Email -->
+                <div class="form-label-group">
+                  <input type="email" id="input-email" class="form-control" placeholder="Email address" required
+                    autofocus>
+                  <label for="input-email">Email</label>
+                </div>
+                <!-- Senha -->
+                <div class="form-label-group">
+                  <input type="password" id="input-password" class="form-control" placeholder="Password" required>
+                  <label for="input-password">Senha (mínimo 6 caracteres)</label>
+                </div>
+                <!-- Butões -->
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Lembrar senha</label>
+                </div>
+                <button id="btn-create-user" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Criar
+                  Conta</button>
+                <button id="btnLogin" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                  in</button>
+                <hr class="my-4">
+                <div class="col-md-12">
+                  <p class="or">ou</p>
+                  <div class="login-social-network">
+                    <ul class="social-network social-circle">
+                      <li><a id="facebook-btn" class="icoFacebook"><i class="fab fa-facebook-f"></i></a></li>
+                      <li><a id="google-btn" class="icoGoogle"><i class="fab fa-google"></i></a></li>
+                    </ul>
                   </div>
-                  <!-- Email -->
-                  <div class="form-label-group">
-                    <input type="email" id="input-email" class="form-control" placeholder="Email address" required
-                      autofocus>
-                    <label for="input-email">Email</label>
-                  </div>
-                  <!-- Senha -->
-                  <div class="form-label-group">
-                    <input type="password" id="input-password" class="form-control" placeholder="Password" required>
-                    <label for="input-password">Senha (mínimo 6 caracteres)</label>
-                  </div>
-                  <!-- Butões -->
-                  <div class="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Lembrar senha</label>
-                  </div>
-                  <button id="btn-create-user" class="btn btn-lg btn-primary btn-block text-uppercase"
-                    type="submit">Criar Conta</button>
-                  <button id="btnLogin" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
-                    in</button>
-                  <hr class="my-4">
-                  <div class="col-md-12">
-                    <p class="or">ou</p>
-                    <div class="login-social-network">
-                      <ul class="social-network social-circle">
-                        <li><a id="facebook-btn" class="icoFacebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a id="google-btn" class="icoGoogle"><i class="fab fa-google"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-              </div>
+                </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
-    <script src="src/js/authentication.js"></script>
-    <script src="src/js/feed.js"></script>
-    <script src="src/js/dom_events.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="src/js/authentication.js"></script>
+  <script src="src/js/feed.js"></script>
+  <script src="src/js/dom_events.js"></script>
 </body>
 
 </html>
