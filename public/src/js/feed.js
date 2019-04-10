@@ -1,105 +1,29 @@
-// sirley:
-
-// feedDatabase.child('posts/privados/').once('value').then(snapshot => { console.log(snapshot.val()) })
-
-
 window.onload = () => {
   event.preventDefault();
   const database = firebase.database();
   const feedDatabase = database.ref('feed');
   const postsContainer = $('#posts-container')[0];
   const users = database.ref('users');
-
+  const user = firebase.auth().currentUser;
   let name, email, photoUrl, uid, emailVerified;
+
   firebase.auth().onAuthStateChanged(function (user) {
     firebase.auth
     if (user) {
       // user signed in
       name = user.displayName;
-      console.log('name: ', name);
       email = user.email;
-      console.log('email: ', email);
       photoUrl = user.photoURL;
-      console.log('photoUrl: ', photoUrl);
       emailVerified = user.emailVerified;
-      console.log('emailVerified: ', emailVerified);
       uid = user.uid;
       // padrão mostra todos posts
-      console.log('uid: ', uid);
       showAllPosts(uid);
     } else {
       // No user is signed in.
     }
   });
 
-  // feedDatabase.child('posts/privates/').once('value').then(snapshot => {
-  //   console.log(snapshot.val())
-
-  // })
-
-  // mostrar todos os posts
-  // database.ref('feed/posts').once('value').then(snapshot => {
-  //   snapshot.forEach(value => {
-  //     const childkey = value.key;
-  //     const childData = value.val();
-  //     const firebaseDate = childData.date;
-  //     const firebaseLocalName = childData.localName;
-  //     const firebaseLocalAdress = childData.localAdress;
-  //     const firebaseLocalHourFrom = childData.localHourFrom;
-  //     const firebaseLocalHourTo = childData.localHourTo;
-  //     const firebaseLocalPrice = childData.localPrice;
-  //     const firebaseText = childData.text;
-  //     const firebaseLikes = childData.likes;
-  //     const firebaseName = childData.name;
-  //     const firebaseEmail = childData.email;
-  //     const firebasePostType = childData.postType;
-
-  //     postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-
-  // let filter = $('#filter-posts');
-  // filter.change(function () {
-  //   let filterChoice = filter.val();
-  //   console.log(filterChoice)
-  //   if (filterChoice === 'all') {
-  //     $('#posts-container').empty();
-  //     postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-  //   } else if (filterChoice === 'private') {
-  //     $('#posts-container').empty();
-  //     if (firebasePostType === 'postPrivate') {
-  //       feedDatabase.child('posts/privates/').once('value').then(snapshot => {
-  //         console.log(snapshot.val())
-  //         let userPrivatePost = snapshot.val();
-
-  //       })
-  //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-  //     }
-  //   } else if (filterChoice === 'public') {
-  //     $('#posts-container').empty();
-  //     if (firebasePostType === 'postPublic') {
-  //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-  //     }
-  //   }
-  // })
-  // $('#filter-posts').change(function () {
-  //   if ($('#filter-posts').val() === 'all') {
-  //     $('#posts-container').empty();
-  //     postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-  //   } else if ($('#filter-posts').val() === 'private') {
-  //     $('#posts-container').empty();
-  //     if (firebasePostType === 'postPrivate') {
-  //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-  //     }
-  //   } else if ($('#filter-posts').val() === 'public') {
-  //     $('#posts-container').empty();
-  //     if (firebasePostType === 'postPublic') {
-  //       postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail);
-  //     }
-  //   }
-  // })
-  // })
-
   // mostra posts filtrados
-
   let filter = $('#filter-posts');
   filter.change(function () {
     let filterChoice = filter.val();
@@ -110,8 +34,7 @@ window.onload = () => {
       showAllPosts(uid);
     }
     showPostsFiltered(filterChoice, uid)
-  })
-
+  });
 
   function showAllPosts(uid) {
     database.ref('feed/posts').once('value').then(snapshot => {
@@ -135,7 +58,7 @@ window.onload = () => {
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType);
         }
       })
-    })
+    // })
 
   }
 
@@ -347,9 +270,7 @@ window.onload = () => {
   // curtidas
   $(document).on('click', '#like-btn', function () {
     let likeId = $(this).attr('like-data-id');
-    console.log(likeId)
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
-    console.log(countLikes)
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
@@ -358,7 +279,6 @@ window.onload = () => {
 
   $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
-      console.log($('#new-comment-text').val().length);
       $('#new-post-btn').prop("disabled", false);
     } else {
       $('#new-post-btn').prop("disabled", true);
