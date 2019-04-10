@@ -135,6 +135,21 @@ window.onload = () => {
     localPrice.setAttribute('price-data-id', key);
     localPrice.innerHTML = `<i class="fas fa-hand-holding-usd"></i>${price},00`
 
+    // estrelas
+    let countStars = document.createElement('div');
+    countStars.setAttribute('class', 'stars');
+    if (stars === '1') {
+      countStars.innerHTML = `<label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '2') {
+      countStars.innerHTML = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '3') {
+      countStars.innerHTML = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '4') {
+      countStars.innerHTML = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    } else if (stars === '5') {
+      countStars.innerHTML = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    }
+
     // mensagem
     let text = document.createElement('p');
     text.setAttribute('class', 'text-post');
@@ -174,27 +189,11 @@ window.onload = () => {
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
 
-    // estrelas
-    let countStars = document.createElement('div');
-    countStars.setAttribute('class', 'stars');
-    if (stars === '1') {
-      countStars.innerHTML = `<label for="star-1"><i class="fa"></i></label>`
-    } else if (stars === '2') {
-      countStars.innerHTML = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    } else if (stars === '3') {
-      countStars.innerHTML = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    } else if (stars === '4') {
-      countStars.innerHTML = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    } else if (stars === '5') {
-      countStars.innerHTML = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
-    }
-
     // público ou privado
     let showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
     showSelected.innerHTML = `${typeChoose}`;
-
 
     // card de postagem
     let card = document.createElement('div');
@@ -212,6 +211,7 @@ window.onload = () => {
     card.appendChild(localInfo);
     card.appendChild(operatingHours);
     card.appendChild(localPrice);
+    card.appendChild(countStars);
     card.appendChild(headerLine);
     card.appendChild(text);
     card.appendChild(footerLine);
@@ -219,7 +219,6 @@ window.onload = () => {
     card.appendChild(deletePost);
     card.appendChild(likeBtn);
     card.appendChild(counter);
-    card.appendChild(countStars);
     card.appendChild(showSelected);
 
     // adiciona card no container de posts
