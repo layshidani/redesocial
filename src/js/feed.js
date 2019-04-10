@@ -14,8 +14,8 @@ window.onload = () => {
       console.log('name: ', name);
       email = user.email;
       console.log('email: ', email);
-      photoUrl = user.photoURL;
-      console.log('photoUrl: ', photoUrl);
+      photoURL = user.photoURL;
+      console.log('photoUrl: ', photoURL);
       emailVerified = user.emailVerified;
       console.log('emailVerified: ', emailVerified);
       uid = user.uid;
@@ -27,7 +27,7 @@ window.onload = () => {
     }
   });
 
-  let filter = $('#filter-posts');
+  const filter = $('#filter-posts');
   filter.change(function () {
     let filterChoice = filter.val();
     console.log('filterChoice: ', filterChoice);
@@ -42,22 +42,22 @@ window.onload = () => {
   function showAllPosts(uid) {
     database.ref('feed/posts').once('value').then(snapshot => {
       snapshot.forEach(value => {
-        let childkey = value.key;
-        let childData = value.val();
-        let firebasePostType = childData.postType;
+        const childkey = value.key;
+        const childData = value.val();
+        const firebasePostType = childData.postType;
 
         if (childData.uid === uid) {
-          let firebaseDate = childData.date;
-          let firebaseLocalName = childData.localName;
-          let firebaseLocalAdress = childData.localAdress;
-          let firebaseLocalHourFrom = childData.localHourFrom;
-          let firebaseLocalHourTo = childData.localHourTo;
-          let firebaseLocalPrice = childData.localPrice;
-          let firebaseText = childData.text;
-          let firebaseLikes = childData.likes;
-          let firebaseName = childData.name;
-          let firebaseEmail = childData.email;
-          let firbaseCountStars = childData.stars;
+          const firebaseDate = childData.date;
+          const firebaseLocalName = childData.localName;
+          const firebaseLocalAdress = childData.localAdress;
+          const firebaseLocalHourFrom = childData.localHourFrom;
+          const firebaseLocalHourTo = childData.localHourTo;
+          const firebaseLocalPrice = childData.localPrice;
+          const firebaseText = childData.text;
+          const firebaseLikes = childData.likes;
+          const firebaseName = childData.name;
+          const firebaseEmail = childData.email;
+          const firbaseCountStars = childData.stars;
           // 
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firbaseCountStars, firebasePostType);
         }
@@ -68,22 +68,22 @@ window.onload = () => {
   function showPostsFiltered(type, uid) {
     database.ref('feed/posts').once('value').then(snapshot => {
       snapshot.forEach(value => {
-        let childkey = value.key;
-        let childData = value.val();
-        let firebasePostType = childData.postType;
+        const childkey = value.key;
+        const childData = value.val();
+        const firebasePostType = childData.postType;
 
         if (firebasePostType === type && childData.uid === uid) {
-          let firebaseDate = childData.date;
-          let firebaseLocalName = childData.localName;
-          let firebaseLocalAdress = childData.localAdress;
-          let firebaseLocalHourFrom = childData.localHourFrom;
-          let firebaseLocalHourTo = childData.localHourTo;
-          let firebaseLocalPrice = childData.localPrice;
-          let firebaseText = childData.text;
-          let firebaseLikes = childData.likes;
-          let firebaseName = childData.name;
-          let firebaseEmail = childData.email;
-          let firbaseCountStars = childData.stars;
+          const firebaseDate = childData.date;
+          const firebaseLocalName = childData.localName;
+          const firebaseLocalAdress = childData.localAdress;
+          const firebaseLocalHourFrom = childData.localHourFrom;
+          const firebaseLocalHourTo = childData.localHourTo;
+          const firebaseLocalPrice = childData.localPrice;
+          const firebaseText = childData.text;
+          const firebaseLikes = childData.likes;
+          const firebaseName = childData.name;
+          const firebaseEmail = childData.email;
+          const firbaseCountStars = childData.stars;
           // 
           postTemplate(firebaseDate, firebaseLocalName, firebaseLocalAdress, firebaseLocalHourFrom, firebaseLocalHourTo, firebaseLocalPrice, firebaseText, firebaseLikes, childkey, firebaseName, firebaseEmail, firebasePostType, firebasePostType, firbaseCountStars);
         }
@@ -93,50 +93,50 @@ window.onload = () => {
 
   // data e hora do post
   function getDate() {
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDate();
-    let time = Date().split(' ')[4];
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const time = Date().split(' ')[4];
 
-    let postDate = `${day}/${month}/${year} - ${time}`
+    const postDate = `${day}/${month}/${year} - ${time}`
     return postDate;
   };
 
   // template dos posts
   const postTemplate = function (date, local, address, hourFrom, hourTo, price, textPost, likes, key, userName, userEmail, typeChoose, stars) {
     // cabeçaho do post
-    let name = document.createElement('p');
+    const name = document.createElement('p');
     name.setAttribute('class', 'user-name');
     name.innerHTML = `${userName} - ${userEmail}`;
 
-    let header = document.createElement('span');
+    const header = document.createElement('span');
     header.setAttribute('class', 'date-time');
     header.innerText = date;
 
     // info local
-    let localInfo = document.createElement('p');
+    const localInfo = document.createElement('p');
     localInfo.setAttribute('id', 'local-info');
     localInfo.setAttribute('class', 'local-info');
     localInfo.setAttribute('info-data-id', key);
     localInfo.innerHTML = `<i class="fas fa-map-marker-alt"></i><span class="bold-text">${local}</span> - ${address}`;
 
     // info horário de funcionamento
-    let operatingHours = document.createElement('p');
+    const operatingHours = document.createElement('p');
     operatingHours.setAttribute('id', 'local-operating');
     operatingHours.setAttribute('class', 'local-info');
     operatingHours.setAttribute('hour-data-id', key);
     operatingHours.innerHTML = `<i class="fas fa-history"></i>Horário de funcionamento: ${hourFrom}h às ${hourTo}h`;
 
     // info preço médio
-    let localPrice = document.createElement('p');
+    const localPrice = document.createElement('p');
     localPrice.setAttribute('id', 'local-price');
     localPrice.setAttribute('class', 'local-info');
     localPrice.setAttribute('price-data-id', key);
     localPrice.innerHTML = `<i class="fas fa-hand-holding-usd"></i>${price},00`
 
     // estrelas
-    let countStars = document.createElement('div');
+    const countStars = document.createElement('div');
     countStars.setAttribute('class', 'stars');
     if (stars === '1') {
       countStars.innerHTML = `<label for="star-1"><i class="fa"></i></label>`
@@ -151,14 +151,14 @@ window.onload = () => {
     }
 
     // mensagem
-    let text = document.createElement('p');
+    const text = document.createElement('p');
     text.setAttribute('class', 'text-post');
     text.setAttribute('id', 'comment-post');
     text.setAttribute('text-data-id', key);
     text.innerHTML = textPost;
 
     // editar postagem
-    let editPost = document.createElement('button');
+    const editPost = document.createElement('button');
     editPost.setAttribute('class', 'post-btn');
     editPost.setAttribute('id', 'edit-btn');
     editPost.setAttribute('class', 'far fa-edit btn btn-default navbar-btn');
@@ -168,7 +168,7 @@ window.onload = () => {
     editPost.innerText = '';
 
     // excluir postagem
-    let deletePost = document.createElement('button');
+    const deletePost = document.createElement('button');
     deletePost.setAttribute('class', 'post-btn');
     deletePost.setAttribute('id', 'delete-btn');
     deletePost.setAttribute('data-id', key);
@@ -176,34 +176,34 @@ window.onload = () => {
     deletePost.innerText = '';
 
     // botão curtir
-    let likeBtn = document.createElement('button');
+    const likeBtn = document.createElement('button');
     likeBtn.setAttribute('id', 'like-btn');
     likeBtn.setAttribute('like-data-id', key);
     likeBtn.setAttribute('class', 'far fa-thumbs-up btn btn-default navbar-btn');
     likeBtn.innerText = '';
 
     // contador de curtidas
-    let counter = document.createElement('span');
+    const counter = document.createElement('span');
     counter.setAttribute('id', 'show-likes');
     counter.setAttribute('class', 'show-likes');
     counter.setAttribute('counter-data-id', key);
     counter.innerHTML = likes + ' curtidas';
 
     // público ou privado
-    let showSelected = document.createElement('p');
+    const showSelected = document.createElement('p');
     showSelected.setAttribute('selected-data-id', key);
     showSelected.setAttribute('id', 'show-selected');
     showSelected.innerHTML = `${typeChoose}`;
 
     // card de postagem
-    let card = document.createElement('div');
+    const card = document.createElement('div');
     card.setAttribute('class', 'post-card');
     card.setAttribute('id', 'post-card-key');
     card.setAttribute('data-idcard', key);
 
     // linha horizontal
-    let headerLine = document.createElement('hr');
-    let footerLine = document.createElement('hr');
+    const headerLine = document.createElement('hr');
+    const footerLine = document.createElement('hr');
 
     // inserir informações no card
     card.appendChild(name);
@@ -236,14 +236,14 @@ window.onload = () => {
 
   // publicar post
   $('#post-btn').click(function publishPost() {
-    let inputLocalName = $('#local-name').val();
-    let inputLocalAdress = $('#adress').val();
-    let inputLocalHourFrom = $('#hour-from').val();
-    let inputLocalHourTo = $('#hour-to').val();
-    let inputLocalPrice = $('#average-price').val();
-    let inputText = $('#comment-text').val();
-    let typeSelected = $('#select-post-type').val();
-    let likeInit = 0;
+    const inputLocalName = $('#local-name').val();
+    const inputLocalAdress = $('#adress').val();
+    const inputLocalHourFrom = $('#hour-from').val();
+    const inputLocalHourTo = $('#hour-to').val();
+    const inputLocalPrice = $('#average-price').val();
+    const inputText = $('#comment-text').val();
+    const typeSelected = $('#select-post-type').val();
+    const likeInit = 0;
     const divStars = $('input[name="fb"]:checked').val();
     // console.log(divStars)
 
@@ -270,9 +270,9 @@ window.onload = () => {
 
   // deletar post
   $(document).on('click', '#delete-btn', function () {
-    let confirmDelete = confirm('Tem certeza que quer excluir?');
+    const confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
-      let cardKey = $(this).attr('data-id');
+      const cardKey = $(this).attr('data-id');
       feedDatabase.child('/posts/' + cardKey).remove().then(() => {
         $(this).parent('.post-card').remove();
       });
@@ -281,10 +281,8 @@ window.onload = () => {
 
   // curtidas
   $(document).on('click', '#like-btn', function () {
-    let likeId = $(this).attr('like-data-id');
-    console.log(likeId)
+    const likeId = $(this).attr('like-data-id');
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
-    console.log(countLikes)
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
@@ -293,7 +291,6 @@ window.onload = () => {
 
   $('#new-comment-text').keyup(function () {
     if ($('#new-comment-text').val().length > 0) {
-      console.log($('#new-comment-text').val().length);
       $('#new-post-btn').prop("disabled", false);
     } else {
       $('#new-post-btn').prop("disabled", true);
@@ -302,40 +299,42 @@ window.onload = () => {
 
   // editar post
   $(document).on('click', '#edit-btn', function () {
-    let editKey = $(this).attr('edit-data-id');
+    const editKey = $(this).attr('edit-data-id');
 
-    let oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
-    let oldOperating = $(`p[hour-data-id=${editKey}]`).text();
-    let oldAveragePrice = $(`p[price-data-id=${editKey}]`).text();
-    let oldText = $(`p[text-data-id=${editKey}]`).text();
+    const oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
+    const oldOperating = $(`p[hour-data-id=${editKey}]`).text();
+    const oldAveragePrice = $(`p[price-data-id=${editKey}]`).text();
+    const oldText = $(`p[text-data-id=${editKey}]`).text();
 
     $('#new-local-name').val(oldLocalinfo);
-    // $('#new-adress').val(oldLocalinfo);
+    $('#new-adress').val(oldLocalinfo);
     $('#new-hour-from').val(oldOperating);
     $('#new-price').val(oldAveragePrice);
     $('#new-comment-text').val(oldText);
 
     $('#new-post-btn').click(function () {
-      let newName = $('#new-local-name').val();
-      let newAdress = $('#new-adress').val();
-      let newOperating = $('#new-hour-from').val();
-      let newPrice = $('#new-price').val();
-      let newText = $('#new-comment-text').val();
-      let newType = $('#select-new-post-type').val();
-      let newStar = $('input[class="star-edit"]:checked').val();
+      const newName = $('#new-local-name').val();
+      const newAdress = $('#new-adress').val();
+      const newHourFrom = $('#new-hour-from').val();
+      const newHourTo = $('#new-hour-to').val()
+      const newPrice = $('#new-price').val();
+      const newText = $('#new-comment-text').val();
+      const newType = $('#select-new-post-type').val();
+      const newStar = $('input[class="star-edit"]:checked').val();
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
         localAdress: newAdress,
-        localHourFrom: newOperating,
-        // localHourTo: newHourTo,
+        localHourFrom: newHourFrom,
+        localHourTo: newHourTo,
         localPrice: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
         likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
         postType: newType,
         stars: newStar,
       }).then(() => {
-        location.reload();
+        $('#posts-container').empty();
+        showAllPosts(uid);
       })
     })
   });

@@ -66,7 +66,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-bookmark"></i></span>
                             </div>
-                            <input class="form-control" id="local-name"></input>
+                            <input class="form-control" id="local-name" required></input>
                           </div>
                           <!-- endereço -->
                           <label for="message-text" class="col-form-label">Endereço:</label>
@@ -74,7 +74,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                             </div>
-                            <input class="form-control" id="adress"></input>
+                            <input class="form-control" id="adress" required></input>
                           </div>
                           <!-- Horário de Funcionamento -->
                           <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
@@ -105,35 +105,28 @@
                               <span class="input-group-text">$</span>
                             </div>
                             <input id="average-price" type="number" class="form-control"
-                              aria-label="Amount (to the nearest dollar)">
+                              aria-label="Amount (to the nearest dollar)" required>
                             <div class="input-group-append">
                               <span class="input-group-text">.00</span>
                             </div>
+                          </div>
+                          <div class="stars">
+                            <input type="radio" id="star-empty" name="fb" value="" checked />
+                            <label for="star-1"><i class="fa"></i></label>
+                            <input type="radio" id="star-1" name="fb" value="1" />
+                            <label for="star-2"><i class="fa"></i></label>
+                            <input type="radio" id="star-2" name="fb" value="2" />
+                            <label for="star-3"><i class="fa"></i></label>
+                            <input type="radio" id="star-3" name="fb" value="3" />
+                            <label for="star-4"><i class="fa"></i></label>
+                            <input type="radio" id="star-4" name="fb" value="4" />
+                            <label for="star-5"><i class="fa"></i></label>
+                            <input type="radio" id="star-5" name="fb" value="5" />
                           </div>
                           <!-- Comentário -->
                           <label for="message-text" class="col-form-label">Comentário:</label>
                           <textarea class="form-control" id="comment-text" value=""></textarea>
                         </div>
-                        <div class="stars">
-                          <input type="radio" id="star-empty" name="fb" value="" checked />
-                          <label for="star-1"><i class="fa"></i></label>
-                          <input type="radio" id="star-1" name="fb" value="1" />
-                          <label for="star-2"><i class="fa"></i></label>
-                          <input type="radio" id="star-2" name="fb" value="2" />
-                          <label for="star-3"><i class="fa"></i></label>
-                          <input type="radio" id="star-3" name="fb" value="3" />
-                          <label for="star-4"><i class="fa"></i></label>
-                          <input type="radio" id="star-4" name="fb" value="4" />
-                          <label for="star-5"><i class="fa"></i></label>
-                          <input type="radio" id="star-5" name="fb" value="5" />
-                        </div>
-                        <!-- Público ou Privado -->
-                        <!-- <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            <option value="postPublic" class="dropdown-item fas fa-users">Público</option>
-                            <option value="postPrivate" class="dropdown-item fas fa-user">Privado</option>
-                          </div>
-                        </select> -->
                         <select id="select-post-type">
                           <option value="public"><i class="fas fa-users"></i>Público</option>
                           <option value="private"><i class="fas fa-user-lock"></i>Privado</option>
@@ -166,7 +159,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-bookmark"></i></span>
                               </div>
-                              <input class="form-control" id="new-local-name"></input>
+                              <input class="form-control" id="new-local-name" required></input>
                             </div>
                             <!-- endereço -->
                             <label for="message-text" class="col-form-label">Endereço:</label>
@@ -174,7 +167,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                               </div>
-                              <input class="form-control" id="new-adress"></input>
+                              <input class="form-control" id="new-adress" required></input>
                             </div>
                             <!-- Horário de Funcionamento -->
                             <label for="message-text" class="col-form-label">Horário de Funcionamento:</label>
@@ -193,7 +186,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text">De</span>
                               </div>
-                              <input id="hour-to" type="time" class="form-control">
+                              <input id="new-hour-to" type="time" class="form-control">
                               <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                               </div>
@@ -205,37 +198,28 @@
                                 <span class="input-group-text">$</span>
                               </div>
                               <input id="new-price" type="text" class="form-control"
-                                aria-label="Amount (to the nearest dollar)">
+                                aria-label="Amount (to the nearest dollar)" required>
                               <div class="input-group-append">
                                 <span class="input-group-text">.00</span>
                               </div>
+                            </div>
+                            <div class="stars">
+                              <input type="radio" id="new-star-empty" class="star-edit" name="fb" value="" checked />
+                              <label for="new-star-1"><i class="fa"></i></label>
+                              <input type="radio" id="new-star-1" class="star-edit" name="fb" value="1" />
+                              <label for="new-star-2"><i class="fa"></i></label>
+                              <input type="radio" id="new-star-2" class="star-edit" name="fb" value="2" />
+                              <label for="new-star-3"><i class="fa"></i></label>
+                              <input type="radio" id="new-star-3" class="star-edit" name="fb" value="3" />
+                              <label for="new-star-4"><i class="fa"></i></label>
+                              <input type="radio" id="new-star-4" class="star-edit" name="fb" value="4" />
+                              <label for="new-star-5"><i class="fa"></i></label>
+                              <input type="radio" id="new-star-5" class="star-edit" name="fb" value="5" />
                             </div>
                             <!-- Comentário -->
                             <label for="message-text" class="col-form-label">Comentário:</label>
                             <textarea class="form-control" id="new-comment-text" value=""></textarea>
                           </div>
-                          <div class="stars">
-                            <input type="radio" id="new-star-empty" class="star-edit" name="fb" value="" checked />
-                            <label for="new-star-1"><i class="fa"></i></label>
-                            <input type="radio" id="new-star-1" class="star-edit" name="fb" value="1" />
-                            <label for="new-star-2"><i class="fa"></i></label>
-                            <input type="radio" id="new-star-2" class="star-edit" name="fb" value="2" />
-                            <label for="new-star-3"><i class="fa"></i></label>
-                            <input type="radio" id="new-star-3" class="star-edit" name="fb" value="3" />
-                            <label for="new-star-4"><i class="fa"></i></label>
-                            <input type="radio" id="new-star-4" class="star-edit" name="fb" value="4" />
-                            <label for="new-star-5"><i class="fa"></i></label>
-                            <input type="radio" id="new-star-5" class="star-edit" name="fb" value="5" />
-                          </div>
-
-                          <!-- Público ou Privado -->
-                          <!-- <select id="select-post-type" class="dropdown fa-select" data-toggle="dropdown">
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                              <option value="postPublic" class="dropdown-item fas fa-users">Público</option>
-                              <option value="postPrivate" class="dropdown-item fas fa-user">Privado</option>
-                            </div>
-                          </select> -->
-
                           <select id="select-new-post-type">
                             <option value="public"><i class="fas fa-users"></i> público</option>
                             <option value="private"><i class="fas fa-user"></i> privado</option>
@@ -244,7 +228,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button id="new-post-btn" type="button" class="btn btn-primary" data-dismiss="modal"
+                        <button id="new-post-btn" type="button" class=" btn btn-primary" data-dismiss="modal"
                           disabled="true">Salvar
                           Alteração</button>
                       </div>
