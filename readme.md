@@ -27,13 +27,13 @@ Os usuários podem interagir curtindo as publicações e assim estimular a credi
 ## Personas
 
 **Elis**
-![Persona 1](src/img/persona-elis.jpeg)
+![Persona 1](public/src/img/persona-elis.jpeg)
 
 **Flora**
-![Persona 2](src/img/persona-flora.jpeg)
+![Persona 2](/public/src/img/persona-flora.jpeg)
 
 **Mateus**
-![Persona 3](src/img/persona-mateus.jpeg)
+![Persona 3](public/src/img/persona-mateus.jpeg)
 
 ## Histórias de usuário
 
@@ -96,8 +96,3 @@ O protótipo da Serview, pode ser visualizado no link abaixo:
 * Bootstrap
 
 A implementação do projeto foi feita de maneira dinâmica entre as tecnologias usadas, de acordo com os requisitos pedidos, seguindo da tela inicial de login, criação de usuário, Boas vindas, home/feed, cashback, pesquisar, amigos e configurações/logout, sendo a tela home/feed com os pontos principais da aplicação funcional: publicação de postagem, edição e exclusão, com escolha de postagem pública e privada; possibilidade de curtidas e filtragens das postagens por públicas e privadas. As outras telas representam a ideia geral da aplicação e funcionalidades para serem implementadas futuramente.
-
-
-
-
-
