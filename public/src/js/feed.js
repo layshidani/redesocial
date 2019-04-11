@@ -256,15 +256,16 @@ window.onload = () => {
     })
   });
 
-  $('#new-local-name').keyup(function () {
-    if ($('#new-local-name').val().length > 0) {
-      $('#new-post-btn').prop("disabled", false);
-    } else {
-      $('#new-post-btn').prop("disabled", true);
-    }
-  });
 
   $(document).on('click', '#edit-btn', function () {
+    $('#new-local-name').keyup(function () {
+      if ($('#new-local-name').val().length > 0) {
+        $('#new-post-btn').prop("disabled", false);
+      } else {
+        $('#new-post-btn').prop("disabled", true);
+      }
+    });
+    
     const editKey = $(this).attr('edit-data-id');
 
     const oldLocalinfo = $(`p[info-data-id=${editKey}]`).text();
@@ -298,8 +299,7 @@ window.onload = () => {
         postType: newType,
         stars: newStar,
       }).then(() => {
-        // $('#posts-container').empty();
-        showAllPosts(uid);
+        location.reload();
       })
     })
   });
