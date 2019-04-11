@@ -284,7 +284,7 @@ window.onload = () => {
       const newHourTo = $('#new-hour-to').val()
       const newPrice = $('#new-price').val();
       const newText = $('#new-comment-text').val();
-      const newType = $('#select-new-post-type').val();
+      let newType = $('#select-new-post-type').val();
       const newStar = $('input[class="star-edit"]:checked').val();
 
       feedDatabase.child('/posts/' + editKey).update({
@@ -298,7 +298,7 @@ window.onload = () => {
         postType: newType,
         stars: newStar,
       }).then(() => {
-        $('#posts-container').empty();
+        // $('#posts-container').empty();
         showAllPosts(uid);
       })
     })
