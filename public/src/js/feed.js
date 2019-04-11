@@ -299,8 +299,7 @@ window.onload = () => {
         postType: newType,
         stars: newStar,
       }).then(() => {
-        $('#posts-container').empty();
-        showAllPosts(uid);
+        location.reload();
       })
     })
   });
