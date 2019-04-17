@@ -1,90 +1,60 @@
 $(document).ready(function () {
   $('#btn-create-user').click(function () {
     event.preventDefault();
-    let email = $('#input-email').val();
-    let password = $('#input-password').val();
-    let userName = $('#input-name').val();
+    const email = $('#input-email').val();
+    const password = $('#input-password').val();
+    const userName = $('#input-name').val();
 
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(function (users) {
-        let user = firebase.auth().currentUser;
+      .then(() => {
+        const user = firebase.auth().currentUser;
         user.updateProfile({
           displayName: userName,
           photoURL: '',
         })
-          .then(() => {
-            window.location.href = "categories_create_user.html";
-          });
+        .then(() => window.location.href = "categories_create_user.html");
       })
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        $('#error-msg').text(errorMessage);
-      });
+      .catch(error => $('#error-msg').text(error.message));
   });
 
   $('#btnLogin').click(function () {
     event.preventDefault();
-    let email = $('#input-email').val();
-    let password = $('#input-password').val();
+    const email = $('#input-email').val();
+    const password = $('#input-password').val();
+    
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function (users) {
-        window.location.href = "feed.html";
-      })
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        $('#error-msg').text(errorMessage);
-      });
+      .then(() => window.location.href = "feed.html")
+      .catch(error => $('#error-msg').text(error.message));
   });
 
   $('#facebook-btn').click(function () {
-    let provider = new firebase.auth.FacebookAuthProvider();
-    // signIn(provider);
+    const provider = new firebase.auth.FacebookAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function (result) {
-        let token = result.credential.accessToken;
-        let user = result.user;
-        let name = result.user.displayName;
-        window.location.href = "feed.html";
-      }).catch(function (error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        $('#error-msg').text(errorMessage);
-      });
+      .then(() => window.location.href = "feed.html")
+      .catch(error => $('#error-msg').text(error.message));
+    
   });
 
   $('#google-btn').click(function () {
-    let provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function (result) {
-        console.log(result);
-        let token = result.credential.accessToken;
-        let user = result.user;
-        let name = result.user.displayName;
-        window.location.href = "feed.html";
-      }).catch(function (error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        $('#error-msg').text(errorMessage);
-      });
+      .then(() => window.location.href = "feed.html")
+      .catch(error => $('#error-msg').text(error.message));
   });
 
   $('#logout-btn').click(function () {
     firebase
       .auth()
       .signOut()
-      .then(function (result) {
-        window.location.href = "index.html";
-      });
+      .then(() => window.location.href = "index.html");
   });
 });
 
