@@ -36,13 +36,14 @@ $(document).ready(function () {
   });
   
   $('#post-btn').click(function publishPost() {
+    console.log("email", email)
     const newPost = {
       name: name,
       uid: uid,
       email: email,
       date: getDate(),
       localName: $('#local-name').val(),
-      adress: $('#adress').val(),
+      address: $('#adress').val(),
       hourFrom: $('#hour-from').val(),
       hourTo: $('#hour-to').val(),
       price: $('#average-price').val(),
@@ -56,10 +57,10 @@ $(document).ready(function () {
     
     feedDatabase.child('/posts/')
       .push(newPost)
-      .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {newPost})));
+      .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {...newPost})));
   });
   
-  $(document).on('click', '#delete-btn', () => {
+  $(document).on('click', '#delete-btn', function () {
     const confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
       const cardKey = $(this).attr('data-id');
@@ -75,8 +76,9 @@ $(document).ready(function () {
   Parte não refatorada
   **/
 
-  $(document).on('click', '#like-btn', () => {
-    const likeId = $(this).attr('like-data-id');
+  $(document).on('click', '#like-btn', function () {
+    const likeId = $(this).attr('like-data-id');console.log("likeId", likeId)
+
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"]`).text());
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
@@ -117,7 +119,7 @@ $(document).ready(function () {
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
-        adress: newAdress,
+        address: newAdress,
         hourFrom: newHourFrom,
         hourTo: newHourTo,
         price: newPrice,
@@ -141,7 +143,7 @@ function showAllPosts(uid) {
     snapshot.forEach(value => {
       const postData = value.val();
       if (postData.uid === uid) {
-        postTemplate(postData);
+        postTemplate(Object.assign({}, {key: value.key}, {...postData}));
       }
     });
   });
@@ -169,7 +171,7 @@ function getDate() {
 }
 
 function postTemplate(data) {
-  console.log('data: ', data.key);
+  console.log('data: ', data);
   const template = `
     <div id="post-card-key" class="post-card" data-idcard=${data.key}>
       <p class="user-name">${data.name} - ${data.email}</p>
@@ -187,9 +189,7 @@ function postTemplate(data) {
       </p>
       ${renderStars(data.stars)}
       <hr />
-      <p id="comment-post" class="text-post" text-data-id="${data.key}">
-        ${data.text}
-      </p>
+      <p id="comment-post" class="text-post" text-data-id="${data.key}">${data.text}</p>
       <hr />
       <button id="edit-btn" class="post-btn far fa-edit btn btn-default navbar-btn" 
         edit-data-id=${data.key} 
@@ -204,8 +204,9 @@ function postTemplate(data) {
       </button>
       <span id="show-likes" class="show-likes" 
         counter-data-id=${data.key}>
-        ${data.likes} curtidas
+        ${data.likes} 
       </span>
+      curtidas
       <p id="show-selected" selected-data-id="${data.key}">
         ${data.postType}
       </p>
