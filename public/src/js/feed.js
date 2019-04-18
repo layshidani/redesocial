@@ -4,9 +4,6 @@ const feedDatabase = database.ref('feed');
 const user = firebase.auth().currentUser;
 
 $(document).ready(function () {
-  
-  const postsContainer = $('#posts-container')[0];
-  
   let name, email, photoURL, uid;
   
   firebase.auth().onAuthStateChanged((user) => {
@@ -31,7 +28,8 @@ $(document).ready(function () {
   });
   
   $('#local-name').keyup(() => {
-    if ($(this).val().length > 0) {
+    if ($('#local-name').val().length > 0) {
+      console.log('$(this).val().length: ', $('#local-name').val().length);
       $('#post-btn').prop("disabled", false);
     } else {
       $('#post-btn').prop("disabled", true)
@@ -45,10 +43,10 @@ $(document).ready(function () {
       email: email,
       date: getDate(),
       localName: $('#local-name').val(),
-      localAdress: $('#adress').val(),
-      localHourFrom: $('#hour-from').val(),
-      localHourTo: $('#hour-to').val(),
-      localPrice: $('#average-price').val(),
+      adress: $('#adress').val(),
+      hourFrom: $('#hour-from').val(),
+      hourTo: $('#hour-to').val(),
+      price: $('#average-price').val(),
       text: $('#comment-text').val(),
       likes: 0,
       stars: $('input[name="fb"]:checked').val(),
@@ -56,9 +54,12 @@ $(document).ready(function () {
     }
 
     $('#filter-posts').val('all');
+    
     feedDatabase.child('/posts/')
       .push(newPost)
       .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {newPost})));
+      console.log('key: ', key);
+
   });
   
   $(document).on('click', '#delete-btn', () => {
@@ -69,7 +70,7 @@ $(document).ready(function () {
         $(this).parent('.post-card').remove();
       });
     }
-  }
+  })
                  
   /************
   Parte não refatorada
@@ -77,11 +78,12 @@ $(document).ready(function () {
 
   $(document).on('click', '#like-btn', () => {
     const likeId = $(this).attr('like-data-id');
-    let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
+    let countLikes = parseInt($(`span[counter-data-id="${likeId}"]`).text());
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     })
+    console.log('countLikes: ', countLikes);
   });
   
   $(document).on('click', '#edit-btn', function () {
@@ -117,10 +119,10 @@ $(document).ready(function () {
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
-        localAdress: newAdress,
-        localHourFrom: newHourFrom,
-        localHourTo: newHourTo,
-        localPrice: newPrice,
+        adress: newAdress,
+        hourFrom: newHourFrom,
+        hourTo: newHourTo,
+        price: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
         likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
         postType: newType,
@@ -168,14 +170,17 @@ function getDate() {
   return `${day}/${month}/${year} - ${time}`;
 }
 
+
 function postTemplate(data) {
+  console.log(data);
+  console.log(data.key);
   const template = `
     <div id="post-card-key" class="post-card" data-idcard=${data.key}>
-      <p class="user-name">${data.userName} - ${data.userEmail}</p>
+      <p class="user-name">${data.name} - ${data.email}</p>
       <span class="data-time">${data.date}</span>
       <p id="local-info" class="local-info" info-data-id="${data.key}">
         <i class="fas fa-map-marker-alt"></i>
-        <span class="bold-text">${data.local}</span> - ${data.address}
+        <span class="bold-text">${data.localName}</span> - ${data.address}
       </p>
       <p id="local-operating" class="local-info" hour-data-id="${data.key}">
         <i class="fas fa-history"></i>
@@ -187,7 +192,7 @@ function postTemplate(data) {
       ${renderStars(data.stars)}
       <hr />
       <p id="comment-post" class="text-post" text-data-id="${data.key}">
-        ${data.textPost}
+        ${data.text}
       </p>
       <hr />
       <button id="edit-btn" class="post-btn far fa-edit btn btn-default navbar-btn" 
@@ -198,20 +203,22 @@ function postTemplate(data) {
       <button id="delete-btn" class="post-btn far fa-trash-alt btn btn-default navbar-btn" 
         data-id=${data.key}>
       </button>
-      <button id="like-btn" class="post-btn far fa-thumbs-alt btn btn-default navbar-btn" 
+      <button id="like-btn" class="post-btn far fa-thumbs-up btn btn-default navbar-btn" 
         like-data-id=${data.key}>
       </button>
-      <button id="show-likes" class="show-likes" 
+      <span id="show-likes" class="show-likes" 
         counter-data-id=${data.key}>
-        ${postData.likes} curtidas
-      </button>
+        ${data.likes} curtidas
+      </span>
       <p id="show-selected" selected-data-id="${data.key}">
-        ${data.typeChoose}
+        ${data.postType}
       </p>
     </div>
   `;
   
-  postsContainer.insertBefore(template, postsContainer.childNodes[0]);
+  const postsContainer = $('#posts-container')[0];
+
+  postsContainer.innerHTML = template;
 }
   
 function renderStars(stars) {
