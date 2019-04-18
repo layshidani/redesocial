@@ -29,7 +29,6 @@ $(document).ready(function () {
   
   $('#local-name').keyup(() => {
     if ($('#local-name').val().length > 0) {
-      console.log('$(this).val().length: ', $('#local-name').val().length);
       $('#post-btn').prop("disabled", false);
     } else {
       $('#post-btn').prop("disabled", true)
@@ -58,14 +57,14 @@ $(document).ready(function () {
     feedDatabase.child('/posts/')
       .push(newPost)
       .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {newPost})));
-      console.log('key: ', key);
-
   });
   
   $(document).on('click', '#delete-btn', () => {
     const confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
       const cardKey = $(this).attr('data-id');
+      console.log('cardKey: ', cardKey);
+
       feedDatabase.child('/posts/' + cardKey).remove().then(() => {
         $(this).parent('.post-card').remove();
       });
@@ -83,7 +82,6 @@ $(document).ready(function () {
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
     })
-    console.log('countLikes: ', countLikes);
   });
   
   $(document).on('click', '#edit-btn', function () {
@@ -170,10 +168,8 @@ function getDate() {
   return `${day}/${month}/${year} - ${time}`;
 }
 
-
 function postTemplate(data) {
-  console.log(data);
-  console.log(data.key);
+  console.log('data: ', data.key);
   const template = `
     <div id="post-card-key" class="post-card" data-idcard=${data.key}>
       <p class="user-name">${data.name} - ${data.email}</p>
@@ -217,8 +213,9 @@ function postTemplate(data) {
   `;
   
   const postsContainer = $('#posts-container')[0];
-
-  postsContainer.innerHTML = template;
+  let postsDiv = document.createElement("div");
+  postsDiv.innerHTML = template
+  postsContainer.insertBefore(postsDiv, postsContainer.childNodes[0]);
 }
   
 function renderStars(stars) {
