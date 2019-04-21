@@ -30,13 +30,13 @@
               <img class="logo-name" src="src/img/logo/logo_final_nome.png" alt="logotipo imagem com texto SerView">
             </div>
             <section class="navbar">
-              <button id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></button>
-              <button id="icon-cashback" class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></button>
-              <button id="icon-search" class="btn btn-default navbar-btn"><i class="fas fa-search"></i></button>
-              <button id="icon-friends" class="btn btn-default navbar-btn"><i class="fas fa-users"></i></button>
+              <a id="icon-home" class="btn btn-default navbar-btn"><i class="fas fa-home"></i></a>
+              <a id="icon-cashback" class="btn btn-default navbar-btn"><i class="fas fa-dollar-sign"></i></a>
+              <a id="icon-search" class="btn btn-default navbar-btn"><i class="fas fa-search"></i></a>
+              <a id="icon-friends" class="btn btn-default navbar-btn"><i class="fas fa-users"></i></a>
               <div class="dropdown">
-                <button id="icon-config" class="dropdown" data-toggle="dropdown"><i
-                    class="fas fa-cog nav-link"></i></button>
+                <a id="icon-config" class="dropdown" data-toggle="dropdown"><i
+                    class="fas fa-cog nav-link"></i></a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                   <a id="config-dropdown" class="dropdown-item" href="#">Configurações</a>
                   <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
@@ -219,10 +219,9 @@
                     <div class="row posts-cards">
                       <div class="mx-auto filter">
                         <span class="span-filter">Filtrar postagens: </span>
-                        <select id="filter-posts" class="select-filter" data-show-icon="true">
+                        <select id="filter-posts" class="select-filter">
                           <option value="all" class="options-filter">Todas</option>
-                          <option value="public" class="options-filter" id="public">Público</option>
-                          <label for="public"><i class="fa"></i></label>
+                          <option value="public" class="options-filter">Público</option>
                           <option value="private" class="options-filter">Privadas</option>
                         </select>
                       </div>

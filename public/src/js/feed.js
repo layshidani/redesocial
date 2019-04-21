@@ -1,11 +1,8 @@
 const database = firebase.database();
 const feedDatabase = database.ref('feed');
 const user = firebase.auth().currentUser;
-// const postsContainer = $('#posts-container')[0];
+
 $(document).ready(function () {
-  
-  // const postsContainer = $('#posts-container')[0];
-  
   let name, email, photoURL, uid;
   
   firebase.auth().onAuthStateChanged((user) => {
@@ -17,9 +14,9 @@ $(document).ready(function () {
       showAllPosts(uid);
     }
   });
-    
+
   $('#filter-posts').change(() => {
-    const filterChoice = $(this).val();
+    const filterChoice = $('#filter-posts').val();
     $('#posts-container').empty();
 
     if (filterChoice === 'all') {
@@ -29,13 +26,13 @@ $(document).ready(function () {
     }
   });
   
-  // $('#local-name').keyup(() => {
-  //   if ($(this).val().length > 0) {
-  //     $('#post-btn').prop("disabled", false);
-  //   } else {
-  //     $('#post-btn').prop("disabled", true)
-  //   }
-  // });
+  $('#local-name').keyup(() => {
+    if ($('#local-name').val().length > 0) {
+      $('#post-btn').prop("disabled", false);
+    } else {
+      $('#post-btn').prop("disabled", true)
+    }
+  });
   
   $('#post-btn').click(function publishPost() {
     const newPost = {
@@ -44,10 +41,10 @@ $(document).ready(function () {
       email: email,
       date: getDate(),
       localName: $('#local-name').val(),
-      localAdress: $('#adress').val(),
-      localHourFrom: $('#hour-from').val(),
-      localHourTo: $('#hour-to').val(),
-      localPrice: $('#average-price').val(),
+      address: $('#adress').val(),
+      hourFrom: $('#hour-from').val(),
+      hourTo: $('#hour-to').val(),
+      price: $('#average-price').val(),
       text: $('#comment-text').val(),
       likes: 0,
       stars: $('input[name="fb"]:checked').val(),
@@ -55,28 +52,27 @@ $(document).ready(function () {
     }
 
     $('#filter-posts').val('all');
+    
     feedDatabase.child('/posts/')
       .push(newPost)
-      .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {newPost})));
+      .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {...newPost})));
   });
   
-  $(document).on('click', '#delete-btn', () => {
+  $(document).on('click', '#delete-btn', function () {
     const confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
       const cardKey = $(this).attr('data-id');
+
       feedDatabase.child('/posts/' + cardKey).remove().then(() => {
         $(this).parent('.post-card').remove();
       });
     }
   })
-                 
-  /************
-  Parte não refatorada
-  **/
 
-  $(document).on('click', '#like-btn', () => {
+  $(document).on('click', '#like-btn', function () {
     const likeId = $(this).attr('like-data-id');
-    let countLikes = parseInt($(`span[counter-data-id="${likeId}"`).text());
+
+    let countLikes = parseInt($(`span[counter-data-id="${likeId}"]`).text());
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
       $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
@@ -116,10 +112,10 @@ $(document).ready(function () {
 
       feedDatabase.child('/posts/' + editKey).update({
         localName: newName,
-        localAdress: newAdress,
-        localHourFrom: newHourFrom,
-        localHourTo: newHourTo,
-        localPrice: newPrice,
+        address: newAdress,
+        hourFrom: newHourFrom,
+        hourTo: newHourTo,
+        price: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
         likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
         postType: newType,
@@ -130,9 +126,6 @@ $(document).ready(function () {
     })
   });
   
-  /************
-  Fim da parte não refatorada
-  **/
 });
 
 function showAllPosts(uid) {
@@ -140,7 +133,7 @@ function showAllPosts(uid) {
     snapshot.forEach(value => {
       const postData = value.val();
       if (postData.uid === uid) {
-        postTemplate(postData);
+        postTemplate(Object.assign({}, {key: value.key}, {...postData}));
       }
     });
   });
@@ -151,7 +144,7 @@ function showPostsFiltered(type, uid) {
     snapshot.forEach(value => {
       const postData = value.val();
       if (postData.postType === type && postData.uid === uid) {
-        postTemplate(postData);
+        postTemplate(Object.assign({}, {key: value.key}, {...postData}));
       }
     });
   });
@@ -170,11 +163,11 @@ function getDate() {
 function postTemplate(data) {
   const template = `
     <div id="post-card-key" class="post-card" data-idcard=${data.key}>
-      <p class="user-name">${data.userName} - ${data.userEmail}</p>
+      <p class="user-name">${data.name} - ${data.email}</p>
       <span class="data-time">${data.date}</span>
       <p id="local-info" class="local-info" info-data-id="${data.key}">
         <i class="fas fa-map-marker-alt"></i>
-        <span class="bold-text">${data.local}</span> - ${data.address}
+        <span class="bold-text">${data.localName}</span> - ${data.address}
       </p>
       <p id="local-operating" class="local-info" hour-data-id="${data.key}">
         <i class="fas fa-history"></i>
@@ -185,9 +178,7 @@ function postTemplate(data) {
       </p>
       ${renderStars(data.stars)}
       <hr />
-      <p id="comment-post" class="text-post" text-data-id="${data.key}">
-        ${data.textPost}
-      </p>
+      <p id="comment-post" class="text-post" text-data-id="${data.key}">${data.text}</p>
       <hr />
       <button id="edit-btn" class="post-btn far fa-edit btn btn-default navbar-btn" 
         edit-data-id=${data.key} 
@@ -197,26 +188,32 @@ function postTemplate(data) {
       <button id="delete-btn" class="post-btn far fa-trash-alt btn btn-default navbar-btn" 
         data-id=${data.key}>
       </button>
-      <button id="like-btn" class="post-btn far fa-thumbs-alt btn btn-default navbar-btn" 
+      <button id="like-btn" class="post-btn far fa-thumbs-up btn btn-default navbar-btn" 
         like-data-id=${data.key}>
       </button>
-      <button id="show-likes" class="show-likes" 
+      <span id="show-likes" class="show-likes" 
         counter-data-id=${data.key}>
         ${data.likes} curtidas
-      </button>
+      </span>
       <p id="show-selected" selected-data-id="${data.key}">
-        ${data.typeChoose}
+        ${data.postType}
       </p>
     </div>
   `;
+  
   const postsContainer = $('#posts-container')[0];
-  postsContainer.insertBefore(template, postsContainer.childNodes[0]);
+  let postsDiv = document.createElement("div");
+  postsDiv.innerHTML = template
+  postsContainer.insertBefore(postsDiv, postsContainer.childNodes[0]);
 }
   
 function renderStars(stars) {
   let starsIcon;
   
-  if (stars === '1') {
+  if (stars === ''){
+    starsIcon = `<input type="radio" id="star-empty" name="fb" value="" checked />
+    <label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label>`
+  } else if(stars === '1') {
     starsIcon = `<label for="star-1"><i class="fa"></i></label>`
   } else if (stars === '2') {
     starsIcon = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`

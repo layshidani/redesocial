@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(to right, #295f2d, #409946);
+  background: linear-gradient(to right, #003333, #008080);
   font-family: 'PT Serif', serif;
 }
 
@@ -307,7 +307,8 @@ a.socialIcon:hover, .socialHoverClass {
   color: #409946;
   font-size: 35px;
   width: auto;
-  height: 500px;
+  height: 400px;
+  text-align: center
 }
  
 .title-friends {
@@ -373,6 +374,10 @@ a.socialIcon:hover, .socialHoverClass {
   font-size: 12px;
   margin-right: 5px;
   color: #295f2d;
+}
+
+.fa-trash-alt {
+  color: #BD3518;
 }
 
 .bold-text {
