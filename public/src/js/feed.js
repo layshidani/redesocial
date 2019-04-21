@@ -1,11 +1,10 @@
 const database = firebase.database();
 const feedDatabase = database.ref('feed');
-
 const user = firebase.auth().currentUser;
-
+// const postsContainer = $('#posts-container')[0];
 $(document).ready(function () {
   
-  const postsContainer = $('#posts-container')[0];
+  // const postsContainer = $('#posts-container')[0];
   
   let name, email, photoURL, uid;
   
@@ -30,13 +29,13 @@ $(document).ready(function () {
     }
   });
   
-  $('#local-name').keyup(() => {
-    if ($(this).val().length > 0) {
-      $('#post-btn').prop("disabled", false);
-    } else {
-      $('#post-btn').prop("disabled", true)
-    }
-  });
+  // $('#local-name').keyup(() => {
+  //   if ($(this).val().length > 0) {
+  //     $('#post-btn').prop("disabled", false);
+  //   } else {
+  //     $('#post-btn').prop("disabled", true)
+  //   }
+  // });
   
   $('#post-btn').click(function publishPost() {
     const newPost = {
@@ -69,7 +68,7 @@ $(document).ready(function () {
         $(this).parent('.post-card').remove();
       });
     }
-  }
+  })
                  
   /************
   Parte não refatorada
@@ -203,14 +202,14 @@ function postTemplate(data) {
       </button>
       <button id="show-likes" class="show-likes" 
         counter-data-id=${data.key}>
-        ${postData.likes} curtidas
+        ${data.likes} curtidas
       </button>
       <p id="show-selected" selected-data-id="${data.key}">
         ${data.typeChoose}
       </p>
     </div>
   `;
-  
+  const postsContainer = $('#posts-container')[0];
   postsContainer.insertBefore(template, postsContainer.childNodes[0]);
 }
   
