@@ -62,11 +62,11 @@ body {
 }
 
 .fas:hover {
-  color: #409946;
+  color: #008080;
 }
 
 .far:hover {
-  color: #409946;
+  color: #008080;
 }
 
 .form-signin {
@@ -156,7 +156,7 @@ body {
 }
 
 .btn-primary {
-  background-color: #295f2d;
+  background-color: #003333;
   border: none;
 }
 
@@ -175,7 +175,7 @@ padding: 10px;
 
 
 .btn-next:hover {
- background-color: #295f2d;
+ background-color: #003333;
  color: #eff1ed;
 }
 
@@ -276,7 +276,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .dropdown-item:hover{
-  color: #409946;
+  color: #008080;
 }
 
 .posts-feed {
@@ -289,7 +289,7 @@ a.socialIcon:hover, .socialHoverClass {
 .post-card {
   width: 300px;
   list-style: none;
-  border: 3px solid #409946;
+  border: 3px solid #003333;
   border-radius: 5px;
   background-color: #eff1ed;
   padding: 10px;
@@ -304,7 +304,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .title-cashback {
-  color: #409946;
+  color: #003333;
   font-size: 35px;
   width: auto;
   height: 400px;
@@ -312,7 +312,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
  
 .title-friends {
-  color: #409946;
+  color: #003333;
   font-size: 35px;
   width: auto;
   height: 500px;
@@ -330,7 +330,7 @@ a.socialIcon:hover, .socialHoverClass {
 
 .list:hover {
   cursor: pointer;
-  color: #295f2d;
+  color: #003333;
 }
 
 .user-name {
@@ -352,7 +352,7 @@ a.socialIcon:hover, .socialHoverClass {
 
 .show-likes {
   padding-left: 10px;
-  color: #295f2d;
+  color: #003333;
 }
 
 .edited {
@@ -365,7 +365,7 @@ a.socialIcon:hover, .socialHoverClass {
 .local-info {
   font-style: italic;
   font-size: 12px;
-  color: #295f2d;
+  color: #003333;
   margin-bottom: 0;
 }
 
@@ -373,7 +373,7 @@ a.socialIcon:hover, .socialHoverClass {
   font-style: italic;
   font-size: 12px;
   margin-right: 5px;
-  color: #295f2d;
+  color: #003333;
 }
 
 .fa-trash-alt {
@@ -396,12 +396,12 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .select-filter {
- color: #295f2d;
+ color: #003333;
  background-color: #eff1ed;
 }
 
 .span-filter {
-  color: #0a250c;
+  color: #003333;
   font-weight: bold;
 }
 
