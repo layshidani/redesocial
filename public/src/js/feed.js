@@ -2,7 +2,7 @@ const database = firebase.database();
 const feedDatabase = database.ref('feed');
 const user = firebase.auth().currentUser;
 
-$(document).ready(function () {
+$(document).ready(() => {
   let name, email, photoURL, uid;
   
   firebase.auth().onAuthStateChanged((user) => {
@@ -28,13 +28,13 @@ $(document).ready(function () {
   
   $('#local-name').keyup(() => {
     if ($('#local-name').val().length > 0) {
-      $('#post-btn').prop("disabled", false);
+      $('#post-btn').prop('disabled', false);
     } else {
-      $('#post-btn').prop("disabled", true)
+      $('#post-btn').prop('disabled', true)
     }
   });
   
-  $('#post-btn').click(function publishPost() {
+  $('#post-btn').click(() => {
     const newPost = {
       name: name,
       uid: uid,
@@ -58,7 +58,7 @@ $(document).ready(function () {
       .then((snapshot) => postTemplate(Object.assign({}, {key: snapshot.key}, {...newPost})));
   });
   
-  $(document).on('click', '#delete-btn', function () {
+  $(document).on('click', '#delete-btn', () => {
     const confirmDelete = confirm('Tem certeza que quer excluir?');
     if (confirmDelete) {
       const cardKey = $(this).attr('data-id');
@@ -69,22 +69,22 @@ $(document).ready(function () {
     }
   })
 
-  $(document).on('click', '#like-btn', function () {
+  $(document).on('click', '#like-btn', () => {
     const likeId = $(this).attr('like-data-id');
 
     let countLikes = parseInt($(`span[counter-data-id="${likeId}"]`).text());
     countLikes++;
     feedDatabase.child('posts/' + likeId + '/likes').set(countLikes).then(() => {
-      $(`span[counter-data-id='${likeId}'`).text(`${countLikes} curtidas`);
+      $(`span[counter-data-id="${likeId}"`).text(`${countLikes} curtidas`);
     })
   });
   
-  $(document).on('click', '#edit-btn', function () {
-    $('#new-local-name').keyup(function () {
+  $(document).on('click', '#edit-btn', () => {
+    $('#new-local-name').keyup(() => {
       if ($('#new-local-name').val().length > 0) {
-        $('#new-post-btn').prop("disabled", false);
+        $('#new-post-btn').prop('disabled', false);
       } else {
-        $('#new-post-btn').prop("disabled", true);
+        $('#new-post-btn').prop('disabled', true);
       }
     });
     
@@ -100,7 +100,7 @@ $(document).ready(function () {
     $('#new-price').val(oldAveragePrice);
     $('#new-comment-text').val(oldText);
 
-    $('#new-post-btn').click(function () {
+    $('#new-post-btn').click(() => {
       const newName = $('#new-local-name').val();
       const newAdress = $('#new-adress').val();
       const newHourFrom = $('#new-hour-from').val();
@@ -117,7 +117,7 @@ $(document).ready(function () {
         hourTo: newHourTo,
         price: newPrice,
         text: `${newText}<span class='edited'>(editado)</span>`,
-        likes: parseInt($(`span[counter-data-id="${editKey}"`).text()),
+        likes: parseInt($(`span[counter-data-id='${editKey}'`).text()),
         postType: newType,
         stars: newStar,
       }).then(() => {
@@ -128,7 +128,7 @@ $(document).ready(function () {
   
 });
 
-function showAllPosts(uid) {
+const showAllPosts = (uid) => {
   database.ref('feed/posts').once('value').then(snapshot => {
     snapshot.forEach(value => {
       const postData = value.val();
@@ -139,7 +139,7 @@ function showAllPosts(uid) {
   });
 }
 
-function showPostsFiltered(type, uid) {
+const showPostsFiltered = (type, uid) => {
   database.ref('feed/posts').once('value').then(snapshot => {
     snapshot.forEach(value => {
       const postData = value.val();
@@ -150,7 +150,7 @@ function showPostsFiltered(type, uid) {
   });
 }
 
-function getDate() {
+const getDate = () => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -160,70 +160,70 @@ function getDate() {
   return `${day}/${month}/${year} - ${time}`;
 }
 
-function postTemplate(data) {
+const postTemplate = (data) => {
   const template = `
-    <div id="post-card-key" class="post-card" data-idcard=${data.key}>
-      <p class="user-name">${data.name} - ${data.email}</p>
-      <span class="data-time">${data.date}</span>
-      <p id="local-info" class="local-info" info-data-id="${data.key}">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="bold-text">${data.localName}</span> - ${data.address}
+    <div id='post-card-key' class='post-card' data-idcard=${data.key}>
+      <p class='user-name'>${data.name} - ${data.email}</p>
+      <span class='data-time'>${data.date}</span>
+      <p id='local-info' class='local-info' info-data-id='${data.key}'>
+        <i class='fas fa-map-marker-alt'></i>
+        <span class='bold-text'>${data.localName}</span> - ${data.address}
       </p>
-      <p id="local-operating" class="local-info" hour-data-id="${data.key}">
-        <i class="fas fa-history"></i>
+      <p id='local-operating' class='local-info' hour-data-id='${data.key}'>
+        <i class='fas fa-history'></i>
         Horário de funcionamento: ${data.hourFrom}h às ${data.hourTo}h
       </p>
-      <p id="local-price" class="local-info" price-data-id="${data.key}">
-        <i class="fas fa-hand-holding-usd"></i>${data.price},00
+      <p id='local-price' class='local-info' price-data-id='${data.key}'>
+        <i class='fas fa-hand-holding-usd'></i>${data.price},00
       </p>
       ${renderStars(data.stars)}
       <hr />
-      <p id="comment-post" class="text-post" text-data-id="${data.key}">${data.text}</p>
+      <p id='comment-post' class='text-post' text-data-id='${data.key}'>${data.text}</p>
       <hr />
-      <button id="edit-btn" class="post-btn far fa-edit btn btn-default navbar-btn" 
+      <button id='edit-btn' class='post-btn far fa-edit btn btn-default navbar-btn' 
         edit-data-id=${data.key} 
-        data-target="#newModal" 
-        data-toggle="modal">
+        data-target='#newModal' 
+        data-toggle='modal'>
       </button>
-      <button id="delete-btn" class="post-btn far fa-trash-alt btn btn-default navbar-btn" 
+      <button id='delete-btn' class='post-btn far fa-trash-alt btn btn-default navbar-btn' 
         data-id=${data.key}>
       </button>
-      <button id="like-btn" class="post-btn far fa-thumbs-up btn btn-default navbar-btn" 
+      <button id='like-btn' class='post-btn far fa-thumbs-up btn btn-default navbar-btn' 
         like-data-id=${data.key}>
       </button>
-      <span id="show-likes" class="show-likes" 
+      <span id='show-likes' class='show-likes' 
         counter-data-id=${data.key}>
         ${data.likes} curtidas
       </span>
-      <p id="show-selected" selected-data-id="${data.key}">
+      <p id='show-selected' selected-data-id='${data.key}'>
         ${data.postType}
       </p>
     </div>
   `;
   
   const postsContainer = $('#posts-container')[0];
-  let postsDiv = document.createElement("div");
+  let postsDiv = document.createElement('div');
   postsDiv.innerHTML = template
   postsContainer.insertBefore(postsDiv, postsContainer.childNodes[0]);
 }
   
-function renderStars(stars) {
+const renderStars = (stars) => {
   let starsIcon;
   
   if (stars === ''){
-    starsIcon = `<input type="radio" id="star-empty" name="fb" value="" checked />
-    <label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label><label for="star-empty"><i class="fa"></i></label>`
+    starsIcon = `<input type='radio' id='star-empty' name='fb' value='' checked />
+    <label for='star-empty'><i class='fa'></i></label><label for='star-empty'><i class='fa'></i></label><label for='star-empty'><i class='fa'></i></label><label for='star-empty'><i class='fa'></i></label><label for='star-empty'><i class='fa'></i></label>`
   } else if(stars === '1') {
-    starsIcon = `<label for="star-1"><i class="fa"></i></label>`
+    starsIcon = `<label for='star-1'><i class='fa'></i></label>`
   } else if (stars === '2') {
-    starsIcon = `<label for="star-2"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    starsIcon = `<label for='star-2'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label>`
   } else if (stars === '3') {
-    starsIcon = `<label for="star-3"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    starsIcon = `<label for='star-3'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label>`
   } else if (stars === '4') {
-    starsIcon = `<label for="star-4"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    starsIcon = `<label for='star-4'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label>`
   } else if (stars === '5') {
-    starsIcon = `<label for="star-5"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label><label for="star-1"><i class="fa"></i></label>`
+    starsIcon = `<label for='star-5'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label><label for='star-1'><i class='fa'></i></label>`
   }
   
-  return `<div class="stars">${starsIcon}</div>`;
+  return `<div class='stars'>${starsIcon}</div>`;
 }

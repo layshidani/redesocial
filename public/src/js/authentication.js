@@ -1,5 +1,5 @@
-$(document).ready(function () {
-  $('#btn-create-user').click(function () {
+$(document).ready(() => {
+  $('#btn-create-user').click(() => {
     event.preventDefault();
     const email = $('#input-email').val();
     const password = $('#input-password').val();
@@ -14,12 +14,12 @@ $(document).ready(function () {
           displayName: userName,
           photoURL: '',
         })
-        .then(() => window.location.href = "categories_create_user.html");
+        .then(() => window.location.href = 'categories_create_user.html');
       })
       .catch(error => $('#error-msg').text(error.message));
   });
 
-  $('#btnLogin').click(function () {
+  $('#btnLogin').click(() => {
     event.preventDefault();
     const email = $('#input-email').val();
     const password = $('#input-password').val();
@@ -27,35 +27,33 @@ $(document).ready(function () {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => window.location.href = "feed.html")
+      .then(() => window.location.href = 'feed.html')
       .catch(error => $('#error-msg').text(error.message));
   });
 
-  $('#facebook-btn').click(function () {
+  $('#facebook-btn').click(() => {
     const provider = new firebase.auth.FacebookAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(() => window.location.href = "feed.html")
+      .then(() => window.location.href = 'feed.html')
       .catch(error => $('#error-msg').text(error.message));
     
   });
 
-  $('#google-btn').click(function () {
+  $('#google-btn').click(() => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(() => window.location.href = "feed.html")
+      .then(() => window.location.href = 'feed.html')
       .catch(error => $('#error-msg').text(error.message));
   });
 
-  $('#logout-btn').click(function () {
+  $('#logout-btn').click(() => {
     firebase
       .auth()
       .signOut()
-      .then(() => window.location.href = "index.html");
+      .then(() => window.location.href = 'index.html');
   });
 });
-
-

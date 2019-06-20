@@ -1,5 +1,7 @@
+const key = "AIzaSyB9RyK56kqSgV4Mr73m3qKmwy0PcGl2Xkk";
+
 const config = {
-  apiKey: "AIzaSyB9RyK56kqSgV4Mr73m3qKmwy0PcGl2Xkk",
+  apiKey: key,
   authDomain: "serview-2019.firebaseapp.com",
   databaseURL: "https://serview-2019.firebaseio.com",
   projectId: "serview-2019",
