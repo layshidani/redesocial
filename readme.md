@@ -1,5 +1,5 @@
 # SerView
-Projeto rede social <Laboratoria>
+Projeto rede social, realizado em trio, na Laboratoria.
 
 ## Índice
 
@@ -11,7 +11,7 @@ Projeto rede social <Laboratoria>
 * [Pesquisa com usuários](#Pesquisa-com-usuários)
   * [Testes de usabilidade](#testes-de-usabilidade)
 
-[Link da aplicação](https://serview-2019.firebaseapp.com/)
+[Link da aplicação](https://timecast-1557870834786.firebaseapp.com/)
 
 ## Organização/Planejamento
 
