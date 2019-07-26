@@ -1,5 +1,5 @@
 # SerView
-Projeto rede social, realizado em trio, na Laboratoria.
+Projeto rede social, realizado em trio, na Laboratoria, por: [Lays](https://github.com/layshidani/), [Sara Sin](https://github.com/scsin), [Sirley Almeida](https://github.com/sirleyalmeida).
 
 ## Índice
 
@@ -11,7 +11,9 @@ Projeto rede social, realizado em trio, na Laboratoria.
 * [Pesquisa com usuários](#Pesquisa-com-usuários)
   * [Testes de usabilidade](#testes-de-usabilidade)
 
-[Link da aplicação](https://timecast-1557870834786.firebaseapp.com/)
+[Link da aplicação](https://serview-2019.firebaseapp.com/)
+
+![feed](imgs/feed.png)
 
 ## Organização/Planejamento
 
